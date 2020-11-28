@@ -1,0 +1,12 @@
+C:\Users\nando\source\repos\Sorteio\Sorteio\bin\Debug\Sorteio.exe.config
+C:\Users\nando\source\repos\Sorteio\Sorteio\bin\Debug\Sorteio.exe
+C:\Users\nando\source\repos\Sorteio\Sorteio\bin\Debug\Sorteio.pdb
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.csprojAssemblyReference.cache
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.Form1.resources
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.Properties.Resources.resources
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.SorteioAdd.resources
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlProd.resources
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.VendaBilhete.resources
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.csproj.GenerateResource.cache
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.exe
+C:\Users\nando\source\repos\Sorteio\Sorteio\obj\Debug\Sorteio.pdb
