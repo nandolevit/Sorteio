@@ -1,0 +1,8 @@
+D:\Sistema\Sorteio\DB\bin\Debug\DB.dll
+D:\Sistema\Sorteio\DB\bin\Debug\DB.pdb
+D:\Sistema\Sorteio\DB\bin\Debug\MySql.Data.dll
+D:\Sistema\Sorteio\DB\bin\Debug\MySql.Data.xml
+D:\Sistema\Sorteio\DB\obj\Debug\DB.csprojAssemblyReference.cache
+D:\Sistema\Sorteio\DB\obj\Debug\DB.csproj.CopyComplete
+D:\Sistema\Sorteio\DB\obj\Debug\DB.dll
+D:\Sistema\Sorteio\DB\obj\Debug\DB.pdb

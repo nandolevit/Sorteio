@@ -20,8 +20,22 @@ namespace Sorteio
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            sort = new SorteioAdd();
-            sort.ShowDialog();
+            //sort = new SorteioAdd();
+            //sort.ShowDialog();
+        }
+
+        private void lancarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SorteioAdd sorteioAdd = new SorteioAdd();
+            sorteioAdd.MdiParent = this;
+            sorteioAdd.Show();
+        }
+
+        private void concorrenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConcorrente formConcorrente = new FormConcorrente();
+            formConcorrente.MdiParent = this;
+            formConcorrente.Show();
         }
     }
 }

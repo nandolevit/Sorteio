@@ -1,0 +1,12 @@
+D:\Sistema\Sorteio\Business\bin\Debug\Business.dll
+D:\Sistema\Sorteio\Business\bin\Debug\Business.pdb
+D:\Sistema\Sorteio\Business\bin\Debug\DB.dll
+D:\Sistema\Sorteio\Business\bin\Debug\MySql.Data.dll
+D:\Sistema\Sorteio\Business\bin\Debug\DB.pdb
+D:\Sistema\Sorteio\Business\bin\Debug\MySql.Data.xml
+D:\Sistema\Sorteio\Business\obj\Debug\Business.csprojAssemblyReference.cache
+D:\Sistema\Sorteio\Business\obj\Debug\Business.csproj.CopyComplete
+D:\Sistema\Sorteio\Business\obj\Debug\Business.dll
+D:\Sistema\Sorteio\Business\obj\Debug\Business.pdb
+D:\Sistema\Sorteio\Business\bin\Debug\Obejct.dll
+D:\Sistema\Sorteio\Business\bin\Debug\Obejct.pdb

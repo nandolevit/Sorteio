@@ -44,8 +44,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
             // 
             // labelDescricao
             // 
@@ -78,8 +76,6 @@
             this.Size = new System.Drawing.Size(148, 150);
             this.Load += new System.EventHandler(this.UserControlProd_Load);
             this.Click += new System.EventHandler(this.UserControlProd_Click);
-            this.MouseEnter += new System.EventHandler(this.UserControlProd_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.UserControlProd_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -46,11 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classe\FormFormat.cs" />
+    <Compile Include="Classe\FormMessage.cs" />
+    <Compile Include="Classe\FormTextoFormat.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBilheteLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBilheteLista.Designer.cs">
+      <DependentUpon>FormBilheteLista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConcorrente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConcorrente.Designer.cs">
+      <DependentUpon>FormConcorrente.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +74,12 @@
     </Compile>
     <Compile Include="SorteioAdd.Designer.cs">
       <DependentUpon>SorteioAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBilhete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlBilhete.Designer.cs">
+      <DependentUpon>UserControlBilhete.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlProd.cs">
       <SubType>UserControl</SubType>
@@ -75,6 +96,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormBilheteLista.resx">
+      <DependentUpon>FormBilheteLista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConcorrente.resx">
+      <DependentUpon>FormConcorrente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -87,6 +114,9 @@
     </Compile>
     <EmbeddedResource Include="SorteioAdd.resx">
       <DependentUpon>SorteioAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlBilhete.resx">
+      <DependentUpon>UserControlBilhete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlProd.resx">
       <DependentUpon>UserControlProd.cs</DependentUpon>
@@ -109,6 +139,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Google_Images_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Close_Window_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{6e438625-4fb1-411e-9646-438270a5bf75}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Object\Object.csproj">
+      <Project>{1ff9e0ee-8d24-4645-b373-99c486c6e9bf}</Project>
+      <Name>Object</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Save_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
