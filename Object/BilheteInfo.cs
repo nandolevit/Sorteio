@@ -9,8 +9,9 @@ namespace Obejct
     public class BilheteInfo
     {
         public int bilhetenum { get; set; }
-        public int bilheteidsorteio { get; set; }
-        public int bilheteidconcorrente { get; set; }
+        public SorteioInfo bilheteidsorteio { get; set; }
+        public ConcorrenteInfo bilheteidconcorrente { get; set; }
+        public ConcorrenteInfo bilheteidVendedor { get; set; }
         public int bilheteid { get; set; }
     }
 }

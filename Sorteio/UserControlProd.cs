@@ -2,16 +2,13 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Obejct;
+using System.IO;
 
 namespace Sorteio
 {
     public partial class UserControlProd : UserControl
     {
         public ProdutoInfo Produto { get; set; }
-        //public string Descricao { get; set; }
-        //public int Quant { get; set; }
-        //public decimal Valor { get; set; }
-        public Image Foto { get; set; }
 
         public UserControlProd()
         {
@@ -20,8 +17,9 @@ namespace Sorteio
 
         private void UserControlProd_Load(object sender, EventArgs e)
         {
+            MemoryStream m = new MemoryStream(Produto.produtofoto);
             labelDescricao.Text = Produto.produtodescricao;
-            pictureBox1.Image = Foto;
+            pictureBox1.Image = Image.FromStream(m);
             labelQuant.Text = string.Format("{0:00}", Produto.produtoquant);
         }
 

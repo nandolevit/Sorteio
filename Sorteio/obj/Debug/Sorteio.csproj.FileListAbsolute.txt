@@ -26,11 +26,13 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormConcorrente.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormBilheteLista.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlBilhete.resources
 D:\Sistema\Sorteio\Sorteio\bin\Debug\Business.dll
-D:\Sistema\Sorteio\Sorteio\bin\Debug\Obejct.dll
 D:\Sistema\Sorteio\Sorteio\bin\Debug\DB.dll
 D:\Sistema\Sorteio\Sorteio\bin\Debug\MySql.Data.dll
 D:\Sistema\Sorteio\Sorteio\bin\Debug\Business.pdb
-D:\Sistema\Sorteio\Sorteio\bin\Debug\Obejct.pdb
 D:\Sistema\Sorteio\Sorteio\bin\Debug\DB.pdb
 D:\Sistema\Sorteio\Sorteio\bin\Debug\MySql.Data.xml
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.csproj.CopyComplete
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormConsultar_Cod_Descricao.resources
+D:\Sistema\Sorteio\Sorteio\bin\Debug\Object.dll
+D:\Sistema\Sorteio\Sorteio\bin\Debug\Object.pdb
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormVendedor.resources

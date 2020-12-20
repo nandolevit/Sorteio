@@ -7,8 +7,8 @@
     <ProjectGuid>{1FF9E0EE-8D24-4645-B373-99C486C6E9BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Obejct</RootNamespace>
-    <AssemblyName>Obejct</AssemblyName>
+    <RootNamespace>Object</RootNamespace>
+    <AssemblyName>Object</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -45,6 +45,8 @@
     <Compile Include="BilheteInfo.cs" />
     <Compile Include="ConcorrenteColecao.cs" />
     <Compile Include="ConcorrenteInfo.cs" />
+    <Compile Include="Form_Consultar.cs" />
+    <Compile Include="Form_ConsultarColecao.cs" />
     <Compile Include="ProdutoColecao.cs" />
     <Compile Include="ProdutoInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

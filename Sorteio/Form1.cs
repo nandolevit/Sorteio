@@ -37,5 +37,12 @@ namespace Sorteio
             formConcorrente.MdiParent = this;
             formConcorrente.Show();
         }
+
+        private void vendedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormVendedor formVendedor = new FormVendedor();
+            formVendedor.MdiParent = this;
+            formVendedor.Show();
+        }
     }
 }

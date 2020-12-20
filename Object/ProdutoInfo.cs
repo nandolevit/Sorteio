@@ -13,6 +13,6 @@ namespace Obejct
         public decimal produtovalor { get; set; }
         public int produtoquant { get; set; }
         public string produtodescricao { get; set; }
-        public byte produtofoto { get; set; }
+        public byte[] produtofoto { get; set; }
     }
 }

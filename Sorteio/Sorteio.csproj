@@ -49,6 +49,7 @@
     <Compile Include="Classe\FormFormat.cs" />
     <Compile Include="Classe\FormMessage.cs" />
     <Compile Include="Classe\FormTextoFormat.cs" />
+    <Compile Include="Classe\ValidarCpfCnpj.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,18 @@
     </Compile>
     <Compile Include="FormConcorrente.Designer.cs">
       <DependentUpon>FormConcorrente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultar_Cod_Descricao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultar_Cod_Descricao.Designer.cs">
+      <DependentUpon>FormConsultar_Cod_Descricao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVendedor.Designer.cs">
+      <DependentUpon>FormVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormConcorrente.resx">
       <DependentUpon>FormConcorrente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultar_Cod_Descricao.resx">
+      <DependentUpon>FormConsultar_Cod_Descricao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVendedor.resx">
+      <DependentUpon>FormVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -167,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Save_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Broom_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

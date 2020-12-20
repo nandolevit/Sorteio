@@ -83,6 +83,16 @@ namespace Sorteio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Broom_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Broom_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Close_Window_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_Close_Window_32", resourceCulture);

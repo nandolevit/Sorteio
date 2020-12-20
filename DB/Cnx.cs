@@ -10,7 +10,7 @@ namespace DB
 {
     public enum enumExecutar
     {
-        NomQuery,
+        NonQuery,
         Scalar,
         DataTable
     }
@@ -30,7 +30,7 @@ namespace DB
             }
             catch (MySqlException)
             {
-                throw;
+                return false;
             }
         }
 
@@ -53,7 +53,7 @@ namespace DB
                 {
                     switch (ext)
                     {
-                        case enumExecutar.NomQuery:
+                        case enumExecutar.NonQuery:
 
                             cmd.ExecuteNonQuery();
                             return true;
@@ -64,15 +64,18 @@ namespace DB
 
                         case enumExecutar.DataTable:
 
-                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                            DataTable dt = new DataTable();
+                            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                            {
+                                using (DataTable dt = new DataTable())
+                                {
+                                    da.Fill(dt);
 
-                            da.Fill(dt);
-
-                            if (dt.Rows.Count > 0)
-                                return dt;
-                            else
-                                return null;
+                                    if (dt.Rows.Count > 0)
+                                        return dt;
+                                    else
+                                        return null;
+                                }
+                            }
 
                         default:
                             return null;

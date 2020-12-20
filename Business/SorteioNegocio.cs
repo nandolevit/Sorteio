@@ -13,6 +13,49 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
+
+        public int DeleteBilheteIdConcorrente(int id)
+        {
+            if (cnx.Conectar())
+            {
+                cnx.AddMySqlParameterCollection("@id", id);
+                return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteBilheteIdConcorrente", enumExecutar.Scalar));
+            }
+            else
+                return 0;
+        }
+        public int InsertBilhete(BilheteInfo b)
+        {
+            if (cnx.Conectar())
+            {
+                cnx.AddMySqlParameterCollection("@conc", b.bilheteidconcorrente.concorrenteid);
+                cnx.AddMySqlParameterCollection("@vend", b.bilheteidVendedor.concorrenteid);
+                cnx.AddMySqlParameterCollection("@sort", b.bilheteidsorteio.sorteioid);
+                cnx.AddMySqlParameterCollection("@num", b.bilhetenum);
+
+                return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertBilhete", enumExecutar.Scalar));
+            }
+            else
+                return 0;
+        }
+
+        public ProdutoColecao ConsultarProdutoIdSorteio(int id)
+        {
+            if (cnx.Conectar())
+            {
+                cnx.AddMySqlParameterCollection("@id", id);
+                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarProdutoIdSorteio", enumExecutar.DataTable);
+                if (dataTable != null)
+                {
+                    return PreencherProdutoColecao(dataTable);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+
         public int InsertProduto(ProdutoInfo prod)
         {
             if (cnx.Conectar())
@@ -96,6 +139,27 @@ namespace Business
                 return 0;
         }
 
+        private ProdutoColecao PreencherProdutoColecao(DataTable dataTable)
+        {
+            var colecao = new ProdutoColecao();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                ProdutoInfo info = new ProdutoInfo
+                {
+                    produtodescricao = Convert.ToString(row["produtodescricao"]),
+                    produtofoto = (byte[])(row["produtofoto"]),
+                    produtoid = Convert.ToInt32(row["produtoid"]),
+                    produtoidsorteio = Convert.ToInt32(row["produtoidsorteio"]),
+                    produtoquant = Convert.ToInt32(row["produtoquant"]),
+                    produtovalor = Convert.ToDecimal(row["produtovalor"]),
+                };
+
+                colecao.Add(info);
+            }
+
+            return colecao;
+        }
+
         private BilheteColecao PreencherBilheteColecao(DataTable table)
         {
             var colecao = new BilheteColecao();
@@ -104,10 +168,11 @@ namespace Business
                 BilheteInfo info = new BilheteInfo
                 {
                     bilheteid = Convert.ToInt32(row["bilheteid"]),
-                    bilheteidconcorrente = Convert.ToInt32(row["bilheteidconcorrente"]),
-                    bilheteidsorteio = Convert.ToInt32(row["bilheteidsorteio"]),
                     bilhetenum = Convert.ToInt32(row["bilhetenum"]),
                 };
+
+                info.bilheteidconcorrente = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidconcorrente"]) };
+                info.bilheteidsorteio = new SorteioInfo { sorteioid = Convert.ToInt32(row["bilheteidsorteio"]) };
 
                 colecao.Add(info);
 

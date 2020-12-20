@@ -16,6 +16,7 @@ namespace Sorteio
     public partial class SorteioAdd : Form
     {
         UserControlProd prod;
+        SorteioNegocio negSort;
         public SorteioAdd()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Sorteio
         private void SorteioAdd_Load(object sender, EventArgs e)
         {
             //PreencherProd();
+            numericUpDown1.Maximum = 1000;
         }
 
         private void PreencherProd()
@@ -45,7 +47,8 @@ namespace Sorteio
 
                     if (file.Length < 50000)
                     {
-                        prod.Foto = Image.FromStream(open.OpenFile());
+                        prod.Produto = new ProdutoInfo();
+                        prod.Produto.produtofoto = ConvertImagem(Image.FromStream(open.OpenFile()));
                         prod.Produto.produtodescricao = textBoxDescricaoProd.Text;
                         prod.Produto.produtoquant = Convert.ToInt32(textBoxQuant.Text);
                         prod.Produto.produtovalor = Convert.ToDecimal(textBoxValor.Text);
@@ -57,8 +60,8 @@ namespace Sorteio
                         if (!buttonRemover.Enabled)
                             buttonRemover.Enabled = true;
 
-                        if (!buttonSave.Enabled)
-                            buttonSave.Enabled = true;
+                        if (!buttonSalvar.Enabled)
+                            buttonSalvar.Enabled = true;
                     }
                     else
                     {
@@ -118,7 +121,7 @@ namespace Sorteio
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void Salvar()
         {
             if (string.IsNullOrEmpty(textBoxDescricaoSort.Text))
             {
@@ -127,35 +130,42 @@ namespace Sorteio
                 return;
             }
 
-            SorteioNegocio negSort = new SorteioNegocio();
+            int id;
+            negSort = new SorteioNegocio();
             SorteioInfo sort = new SorteioInfo
             {
                 sorteiodata = dateTimePicker1.Value,
                 sorteiodescricao = textBoxDescricaoSort.Text,
-                sorteioquant = Convert.ToInt32( numericUpDown1.Value)
+                sorteioquant = Convert.ToInt32(numericUpDown1.Value)
             };
 
-            if (negSort.InsertSorteio(sort) > 0)
+            id = negSort.InsertSorteio(sort);
+
+            if (id > 0)
             {
-                FormMessage.ShowMessageSave();
+                if (flowLayoutPanelProd.Controls.Count > 0)
+                {
+                    foreach (Control item in flowLayoutPanelProd.Controls)
+                    {
+                        UserControlProd uProd = (UserControlProd)item;
+                        uProd.Produto.produtoidsorteio = id;
+                        negSort.InsertProduto(uProd.Produto);
+                    }
+
+                    FormMessage.ShowMessageSave();
+
+                    if (this.Modal)
+                        this.DialogResult = DialogResult.Yes;
+                    else
+                        this.Close();
+                }
+                else
+                    MessageBox.Show("Nenhum produto foi lançado!");
             }
+            else
+                FormMessage.ShowMessageFalha();
 
-            //if (flowLayoutPanelProd.Controls.Count > 0)
-            //{
-            //    foreach (Control item in flowLayoutPanelProd.Controls)
-            //    {
-            //        UserControlProd uProd = (UserControlProd)item;
-            //        byte[] b = ConvertImagem(uProd.Foto);
-            //        MessageBox.Show(string.Concat(uProd.Descricao, "; ", uProd.Quant, "; ", uProd.Valor));
-            //    }
-
-            //    if (this.Modal)
-            //        this.DialogResult = DialogResult.Yes;
-            //    else
-            //        this.Close();
-            //}
-            //else
-            //    MessageBox.Show("Nenhum produto foi lançado!");
+            
         }
 
         private void buttonPict_MouseEnter(object sender, EventArgs e)
@@ -176,7 +186,7 @@ namespace Sorteio
             else
             {
                 buttonRemover.Enabled = false;
-                buttonSave.Enabled = false;
+                buttonSalvar.Enabled = false;
             }
         }
 
@@ -188,6 +198,25 @@ namespace Sorteio
         private void textBoxQuant_TextChanged(object sender, EventArgs e)
         {
             FormTextoFormat.NumericTexto(sender, 2);
+        }
+
+        private void buttonFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxDescricaoSort.Text) && flowLayoutPanelProd.Controls.Count > 0)
+            {
+                Salvar();
+            }
+            else
+            {
+                FormMessage.ShowMessegeWarning("Insira uma descrição para o sorteio e adicione no mínimo um produto para salvar!");
+                textBoxDescricaoSort.Select();
+            }
+
         }
     }
 }
