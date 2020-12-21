@@ -40,7 +40,7 @@ namespace Sorteio
 
         private void vendedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormVendedor formVendedor = new FormVendedor();
+            FormVendedor formVendedor = new FormVendedor(true);
             formVendedor.MdiParent = this;
             formVendedor.Show();
         }

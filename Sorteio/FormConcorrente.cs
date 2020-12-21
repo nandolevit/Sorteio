@@ -15,7 +15,6 @@ namespace Sorteio
     public partial class FormConcorrente : Form
     {
         int id = 0;
-        bool bSave;
         SorteioNegocio negSort;
         ConcorrenteNegocio negCon;
         SorteioInfo infoSort;
@@ -64,13 +63,20 @@ namespace Sorteio
 
             using (FormConsultar_Cod_Descricao consult = new FormConsultar_Cod_Descricao(colecao, "SORTEIO"))
             {
-                if(consult.ShowDialog(this) == DialogResult.Yes)
+                if (consult.ShowDialog(this) == DialogResult.Yes)
                 {
                     textBoxIdSort.Text = consult.Selecionado.Cod;
                     textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
                     infoSort = (SorteioInfo)consult.Selecionado.Objeto;
+                    ListaBilhete();
                 }
             }
+
+        }
+
+        private void ListaBilhete()
+        {
+            
             NumSorteio(infoSort.sorteiobilhetequant);
             BilheteSelecionado();
             groupBoxNum.Enabled = true;
@@ -100,7 +106,6 @@ namespace Sorteio
                             b.Botao.BackColor = Color.Green;
                             b.Botao.Font = new Font(b.Font, FontStyle.Bold);
                             b.Botao.ForeColor = Color.White;
-                            bSave = true;
                         }
 
                         if (bi.bilhetenum == Convert.ToInt32(b.Texto))
@@ -161,16 +166,34 @@ namespace Sorteio
 
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBoxNome.Text) || string.IsNullOrEmpty(textBoxIdSort.Text) || string.IsNullOrEmpty(textBoxVendCod.Text))
+            {
+                if (string.IsNullOrEmpty(textBoxNome.Text))
+                {
+                    FormMessage.ShowMessegeWarning("Selecione o concorrente!");
+                    button1.Select();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(textBoxIdSort.Text))
+                {
+                    FormMessage.ShowMessegeWarning("Selecione um sorteio!");
+                    buttonSort.Select();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(textBoxVendCod.Text))
+                {
+                    FormMessage.ShowMessegeWarning("Selecione o vendedor!");
+                    buttonVendBuscar.Select();
+                    return;
+                }
+            }
+
             if (FormMessage.ShowMessegeQuestion("Salvar?") == DialogResult.Yes)
             {
                 int id = 0;
-
-                if (bSave)
-                {
-                    negSort.DeleteBilheteIdConcorrente(infoConc.concorrenteid);
-                    bSave = false;
-                }
-
+                negSort.DeleteBilheteIdConcorrente(infoConc.concorrenteid, infoSort.sorteioid);
                 foreach (var item in flowLayoutPanel1.Controls)
                 {
                     UserControlBilhete bi = (UserControlBilhete)item;
@@ -210,43 +233,16 @@ namespace Sorteio
             textBoxIdSort.Clear();
             flowLayoutPanel1.Controls.Clear();
             numericUpDown1.Value = 1;
-            groupBoxNome.Enabled = true;
-            groupBoxNum.Enabled = false;
-            groupBoxSorteio.Enabled = false;
-            groupBoxVendedor.Enabled = false;
+            //groupBoxNome.Enabled = true;
+            //groupBoxNum.Enabled = false;
+            //groupBoxSorteio.Enabled = false;
+            //groupBoxVendedor.Enabled = false;
             maskedTextBoxCpf.Select();
         }
 
         private void FormConcorrente_Load(object sender, EventArgs e)
         {
             
-        }
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            if (!(string.IsNullOrEmpty(textBoxNome.Text) || string.IsNullOrEmpty(textBoxEmail.Text) || string.IsNullOrEmpty(maskedTextBoxTel.Text)))
-            {
-                negCon = new ConcorrenteNegocio();
-                if (id == 0)
-                {
-                    ConcorrenteInfo con = new ConcorrenteInfo
-                    {
-                        concorrentecpf = maskedTextBoxCpf.Text,
-                        concorrenteemail = textBoxEmail.Text,
-                        concorrentenome = textBoxNome.Text,
-                        concorrentetelefone = maskedTextBoxTel.Text
-                    };
-
-                    id = negCon.InsertConcorrente(con);
-                    con.concorrenteid = id;
-                    infoConc = con;
-                }
-
-                groupBoxVendedor.Enabled = true;
-                groupBoxSorteio.Enabled = true;
-                groupBoxNum.Enabled = true;
-                groupBoxNome.Enabled = false;
-            }
         }
 
         private void buttonLimpar_Click(object sender, EventArgs e)
@@ -263,14 +259,13 @@ namespace Sorteio
         private void buttonVendBuscar_Click(object sender, EventArgs e)
         {
 
-            using (FormVendedor formVendedor = new FormVendedor())
+            using (FormVendedor formVendedor = new FormVendedor(true))
             {
                 if (formVendedor.ShowDialog(this) == DialogResult.Yes)
                 {
                     infoVend = formVendedor.infoConc;
                     textBoxVendCod.Text = string.Format("{0:0000}", infoVend.concorrenteid);
                     textBoxVendNome.Text = infoVend.concorrentenome;
-                    buttonSort.Enabled = true;
                 }
             }
         }
@@ -302,6 +297,25 @@ namespace Sorteio
                 }
                 else
                     maskedTextBoxCpf.Text = string.Empty;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (FormVendedor formVendedor = new FormVendedor(false))
+            {
+                if (formVendedor.ShowDialog(this) == DialogResult.Yes)
+                {
+                    infoConc = formVendedor.infoConc;
+                    maskedTextBoxCpf.Text = infoConc.concorrentecpf;
+                    textBoxNome.Text = infoConc.concorrentenome;
+                    textBoxEmail.Text = infoConc.concorrenteemail;
+                    maskedTextBoxTel.Text = infoConc.concorrentetelefone;
+                    buttonSort.Enabled = true;
+
+                    if(!string.IsNullOrEmpty(textBoxIdSort.Text))
+                        ListaBilhete(); 
+                }
             }
         }
     }

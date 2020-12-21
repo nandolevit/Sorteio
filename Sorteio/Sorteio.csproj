@@ -219,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Electrical_48px.png" />
+    <None Include="Resources\icons8_Electrical_16.png" />
     <None Include="Resources\eletro.jpg" />
     <Content Include="Resources\icons8_Leaderboard.ico" />
     <Content Include="Resources\icons8_Leaderboard_32.png" />

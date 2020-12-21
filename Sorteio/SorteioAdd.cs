@@ -195,12 +195,29 @@ namespace Sorteio
                         numericUpDown1.Value = infoSort.sorteiobilhetequant;
                         textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
 
+                        BilheteColecao colB = negSort.ConsultarBilheteIdSorteio(infoSort.sorteioid);
+                        dataGridView1.DataSource = null;
+
+                        if (colB != null)
+                        {
+                            ConcorrenteColecao colC = new ConcorrenteColecao();
+                            foreach (var item in colB)
+                            {
+                                var cc = colC.Where(c => c.concorrenteid == item.bilheteidconcorrente.concorrenteid).FirstOrDefault();
+
+                                if (cc == null)
+                                    colC.Add(item.bilheteidconcorrente);
+                            }
+                            dataGridView1.DataSource = colC;
+                        }
 
                         flowLayoutPanelProd.Controls.Clear();
                         SorteioItemColecao colItem = negSort.ConsultarItemIdSorteio(infoSort.sorteioid);
 
                         if (colItem != null)
                         {
+                            int totalQuant = 0;
+                            decimal totalValorProd = 0;
                             foreach (var item in colItem)
                             {
                                 UserControlProd prod = new UserControlProd
@@ -210,7 +227,13 @@ namespace Sorteio
                                 };
 
                                 flowLayoutPanelProd.Controls.Add(prod);
+                                totalQuant += item.Quant;
+                                totalValorProd += (item.Prod.produtovalor * item.Quant);
                             }
+
+                            labelTotalQuant.Text = "Total de Prêmios: " + string.Format("{0:000}", totalQuant);
+                            labelTotalValorProd.Text = "Valor Total de Prêmios: " + string.Format("{0:C2}", totalValorProd);
+                            labelTotalValorBilhete.Text = "Valor Total de Bilhetes: " + string.Format("{0:C2}", infoSort.sorteiobilhetequant * infoSort.sorteiobilhetevalor);
                         }
                     }
                 }
@@ -220,6 +243,11 @@ namespace Sorteio
         private void textBoxValor_TextChanged_1(object sender, EventArgs e)
         {
             FormTextoFormat.MoedaFormat(sender);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

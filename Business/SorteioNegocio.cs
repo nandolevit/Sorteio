@@ -45,11 +45,12 @@ namespace Business
                 return 0;
         }
 
-        public int DeleteBilheteIdConcorrente(int id)
+        public int DeleteBilheteIdConcorrente(int id, int idsort)
         {
             if (cnx.Conectar())
             {
                 cnx.AddMySqlParameterCollection("@id", id);
+                cnx.AddMySqlParameterCollection("@idsort", idsort);
                 return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteBilheteIdConcorrente", enumExecutar.Scalar));
             }
             else
@@ -218,10 +219,11 @@ namespace Business
                 {
                     bilheteid = Convert.ToInt32(row["bilheteid"]),
                     bilhetenum = Convert.ToInt32(row["bilhetenum"]),
+                    bilheteidconcorrente = ConcorrenteNegocio.PreencherConcorrenteInfo(row),
+                    bilheteidsorteio = PreencherSorteioInfo(row)
                 };
 
-                info.bilheteidconcorrente = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidconcorrente"]) };
-                info.bilheteidsorteio = new SorteioInfo { sorteioid = Convert.ToInt32(row["bilheteidsorteio"]) };
+                info.bilheteidVendedor = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidVendedor"]) };
 
                 colecao.Add(info);
 

@@ -30,11 +30,17 @@ namespace Business
                 return null;
         }
 
-        public ConcorrenteColecao ConsultarVendedor()
+        public ConcorrenteColecao ConsultarConcorrente(bool vend)
         {
             if (cnx.Conectar())
             {
-                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarVendedor", enumExecutar.DataTable);
+                DataTable dataTable;
+
+                if (vend)
+                    dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarVendedor", enumExecutar.DataTable);
+                else
+                    dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrente", enumExecutar.DataTable);
+
                 if (dataTable != null)
                 {
                     return PreencherConcorrenteColecao(dataTable);
@@ -71,20 +77,23 @@ namespace Business
         {
             var colecao = new ConcorrenteColecao();
             foreach (DataRow row in dataTable.Rows)
-            {
-                ConcorrenteInfo info = new ConcorrenteInfo
-                {
-                    concorrentecpf = Convert.ToString(row["concorrentecpf"]),
-                    concorrenteemail = Convert.ToString(row["concorrenteemail"]),
-                    concorrenteid = Convert.ToInt32(row["concorrenteid"]),
-                    concorrentenome = Convert.ToString(row["concorrentenome"]),
-                    concorrentetelefone = Convert.ToString(row["concorrentetelefone"]),
-                };
-
-                colecao.Add(info);
-            }
+                colecao.Add(PreencherConcorrenteInfo(row));
 
             return colecao;
+        }
+
+        static public ConcorrenteInfo PreencherConcorrenteInfo(DataRow row)
+        {
+            ConcorrenteInfo info = new ConcorrenteInfo
+            {
+                concorrentecpf = Convert.ToString(row["concorrentecpf"]),
+                concorrenteemail = Convert.ToString(row["concorrenteemail"]),
+                concorrenteid = Convert.ToInt32(row["concorrenteid"]),
+                concorrentenome = Convert.ToString(row["concorrentenome"]),
+                concorrentetelefone = Convert.ToString(row["concorrentetelefone"]),
+            };
+
+            return info;
         }
     }
 }

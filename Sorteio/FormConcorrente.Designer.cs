@@ -36,7 +36,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxNome = new System.Windows.Forms.GroupBox();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.maskedTextBoxCpf = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNome = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonFechar = new System.Windows.Forms.Button();
             this.buttonSalvar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBoxNum.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -143,7 +143,7 @@
             // 
             // groupBoxNome
             // 
-            this.groupBoxNome.Controls.Add(this.buttonSave);
+            this.groupBoxNome.Controls.Add(this.button1);
             this.groupBoxNome.Controls.Add(this.maskedTextBoxCpf);
             this.groupBoxNome.Controls.Add(this.label1);
             this.groupBoxNome.Controls.Add(this.textBoxNome);
@@ -159,22 +159,9 @@
             this.groupBoxNome.TabStop = false;
             this.groupBoxNome.Text = "Comprador:";
             // 
-            // buttonSave
-            // 
-            this.buttonSave.BackgroundImage = global::Sorteio.Properties.Resources.icons8_Save_32;
-            this.buttonSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSave.FlatAppearance.BorderSize = 0;
-            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSave.Location = new System.Drawing.Point(920, 32);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(25, 23);
-            this.buttonSave.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.buttonSave, "Consultar Vendedor...");
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
             // maskedTextBoxCpf
             // 
+            this.maskedTextBoxCpf.Enabled = false;
             this.maskedTextBoxCpf.Location = new System.Drawing.Point(6, 35);
             this.maskedTextBoxCpf.Mask = "000.000.000-00";
             this.maskedTextBoxCpf.Name = "maskedTextBoxCpf";
@@ -193,6 +180,7 @@
             // 
             // textBoxNome
             // 
+            this.textBoxNome.Enabled = false;
             this.textBoxNome.Location = new System.Drawing.Point(112, 34);
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(322, 20);
@@ -219,6 +207,7 @@
             // 
             // maskedTextBoxTel
             // 
+            this.maskedTextBoxTel.Enabled = false;
             this.maskedTextBoxTel.Location = new System.Drawing.Point(814, 35);
             this.maskedTextBoxTel.Mask = "(00) 0 0000 0000";
             this.maskedTextBoxTel.Name = "maskedTextBoxTel";
@@ -228,6 +217,7 @@
             // 
             // textBoxEmail
             // 
+            this.textBoxEmail.Enabled = false;
             this.textBoxEmail.Location = new System.Drawing.Point(440, 35);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(369, 20);
@@ -250,7 +240,6 @@
             this.groupBoxSorteio.Controls.Add(this.label7);
             this.groupBoxSorteio.Controls.Add(this.label8);
             this.groupBoxSorteio.Controls.Add(this.textBoxDescricaoSort);
-            this.groupBoxSorteio.Enabled = false;
             this.groupBoxSorteio.Location = new System.Drawing.Point(477, 87);
             this.groupBoxSorteio.Name = "groupBoxSorteio";
             this.groupBoxSorteio.Size = new System.Drawing.Size(482, 63);
@@ -265,7 +254,7 @@
             this.buttonSort.Enabled = false;
             this.buttonSort.FlatAppearance.BorderSize = 0;
             this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSort.Location = new System.Drawing.Point(440, 32);
+            this.buttonSort.Location = new System.Drawing.Point(449, 32);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(25, 23);
             this.buttonSort.TabIndex = 4;
@@ -304,7 +293,7 @@
             this.textBoxDescricaoSort.Enabled = false;
             this.textBoxDescricaoSort.Location = new System.Drawing.Point(70, 35);
             this.textBoxDescricaoSort.Name = "textBoxDescricaoSort";
-            this.textBoxDescricaoSort.Size = new System.Drawing.Size(364, 20);
+            this.textBoxDescricaoSort.Size = new System.Drawing.Size(373, 20);
             this.textBoxDescricaoSort.TabIndex = 3;
             // 
             // groupBoxVendedor
@@ -314,7 +303,6 @@
             this.groupBoxVendedor.Controls.Add(this.label6);
             this.groupBoxVendedor.Controls.Add(this.label4);
             this.groupBoxVendedor.Controls.Add(this.textBoxVendNome);
-            this.groupBoxVendedor.Enabled = false;
             this.groupBoxVendedor.Location = new System.Drawing.Point(6, 87);
             this.groupBoxVendedor.Name = "groupBoxVendedor";
             this.groupBoxVendedor.Size = new System.Drawing.Size(465, 63);
@@ -391,6 +379,20 @@
             this.buttonSalvar.UseVisualStyleBackColor = true;
             this.buttonSalvar.Click += new System.EventHandler(this.buttonSalvar_Click);
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(920, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 23);
+            this.button1.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.button1, "Consultar Vendedor...");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormConcorrente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,7 +447,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button buttonSelecionar;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonLimpar;
+        private System.Windows.Forms.Button button1;
     }
 }

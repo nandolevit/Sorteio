@@ -45,8 +45,6 @@ namespace Sorteio
             {
                 if (descricao.ShowDialog(this) == DialogResult.Yes)
                 {
-                    this.BackColor = Color.GreenYellow;
-                    labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Bold);
                     FlowLayoutPanel panel = (FlowLayoutPanel)this.Parent;
                     SorteioAdd frm1 = (SorteioAdd)Application.OpenForms["SorteioAdd"];
 
@@ -67,6 +65,9 @@ namespace Sorteio
                         Balloon();
                         this.Enabled = false;
                     }
+
+                    this.BackColor = Color.GreenYellow;
+                    labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Bold);
                 }
             }
 
