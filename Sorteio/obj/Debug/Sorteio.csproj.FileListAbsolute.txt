@@ -36,3 +36,6 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormConsultar_Cod_Descricao.resourc
 D:\Sistema\Sorteio\Sorteio\bin\Debug\Object.dll
 D:\Sistema\Sorteio\Sorteio\bin\Debug\Object.pdb
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormVendedor.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormProduto.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlProdDescricao.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormDescricao.resources

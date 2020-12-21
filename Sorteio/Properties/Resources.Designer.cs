@@ -73,6 +73,26 @@ namespace Sorteio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Electrical_48px {
+            get {
+                object obj = ResourceManager.GetObject("Electrical_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eletro {
+            get {
+                object obj = ResourceManager.GetObject("eletro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap exit_red {
             get {
                 object obj = ResourceManager.GetObject("exit_red", resourceCulture);

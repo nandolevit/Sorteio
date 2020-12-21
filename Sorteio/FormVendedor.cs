@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Obejct;
+using Object;
 using Business;
 
 namespace Sorteio
@@ -32,6 +32,8 @@ namespace Sorteio
             negCon = new ConcorrenteNegocio();
             colecao = negCon.ConsultarVendedor();
             dataGridView1.DataSource = colecao;
+            if (colecao == null)
+                buttonSave.Visible = true;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -77,14 +79,17 @@ namespace Sorteio
         private void textBoxNome_TextChanged(object sender, EventArgs e)
         {
             //ConcorrenteColecao conc = colecao;
-            dataGridView1.DataSource = colecao.Where(c => c.concorrentenome.Contains(textBoxNome.Text)).ToList();
-
-            if (dataGridView1.Rows.Count == 0)
+            if (dataGridView1.Rows.Count > 0)
             {
-                buttonSave.Visible = true;
+                dataGridView1.DataSource = colecao.Where(c => c.concorrentenome.Contains(textBoxNome.Text)).ToList();
+
+                if (dataGridView1.Rows.Count == 0)
+                {
+                    buttonSave.Visible = true;
+                }
+                else
+                    buttonSave.Visible = false;
             }
-            else
-                buttonSave.Visible = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

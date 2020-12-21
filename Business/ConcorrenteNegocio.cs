@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using Obejct;
+using Object;
 using DB;
 
 namespace Business

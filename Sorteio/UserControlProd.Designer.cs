@@ -37,6 +37,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(25, 8);
             this.pictureBox1.Name = "pictureBox1";
@@ -44,6 +45,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.UserControlProd_Click);
             // 
             // labelDescricao
             // 
@@ -53,6 +55,7 @@
             this.labelDescricao.Size = new System.Drawing.Size(145, 39);
             this.labelDescricao.TabIndex = 1;
             this.labelDescricao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelDescricao.Click += new System.EventHandler(this.UserControlProd_Click);
             // 
             // labelQuant
             // 
@@ -63,6 +66,7 @@
             this.labelQuant.Size = new System.Drawing.Size(41, 13);
             this.labelQuant.TabIndex = 2;
             this.labelQuant.Text = "label1";
+            this.labelQuant.Click += new System.EventHandler(this.UserControlProd_Click);
             // 
             // UserControlProd
             // 

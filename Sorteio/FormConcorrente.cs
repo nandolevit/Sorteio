@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Obejct;
+using Object;
 using Business;
 
 namespace Sorteio
@@ -71,7 +71,7 @@ namespace Sorteio
                     infoSort = (SorteioInfo)consult.Selecionado.Objeto;
                 }
             }
-            NumSorteio(infoSort.sorteioquant);
+            NumSorteio(infoSort.sorteiobilhetequant);
             BilheteSelecionado();
             groupBoxNum.Enabled = true;
             buttonSelecionar.Enabled = true;
@@ -251,7 +251,7 @@ namespace Sorteio
 
         private void buttonLimpar_Click(object sender, EventArgs e)
         {
-            NumSorteio(infoSort.sorteioquant);
+            NumSorteio(infoSort.sorteiobilhetequant);
             BilheteSelecionado();
         }
 

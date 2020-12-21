@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obejct
+namespace Object
 {
     public class SorteioColecao : List<SorteioInfo>
     {

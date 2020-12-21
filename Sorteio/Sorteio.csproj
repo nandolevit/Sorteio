@@ -74,6 +74,18 @@
     <Compile Include="FormConsultar_Cod_Descricao.Designer.cs">
       <DependentUpon>FormConsultar_Cod_Descricao.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDescricao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDescricao.Designer.cs">
+      <DependentUpon>FormDescricao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProduto.Designer.cs">
+      <DependentUpon>FormProduto.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +112,12 @@
     <Compile Include="UserControlProd.Designer.cs">
       <DependentUpon>UserControlProd.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlProdDescricao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlProdDescricao.Designer.cs">
+      <DependentUpon>UserControlProdDescricao.cs</DependentUpon>
+    </Compile>
     <Compile Include="VendaBilhete.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +135,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormConsultar_Cod_Descricao.resx">
       <DependentUpon>FormConsultar_Cod_Descricao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDescricao.resx">
+      <DependentUpon>FormDescricao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProduto.resx">
+      <DependentUpon>FormProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVendedor.resx">
       <DependentUpon>FormVendedor.cs</DependentUpon>
@@ -139,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlProd.resx">
       <DependentUpon>UserControlProd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlProdDescricao.resx">
+      <DependentUpon>UserControlProdDescricao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VendaBilhete.resx">
       <DependentUpon>VendaBilhete.cs</DependentUpon>
@@ -189,6 +216,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Broom_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Electrical_48px.png" />
+    <None Include="Resources\eletro.jpg" />
+    <Content Include="Resources\icons8_Leaderboard.ico" />
+    <Content Include="Resources\icons8_Leaderboard_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

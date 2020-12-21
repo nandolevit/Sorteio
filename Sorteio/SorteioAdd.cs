@@ -8,14 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using Obejct;
+using Object;
 using Business;
 
 namespace Sorteio
 {
     public partial class SorteioAdd : Form
     {
-        UserControlProd prod;
+        UserControlProd useProd;
+        ProdutoInfo infoProd;
+        SorteioInfo infoSort;
         SorteioNegocio negSort;
         public SorteioAdd()
         {
@@ -26,100 +28,24 @@ namespace Sorteio
 
         private void SorteioAdd_Load(object sender, EventArgs e)
         {
-            //PreencherProd();
             numericUpDown1.Maximum = 1000;
         }
 
-        private void PreencherProd()
+        public void PreencherProd(UserControlProd p)
         {
-            prod = new UserControlProd();
-
-            using (OpenFileDialog open = new OpenFileDialog())
-            {
-                open.Title = "Selecionar uma foto...";
-                open.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                open.Filter = "Arquivos(*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
-                //open.RestoreDirectory = true;
-
-                if (open.ShowDialog() == DialogResult.OK)
-                {
-                    FileInfo file = new FileInfo(open.FileName);
-
-                    if (file.Length < 50000)
-                    {
-                        prod.Produto = new ProdutoInfo();
-                        prod.Produto.produtofoto = ConvertImagem(Image.FromStream(open.OpenFile()));
-                        prod.Produto.produtodescricao = textBoxDescricaoProd.Text;
-                        prod.Produto.produtoquant = Convert.ToInt32(textBoxQuant.Text);
-                        prod.Produto.produtovalor = Convert.ToDecimal(textBoxValor.Text);
-                        this.flowLayoutPanelProd.Controls.Add(prod);
-                        textBoxDescricaoProd.Clear();
-                        textBoxQuant.Text = "01";
-                        textBoxValor.Text = "1,00";
-
-                        if (!buttonRemover.Enabled)
-                            buttonRemover.Enabled = true;
-
-                        if (!buttonSalvar.Enabled)
-                            buttonSalvar.Enabled = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Este arquivo possue mais de 50KB, a foto deve ser menor!");
-                        PreencherProd();
-                    }
-                }
-            }
-
-            textBoxDescricaoProd.Select();
+            this.flowLayoutPanelProd.Controls.Add(p);
+            this.buttonSalvar.Enabled = true;
+            this.buttonRemover.Enabled = true;
         }
 
         private void buttonPict_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBoxDescricaoProd.Text))
+            using (FormProduto formProduto = new FormProduto())
             {
-                bool s = true;
-
-                foreach (Control item in flowLayoutPanelProd.Controls)
-                {
-                    UserControlProd uProd = (UserControlProd)item;
-
-                    if (textBoxDescricaoProd.Text.ToUpper().CompareTo(uProd.Produto.produtodescricao.ToUpper()) == 0)
-                        s = false;
-                }
-
-                if (s)
-                    PreencherProd();
-                else
-                {
-                    MessageBox.Show("Este produto já foi adcionado, adicione outro!");
-                    textBoxDescricaoProd.Clear();
-                    textBoxDescricaoProd.Select();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Informe a descrição do produto antes...");
-                textBoxDescricaoProd.Select();
+                formProduto.ShowDialog(this);
             }
         }
 
-        private byte[] ConvertImagem(Image img)
-        {
-            try
-            {
-                using (MemoryStream mStream = new MemoryStream())
-                {
-                    img.Save(mStream, img.RawFormat);
-                    return mStream.ToArray();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
 
         private void Salvar()
         {
@@ -136,20 +62,27 @@ namespace Sorteio
             {
                 sorteiodata = dateTimePicker1.Value,
                 sorteiodescricao = textBoxDescricaoSort.Text,
-                sorteioquant = Convert.ToInt32(numericUpDown1.Value)
+                sorteiobilhetequant = Convert.ToInt32(numericUpDown1.Value),
+                sorteiobilhetevalor = Convert.ToDecimal(textBoxValor.Text)
             };
 
             id = negSort.InsertSorteio(sort);
 
             if (id > 0)
             {
+                sort.sorteioid = id;
                 if (flowLayoutPanelProd.Controls.Count > 0)
                 {
                     foreach (Control item in flowLayoutPanelProd.Controls)
                     {
                         UserControlProd uProd = (UserControlProd)item;
-                        uProd.Produto.produtoidsorteio = id;
-                        negSort.InsertProduto(uProd.Produto);
+                        SorteioItemInfo it = new SorteioItemInfo
+                        {
+                            Prod = uProd.Produto,
+                            Quant = uProd.Quant,
+                            Sort = sort
+                        };
+                        negSort.InsertSorteioItem(it);
                     }
 
                     FormMessage.ShowMessageSave();
@@ -165,7 +98,7 @@ namespace Sorteio
             else
                 FormMessage.ShowMessageFalha();
 
-            
+
         }
 
         private void buttonPict_MouseEnter(object sender, EventArgs e)
@@ -180,14 +113,26 @@ namespace Sorteio
 
         private void buttonRemover_Click(object sender, EventArgs e)
         {
+            int n = 0;
+            List<UserControlProd> l = new List<UserControlProd>();
 
-            if (flowLayoutPanelProd.Controls.Count > 0)
-                flowLayoutPanelProd.Controls.RemoveAt(flowLayoutPanelProd.Controls.Count - 1);
-            else
+            foreach (var item in flowLayoutPanelProd.Controls)
             {
-                buttonRemover.Enabled = false;
-                buttonSalvar.Enabled = false;
+                UserControlProd prod = (UserControlProd)item;
+
+                if (prod.BackColor == Color.Silver)
+                {
+                    l.Add(prod);
+                    ++n;
+                }
             }
+
+            if (n == 0)
+                FormMessage.ShowMessegeWarning("Selecione um produto para que seja removido!");
+            else
+                for (int i = 0; i < l.Count; i++)
+                    flowLayoutPanelProd.Controls.Remove(l[i]);
+
         }
 
         private void textBoxValor_TextChanged(object sender, EventArgs e)
@@ -209,7 +154,8 @@ namespace Sorteio
         {
             if (!string.IsNullOrEmpty(textBoxDescricaoSort.Text) && flowLayoutPanelProd.Controls.Count > 0)
             {
-                Salvar();
+                if (FormMessage.ShowMessegeQuestion("Deseja salvar?") == DialogResult.Yes)
+                    Salvar();
             }
             else
             {
@@ -217,6 +163,63 @@ namespace Sorteio
                 textBoxDescricaoSort.Select();
             }
 
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            negSort = new SorteioNegocio();
+            SorteioColecao colSort = negSort.ConsultarSorteio();
+
+            if (colSort != null)
+            {
+                var colecao = new Form_ConsultarColecao();
+                foreach (var item in colSort)
+                {
+                    Form_Consultar form = new Form_Consultar
+                    {
+                        Cod = string.Format("{0:00000}", item.sorteioid),
+                        Descricao = item.sorteiodescricao,
+                        Objeto = item,
+                    };
+
+                    colecao.Add(form);
+                }
+
+                using (FormConsultar_Cod_Descricao consult = new FormConsultar_Cod_Descricao(colecao, "SORTEIO"))
+                {
+                    if (consult.ShowDialog(this) == DialogResult.Yes)
+                    {
+                        infoSort = (SorteioInfo)consult.Selecionado.Objeto;
+                        textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
+                        dateTimePicker1.Value = infoSort.sorteiodata;
+                        numericUpDown1.Value = infoSort.sorteiobilhetequant;
+                        textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
+
+
+                        flowLayoutPanelProd.Controls.Clear();
+                        SorteioItemColecao colItem = negSort.ConsultarItemIdSorteio(infoSort.sorteioid);
+
+                        if (colItem != null)
+                        {
+                            foreach (var item in colItem)
+                            {
+                                UserControlProd prod = new UserControlProd
+                                {
+                                    Produto = item.Prod,
+                                    Quant = item.Quant
+                                };
+
+                                flowLayoutPanelProd.Controls.Add(prod);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void textBoxValor_TextChanged_1(object sender, EventArgs e)
+        {
+            FormTextoFormat.MoedaFormat(sender);
         }
     }
 }

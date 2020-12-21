@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Obejct;
+using Object;
 using DB;
 using System.Data;
 
@@ -13,6 +13,37 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
+        public SorteioItemColecao ConsultarItemIdSorteio(int id)
+        {
+            if (cnx.Conectar())
+            {
+                cnx.AddMySqlParameterCollection("@id", id);
+                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarItemIdSorteio", enumExecutar.DataTable);
+
+                if (dataTable != null)
+                {
+                    return PreencherSorteioItemColecao(dataTable);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+
+        public int InsertSorteioItem(SorteioItemInfo item)
+        {
+            if (cnx.Conectar())
+            {
+                cnx.AddMySqlParameterCollection("@prod", item.Prod.produtoid);
+                cnx.AddMySqlParameterCollection("@sort", item.Sort.sorteioid);
+                cnx.AddMySqlParameterCollection("@quant", item.Quant);
+
+                return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertSorteioItem", enumExecutar.Scalar));
+            }
+            else
+                return 0;
+        }
 
         public int DeleteBilheteIdConcorrente(int id)
         {
@@ -24,6 +55,7 @@ namespace Business
             else
                 return 0;
         }
+
         public int InsertBilhete(BilheteInfo b)
         {
             if (cnx.Conectar())
@@ -39,12 +71,11 @@ namespace Business
                 return 0;
         }
 
-        public ProdutoColecao ConsultarProdutoIdSorteio(int id)
+        public ProdutoColecao ConsultarProduto()
         {
             if (cnx.Conectar())
             {
-                cnx.AddMySqlParameterCollection("@id", id);
-                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarProdutoIdSorteio", enumExecutar.DataTable);
+                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarProduto", enumExecutar.DataTable);
                 if (dataTable != null)
                 {
                     return PreencherProdutoColecao(dataTable);
@@ -62,8 +93,6 @@ namespace Business
             {
                 cnx.AddMySqlParameterCollection("@descricao", prod.produtodescricao);
                 cnx.AddMySqlParameterCollection("@foto", prod.produtofoto);
-                cnx.AddMySqlParameterCollection("@sort", prod.produtoidsorteio);
-                cnx.AddMySqlParameterCollection("@quant", prod.produtoquant);
                 cnx.AddMySqlParameterCollection("@valor", prod.produtovalor);
 
                 return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertProduto", enumExecutar.Scalar));
@@ -130,7 +159,8 @@ namespace Business
             if (cnx.Conectar())
             {
                 cnx.AddMySqlParameterCollection("@descricao", sort.sorteiodescricao);
-                cnx.AddMySqlParameterCollection("@quant", sort.sorteioquant);
+                cnx.AddMySqlParameterCollection("@quantb", sort.sorteiobilhetequant);
+                cnx.AddMySqlParameterCollection("@valor", sort.sorteiobilhetevalor);
                 cnx.AddMySqlParameterCollection("@sdata", sort.sorteiodata);
 
                 return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertSorteio", enumExecutar.Scalar));
@@ -143,18 +173,37 @@ namespace Business
         {
             var colecao = new ProdutoColecao();
             foreach (DataRow row in dataTable.Rows)
+                colecao.Add(PreencherProdutoInfo(row));
+
+            return colecao;
+        }
+
+        private ProdutoInfo PreencherProdutoInfo(DataRow row)
+        {
+            ProdutoInfo info = new ProdutoInfo
             {
-                ProdutoInfo info = new ProdutoInfo
+                produtodescricao = Convert.ToString(row["produtodescricao"]),
+                produtofoto = (byte[])(row["produtofoto"]),
+                produtoid = Convert.ToInt32(row["produtoid"]),
+                produtovalor = Convert.ToDecimal(row["produtovalor"]),
+            };
+
+            return info;
+        }
+
+        private SorteioItemColecao PreencherSorteioItemColecao( DataTable dataTable)
+        {
+            var colecao = new SorteioItemColecao();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var sort = new SorteioItemInfo
                 {
-                    produtodescricao = Convert.ToString(row["produtodescricao"]),
-                    produtofoto = (byte[])(row["produtofoto"]),
-                    produtoid = Convert.ToInt32(row["produtoid"]),
-                    produtoidsorteio = Convert.ToInt32(row["produtoidsorteio"]),
-                    produtoquant = Convert.ToInt32(row["produtoquant"]),
-                    produtovalor = Convert.ToDecimal(row["produtovalor"]),
+                    Prod = PreencherProdutoInfo(row),
+                    Sort = PreencherSorteioInfo(row),
+                    Quant = Convert.ToInt32(row["itemprodquant"]),
                 };
 
-                colecao.Add(info);
+                colecao.Add(sort);
             }
 
             return colecao;
@@ -185,21 +234,24 @@ namespace Business
         {
             var colecao = new SorteioColecao();
             foreach (DataRow row in table.Rows)
-            {
-                SorteioInfo info = new SorteioInfo
-                {
-                    sorteiodata = Convert.ToDateTime(row["sorteiodata"]),
-                    sorteiodatacad = Convert.ToDateTime(row["sorteiodatacad"]),
-                    sorteiodescricao = Convert.ToString(row["sorteiodescricao"]),
-                    sorteioid = Convert.ToInt32(row["sorteioid"]),
-                    sorteioquant = Convert.ToInt32(row["sorteioquant"]),
-                };
-
-                colecao.Add(info);
-
-            }
+                colecao.Add(PreencherSorteioInfo(row));
 
             return colecao;
+        }
+
+        private SorteioInfo PreencherSorteioInfo(DataRow row)
+        {
+            SorteioInfo info = new SorteioInfo
+            {
+                sorteiodata = Convert.ToDateTime(row["sorteiodata"]),
+                sorteiodatacad = Convert.ToDateTime(row["sorteiodatacad"]),
+                sorteiodescricao = Convert.ToString(row["sorteiodescricao"]),
+                sorteioid = Convert.ToInt32(row["sorteioid"]),
+                sorteiobilhetequant = Convert.ToInt32(row["sorteiobilhetequant"]),
+                sorteiobilhetevalor = Convert.ToDecimal(row["sorteiobilhetevalor"]),
+            };
+
+            return info;
         }
     }
 }
