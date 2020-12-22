@@ -104,14 +104,14 @@ namespace Sorteio
 
                         if (info != null)
                         {
-                            b.Botao.BackColor = Color.Green;
+                            b.Botao.BackColor = Color.GreenYellow;
                             b.Botao.Font = new Font(b.Font, FontStyle.Bold);
                             b.Botao.ForeColor = Color.White;
                         }
 
                         if (bi.bilhetenum == Convert.ToInt32(b.Texto))
                         {
-                            if (b.Botao.BackColor != Color.Green)
+                            if (b.Botao.BackColor != Color.GreenYellow)
                             {
                                 b.Enabled = false;
                                 break;
@@ -124,7 +124,6 @@ namespace Sorteio
 
             }
         }
-
 
         private void NumSorteio(int n)
         {
@@ -149,9 +148,9 @@ namespace Sorteio
             {
                 UserControlBilhete userControl = (UserControlBilhete)item;
 
-                if (userControl.Botao.Enabled && userControl.Botao.BackColor != Color.Green)
+                if (userControl.Botao.Enabled && userControl.Botao.BackColor != Color.GreenYellow)
                 {
-                    userControl.Botao.BackColor = Color.Green;
+                    userControl.Botao.BackColor = Color.GreenYellow;
                     userControl.Botao.Font = new Font(userControl.Botao.Font, FontStyle.Bold);
                     userControl.Botao.ForeColor = Color.White;
                     num++;
@@ -194,13 +193,13 @@ namespace Sorteio
             if (FormMessage.ShowMessegeQuestion("Salvar?") == DialogResult.Yes)
             {
                 int id = 0;
-                BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort };
+                BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort, bilheteidVendedor = infoVend };
                 negSort.ExecutarBilhete(enumCRUD.delete, b1);
                 foreach (var item in flowLayoutPanel1.Controls)
                 {
                     UserControlBilhete bi = (UserControlBilhete)item;
 
-                    if (bi.Botao.BackColor == Color.Green)
+                    if (bi.Botao.BackColor == Color.GreenYellow)
                     {
                         BilheteInfo b = new BilheteInfo
                         {

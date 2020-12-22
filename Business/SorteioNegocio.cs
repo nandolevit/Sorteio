@@ -31,7 +31,6 @@ namespace Business
                 {
                     case enumCRUD.select:
 
-                        //cnx.AddMySqlParameterCollection("@id", item.Sort.sorteioid);
                         DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarItemIdSorteio", enumExecutar.DataTable);
                         if (dataTable != null)
                             return PreencherSorteioItemColecao(dataTable);
@@ -136,7 +135,6 @@ namespace Business
                     case enumCRUD.insert:
                         return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertSorteio", enumExecutar.Scalar));
                     case enumCRUD.update:
-                        cnx.AddMySqlParameterCollection("@id", sort.sorteioid);
                         return Convert.ToInt32(cnx.ExecutarComandoMySql("spUpdateSorteio", enumExecutar.Scalar));
                     case enumCRUD.delete:
                         return 0;

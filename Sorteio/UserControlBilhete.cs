@@ -28,7 +28,7 @@ namespace Sorteio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1.BackColor == Color.Green)
+            if (button1.BackColor == Color.GreenYellow)
             {
                 button1.BackColor = Cor;
                 button1.Font = Fonte;
@@ -37,7 +37,7 @@ namespace Sorteio
             }
             else
             {
-                button1.BackColor = Color.Green;
+                button1.BackColor = Color.GreenYellow;
                 button1.Font = new Font(button1.Font, FontStyle.Bold);
                 button1.ForeColor = Color.White;
                 //Ativo = true;

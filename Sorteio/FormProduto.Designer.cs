@@ -169,7 +169,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Name = "FormProduto";
-            this.Text = "FormProduto";
+            this.Text = "Prêmios";
             this.Load += new System.EventHandler(this.FormProduto_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

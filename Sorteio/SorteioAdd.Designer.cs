@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonPict = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
@@ -223,7 +223,7 @@
             // buttonSalvar
             // 
             this.buttonSalvar.Enabled = false;
-            this.buttonSalvar.Location = new System.Drawing.Point(662, 527);
+            this.buttonSalvar.Location = new System.Drawing.Point(663, 536);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(75, 23);
             this.buttonSalvar.TabIndex = 3;
@@ -233,7 +233,7 @@
             // 
             // buttonFechar
             // 
-            this.buttonFechar.Location = new System.Drawing.Point(749, 527);
+            this.buttonFechar.Location = new System.Drawing.Point(750, 536);
             this.buttonFechar.Name = "buttonFechar";
             this.buttonFechar.Size = new System.Drawing.Size(75, 23);
             this.buttonFechar.TabIndex = 4;
@@ -300,9 +300,9 @@
             // colCod
             // 
             this.colCod.DataPropertyName = "concorrenteid";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Format = "00000";
-            this.colCod.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Format = "00000";
+            this.colCod.DefaultCellStyle = dataGridViewCellStyle15;
             this.colCod.HeaderText = "Cod.:";
             this.colCod.Name = "colCod";
             this.colCod.Visible = false;
@@ -311,8 +311,8 @@
             // colNome
             // 
             this.colNome.DataPropertyName = "concorrentenome";
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.colNome.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.colNome.DefaultCellStyle = dataGridViewCellStyle16;
             this.colNome.HeaderText = "Nome:";
             this.colNome.Name = "colNome";
             this.colNome.Resizable = System.Windows.Forms.DataGridViewTriState.True;

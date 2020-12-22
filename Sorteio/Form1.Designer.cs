@@ -35,6 +35,7 @@
             this.vendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lancarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.sortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             // 
             this.sorteioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrarToolStripMenuItem,
-            this.lancarToolStripMenuItem});
+            this.lancarToolStripMenuItem,
+            this.sortearToolStripMenuItem});
             this.sorteioToolStripMenuItem.Name = "sorteioToolStripMenuItem";
             this.sorteioToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.sorteioToolStripMenuItem.Text = "Sorteio";
@@ -69,14 +71,14 @@
             // concorrenteToolStripMenuItem
             // 
             this.concorrenteToolStripMenuItem.Name = "concorrenteToolStripMenuItem";
-            this.concorrenteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.concorrenteToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.concorrenteToolStripMenuItem.Text = "Concorrente";
             this.concorrenteToolStripMenuItem.Click += new System.EventHandler(this.concorrenteToolStripMenuItem_Click);
             // 
             // vendedorToolStripMenuItem
             // 
             this.vendedorToolStripMenuItem.Name = "vendedorToolStripMenuItem";
-            this.vendedorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vendedorToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.vendedorToolStripMenuItem.Text = "Vendedor";
             this.vendedorToolStripMenuItem.Click += new System.EventHandler(this.vendedorToolStripMenuItem_Click);
             // 
@@ -94,6 +96,13 @@
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // sortearToolStripMenuItem
+            // 
+            this.sortearToolStripMenuItem.Name = "sortearToolStripMenuItem";
+            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortearToolStripMenuItem.Text = "Sortear";
+            this.sortearToolStripMenuItem.Click += new System.EventHandler(this.sortearToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -127,6 +136,7 @@
         private System.Windows.Forms.ToolStripMenuItem vendedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem concorrenteToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripMenuItem sortearToolStripMenuItem;
     }
 }
 

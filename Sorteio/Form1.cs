@@ -44,5 +44,12 @@ namespace Sorteio
             formVendedor.MdiParent = this;
             formVendedor.Show();
         }
+
+        private void sortearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSortear formSortear = new FormSortear();
+            formSortear.MdiParent = this;
+            formSortear.Show();
+        }
     }
 }

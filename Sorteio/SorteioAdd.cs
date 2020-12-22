@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using Object;
 using Business;
+using Sorteio.Classe;
 
 namespace Sorteio
 {
@@ -65,6 +66,8 @@ namespace Sorteio
                 this.buttonSalvar.Enabled = true;
                 this.buttonRemover.Enabled = true;
             }
+
+            ContarItens();
         }
 
         private void buttonPict_Click(object sender, EventArgs e)
@@ -145,9 +148,9 @@ namespace Sorteio
 
                 negSort.ExecutarSorteio(enumCRUD.update, infoSort);
 
+                ExProd(listProdRem, enumCRUD.delete);
                 ExProd(listProdAdd, enumCRUD.insert);
                 ExProd(listProdAlt, enumCRUD.update);
-                ExProd(listProdRem, enumCRUD.delete);
 
                 FormMessage.ShowMessageSave();
             }
@@ -159,7 +162,7 @@ namespace Sorteio
             {
                 foreach (var item in l)
                 {
-                    UserControlProd uProd = (UserControlProd)item;
+                    UserControlProd uProd = item;
                     SorteioItemInfo it = new SorteioItemInfo
                     {
                         Prod = uProd.Produto,
@@ -169,6 +172,8 @@ namespace Sorteio
 
                     negSort.ExecutarSorteioItem(e, it);
                 }
+
+                l.Clear();
             }
         }
 
@@ -209,6 +214,7 @@ namespace Sorteio
                 }
             }
 
+            ContarItens();
         }
 
         private void textBoxValor_TextChanged(object sender, EventArgs e)
@@ -228,6 +234,8 @@ namespace Sorteio
 
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
+            //Aleatorio.Gerar(infoSort.sorteiobilhetequant, 10);
+
             if (!string.IsNullOrEmpty(textBoxDescricaoSort.Text) && flowLayoutPanelProd.Controls.Count > 0)
             {
                 if (FormMessage.ShowMessegeQuestion("Deseja salvar?") == DialogResult.Yes)
@@ -272,13 +280,11 @@ namespace Sorteio
                         textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
 
                         flowLayoutPanelProd.Controls.Clear();
-                        SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo()}; 
+                        SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo() };
                         SorteioItemColecao colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
 
                         if (colItem != null)
                         {
-                            int totalQuant = 0;
-                            decimal totalValorProd = 0;
                             foreach (var item in colItem)
                             {
                                 UserControlProd prod = new UserControlProd
@@ -288,13 +294,9 @@ namespace Sorteio
                                 };
 
                                 flowLayoutPanelProd.Controls.Add(prod);
-                                totalQuant += item.Quant;
-                                totalValorProd += (item.Prod.produtovalor * item.Quant);
                             }
 
-                            labelTotalQuant.Text = "Total de Prêmios: " + string.Format("{0:000}", totalQuant);
-                            labelTotalValorProd.Text = "Valor Total de Prêmios: " + string.Format("{0:C2}", totalValorProd);
-                            labelTotalValorBilhete.Text = "Valor Total de Bilhetes: " + string.Format("{0:C2}", infoSort.sorteiobilhetequant * infoSort.sorteiobilhetevalor);
+                            ContarItens();
                         }
 
                         BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidVendedor = new ConcorrenteInfo() };
@@ -322,9 +324,28 @@ namespace Sorteio
                         }
 
                         buttonSalvar.Enabled = true;
+                        buttonRemover.Enabled = true;
                     }
                 }
             }
+
+        }
+
+        private void ContarItens()
+        {
+            int totalQuant = 0;
+            decimal totalValorProd = 0;
+            foreach (var item in flowLayoutPanelProd.Controls)
+            {
+                UserControlProd prod = (UserControlProd)item;
+
+                totalQuant += prod.Quant;
+                totalValorProd += (prod.Produto.produtovalor * prod.Quant);
+            }
+
+            labelTotalQuant.Text = "Total de Prêmios: " + string.Format("{0:000}", totalQuant);
+            labelTotalValorProd.Text = "Valor Total de Prêmios: " + string.Format("{0:C2}", totalValorProd);
+            labelTotalValorBilhete.Text = "Valor Total de Bilhetes: " + string.Format("{0:C2}", infoSort != null ? infoSort.sorteiobilhetequant * infoSort.sorteiobilhetevalor : 0);
         }
 
         private void textBoxValor_TextChanged_1(object sender, EventArgs e)

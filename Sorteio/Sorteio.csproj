@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classe\Aleatorio.cs" />
     <Compile Include="Classe\FormFormat.cs" />
     <Compile Include="Classe\FormMessage.cs" />
     <Compile Include="Classe\FormTextoFormat.cs" />
@@ -85,6 +86,12 @@
     </Compile>
     <Compile Include="FormProduto.Designer.cs">
       <DependentUpon>FormProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSortear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSortear.Designer.cs">
+      <DependentUpon>FormSortear.cs</DependentUpon>
     </Compile>
     <Compile Include="FormVendedor.cs">
       <SubType>Form</SubType>
@@ -141,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProduto.resx">
       <DependentUpon>FormProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSortear.resx">
+      <DependentUpon>FormSortear.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVendedor.resx">
       <DependentUpon>FormVendedor.cs</DependentUpon>
