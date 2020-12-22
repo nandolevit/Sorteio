@@ -88,7 +88,8 @@ namespace Sorteio
         private void BilheteSelecionado()
         {
             negSort = new SorteioNegocio();
-            BilheteColecao colecao = negSort.ConsultarBilheteIdSorteio(infoSort.sorteioid);
+            BilheteInfo b3 = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidVendedor = new ConcorrenteInfo() };
+            BilheteColecao colecao = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b3);
 
             if (colecao != null)
             {
@@ -193,7 +194,8 @@ namespace Sorteio
             if (FormMessage.ShowMessegeQuestion("Salvar?") == DialogResult.Yes)
             {
                 int id = 0;
-                negSort.DeleteBilheteIdConcorrente(infoConc.concorrenteid, infoSort.sorteioid);
+                BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort };
+                negSort.ExecutarBilhete(enumCRUD.delete, b1);
                 foreach (var item in flowLayoutPanel1.Controls)
                 {
                     UserControlBilhete bi = (UserControlBilhete)item;
@@ -280,7 +282,8 @@ namespace Sorteio
                     if (cpf.CpfCpnjValido())
                     {
                         negCon = new ConcorrenteNegocio();
-                        infoConc = negCon.ConsultarConcorrenteCpf(maskedTextBoxCpf.Text);
+                        ConcorrenteInfo c = new ConcorrenteInfo { concorrentecpf = maskedTextBoxCpf.Text };
+                        infoConc = (ConcorrenteInfo)negCon.ExecutarConcorrente(enumCRUD.select, c);
                         if (infoConc != null)
                         {
                             textBoxNome.Text = infoConc.concorrentenome;

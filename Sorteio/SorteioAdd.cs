@@ -114,7 +114,7 @@ namespace Sorteio
                                 Quant = uProd.Quant,
                                 Sort = infoSort
                             };
-                            negSort.InsertSorteioItem(it);
+                            negSort.ExecutarSorteioItem(enumCRUD.insert, it);
                         }
 
                         FormMessage.ShowMessageSave();
@@ -144,7 +144,31 @@ namespace Sorteio
                 };
 
                 negSort.ExecutarSorteio(enumCRUD.update, infoSort);
+
+                ExProd(listProdAdd, enumCRUD.insert);
+                ExProd(listProdAlt, enumCRUD.update);
+                ExProd(listProdRem, enumCRUD.delete);
+
                 FormMessage.ShowMessageSave();
+            }
+        }
+
+        private void ExProd(List<UserControlProd> l, enumCRUD e)
+        {
+            if (l.Count > 0)
+            {
+                foreach (var item in l)
+                {
+                    UserControlProd uProd = (UserControlProd)item;
+                    SorteioItemInfo it = new SorteioItemInfo
+                    {
+                        Prod = uProd.Produto,
+                        Quant = uProd.Quant,
+                        Sort = infoSort
+                    };
+
+                    negSort.ExecutarSorteioItem(e, it);
+                }
             }
         }
 
@@ -248,7 +272,8 @@ namespace Sorteio
                         textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
 
                         flowLayoutPanelProd.Controls.Clear();
-                        SorteioItemColecao colItem = negSort.ConsultarItemIdSorteio(infoSort.sorteioid);
+                        SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo()}; 
+                        SorteioItemColecao colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
 
                         if (colItem != null)
                         {
@@ -272,7 +297,8 @@ namespace Sorteio
                             labelTotalValorBilhete.Text = "Valor Total de Bilhetes: " + string.Format("{0:C2}", infoSort.sorteiobilhetequant * infoSort.sorteiobilhetevalor);
                         }
 
-                        BilheteColecao colB = negSort.ConsultarBilheteIdSorteio(infoSort.sorteioid);
+                        BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidVendedor = new ConcorrenteInfo() };
+                        BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b);
                         dataGridView1.DataSource = null;
 
                         if (colB != null)

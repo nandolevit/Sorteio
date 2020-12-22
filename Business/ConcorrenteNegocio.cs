@@ -13,65 +13,72 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
-        public ConcorrenteInfo ConsultarConcorrenteCpf(string cpf)
+        public object ExecutarConcorrente(enumCRUD en, ConcorrenteInfo info = null, bool vendedor = false)
         {
             if (cnx.Conectar())
             {
-                cnx.AddMySqlParameterCollection("@cpf", cpf);
-                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrenteCpf", enumExecutar.DataTable);
-                if (dataTable != null)
-                {
-                    return PreencherConcorrenteColecao(dataTable)[0];
-                }
-                else
-                    return null;
-            }
-            else
-                return null;
-        }
-
-        public ConcorrenteColecao ConsultarConcorrente(bool vend)
-        {
-            if (cnx.Conectar())
-            {
-                DataTable dataTable;
-
-                if (vend)
-                    dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarVendedor", enumExecutar.DataTable);
-                else
-                    dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrente", enumExecutar.DataTable);
-
-                if (dataTable != null)
-                {
-                    return PreencherConcorrenteColecao(dataTable);
-                }
-                else
-                    return null;
-            }
-            else
-                return null;
-        }
-
-        public int InsertConcorrente(ConcorrenteInfo info, bool vendedor = false)
-        {
-            if (cnx.Conectar())
-            {
-                cnx.AddMySqlParameterCollection("@cpf", info.concorrentecpf);
-                cnx.AddMySqlParameterCollection("@nome", info.concorrentenome);
-                cnx.AddMySqlParameterCollection("@email", info.concorrenteemail);
-                cnx.AddMySqlParameterCollection("@tel", info.concorrentetelefone);
-
                 int n = 0;
-                if (vendedor)
-                    n = Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertVendedor", enumExecutar.Scalar));
-                else
-                    n = Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertConcorrente", enumExecutar.Scalar));
+                ConcorrenteAdd(info, cnx);
+
+                switch (en)
+                {
+                    case enumCRUD.select:
+
+                        DataTable dataTable;
+
+                        if (info == null)
+                        {
+                            if (vendedor)
+                                dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarVendedor", enumExecutar.DataTable);
+                            else
+                                dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrente", enumExecutar.DataTable);
+                        }
+                        else
+                            dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrenteCpf", enumExecutar.DataTable);
+
+                        if (dataTable != null)
+                            return PreencherConcorrenteColecao(dataTable);
+                        else
+                            return null;
+
+                    case enumCRUD.insert:
+
+                        if (vendedor)
+                            n = Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertVendedor", enumExecutar.Scalar));
+                        else
+                            n = Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertConcorrente", enumExecutar.Scalar));
+                        break;
+                    case enumCRUD.update:
+                        break;
+                    case enumCRUD.delete:
+                        break;
+                    default:
+                        break;
+                }
 
                 return n;
             }
             else
                 return 0;
         }
+
+        #region ADD
+
+        private void ConcorrenteAdd(ConcorrenteInfo a, Cnx cnz)
+        {
+            if (a != null)
+            {
+                cnz.AddMySqlParameterCollection("@id", a.concorrenteid);
+                cnz.AddMySqlParameterCollection("@cpf", a.concorrentecpf);
+                cnz.AddMySqlParameterCollection("@nome", a.concorrentenome);
+                cnz.AddMySqlParameterCollection("@email", a.concorrenteemail);
+                cnz.AddMySqlParameterCollection("@tel", a.concorrentetelefone);
+            }
+        }
+
+        #endregion
+
+        #region PREENCHER
 
         private ConcorrenteColecao PreencherConcorrenteColecao(DataTable dataTable)
         {
@@ -95,5 +102,6 @@ namespace Business
 
             return info;
         }
+        #endregion
     }
 }

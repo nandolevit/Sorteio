@@ -32,7 +32,7 @@ namespace Sorteio
         private void FormVendedor_Load(object sender, EventArgs e)
         {
             negCon = new ConcorrenteNegocio();
-            colecao = negCon.ConsultarConcorrente(vendedor);
+            colecao = (ConcorrenteColecao)negCon.ExecutarConcorrente(enumCRUD.select, null, vendedor);
             dataGridView1.DataSource = colecao;
             if (colecao == null)
                 buttonSave.Visible = true;
@@ -53,7 +53,7 @@ namespace Sorteio
                         concorrentetelefone = maskedTextBoxTel.Text
                     };
 
-                    id = negCon.InsertConcorrente(con, vendedor);
+                    id = (int)negCon.ExecutarConcorrente(enumCRUD.insert, con, vendedor);
                     con.concorrenteid = id;
                     infoConc = con;
 
@@ -64,7 +64,7 @@ namespace Sorteio
                     else
                     {
                         negCon = new ConcorrenteNegocio();
-                        colecao = negCon.ConsultarConcorrente(vendedor);
+                        colecao = (ConcorrenteColecao)negCon.ExecutarConcorrente(enumCRUD.select, null, vendedor);
 
                         dataGridView1.DataSource = colecao;
                         buttonSave.Visible = false;

@@ -21,46 +21,32 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
-
-        public SorteioItemColecao ConsultarItemIdSorteio(int id)
+        public object ExecutarSorteioItem(enumCRUD en, SorteioItemInfo item = null)
         {
             if (cnx.Conectar())
             {
-                cnx.AddMySqlParameterCollection("@id", id);
-                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarItemIdSorteio", enumExecutar.DataTable);
+                ItemAdd(item, cnx);
 
-                if (dataTable != null)
+                switch (en)
                 {
-                    return PreencherSorteioItemColecao(dataTable);
+                    case enumCRUD.select:
+
+                        //cnx.AddMySqlParameterCollection("@id", item.Sort.sorteioid);
+                        DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarItemIdSorteio", enumExecutar.DataTable);
+                        if (dataTable != null)
+                            return PreencherSorteioItemColecao(dataTable);
+                        else
+                            return null;
+
+                    case enumCRUD.insert:
+                        return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertSorteioItem", enumExecutar.Scalar));
+                    case enumCRUD.update:
+                        return Convert.ToInt32(cnx.ExecutarComandoMySql("spUpdateSorteioItem", enumExecutar.Scalar));
+                    case enumCRUD.delete:
+                        return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteSorteioItem", enumExecutar.Scalar));
+                    default:
+                        return 0;
                 }
-                else
-                    return null;
-            }
-            else
-                return null;
-        }
-
-        public int InsertSorteioItem(SorteioItemInfo item)
-        {
-            if (cnx.Conectar())
-            {
-                cnx.AddMySqlParameterCollection("@prod", item.Prod.produtoid);
-                cnx.AddMySqlParameterCollection("@sort", item.Sort.sorteioid);
-                cnx.AddMySqlParameterCollection("@quant", item.Quant);
-
-                return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertSorteioItem", enumExecutar.Scalar));
-            }
-            else
-                return 0;
-        }
-
-        public int DeleteBilheteIdConcorrente(int id, int idsort)
-        {
-            if (cnx.Conectar())
-            {
-                cnx.AddMySqlParameterCollection("@id", id);
-                cnx.AddMySqlParameterCollection("@idsort", idsort);
-                return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteBilheteIdConcorrente", enumExecutar.Scalar));
             }
             else
                 return 0;
@@ -75,30 +61,25 @@ namespace Business
                 switch (en)
                 {
                     case enumCRUD.select:
-                        return 0;
+
+                        DataTable table = (DataTable)cnx.ExecutarComandoMySql("spConsultarBilheteIdSorteio", enumExecutar.DataTable);
+                        if (table != null)
+                            return PreencherBilheteColecao(table);
+                        else
+                            return null;
+
                     case enumCRUD.insert:
                         return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertBilhete", enumExecutar.Scalar));
                     case enumCRUD.update:
                         return 0;
                     case enumCRUD.delete:
-                        return 0;
+                        return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteBilheteIdConcorrente", enumExecutar.Scalar));
                     default:
                         return 0;
                 }
             }
             else
                 return 0;
-        }
-
-        private void BilheteAdd(BilheteInfo a, Cnx cnz)
-        {
-            if (a != null)
-            {
-                cnz.AddMySqlParameterCollection("@conc", a.bilheteidconcorrente.concorrenteid);
-                cnz.AddMySqlParameterCollection("@vend", a.bilheteidVendedor.concorrenteid);
-                cnz.AddMySqlParameterCollection("@sort", a.bilheteidsorteio.sorteioid);
-                cnz.AddMySqlParameterCollection("@num", a.bilhetenum);
-            }
         }
 
         public object ExecutarProduto(enumCRUD en, ProdutoInfo prod = null)
@@ -131,52 +112,6 @@ namespace Business
                 return 0;
         }
 
-        private void ProdutoAdd(ProdutoInfo a, Cnx cnz)
-        {
-            if (a != null)
-            {
-                cnz.AddMySqlParameterCollection("@descricao", a.produtodescricao);
-                cnz.AddMySqlParameterCollection("@foto", a.produtofoto);
-                cnz.AddMySqlParameterCollection("@valor", a.produtovalor);
-            }
-        }
-
-        public BilheteColecao ConsultarBilheteIdSorteio(int id)
-        {
-            if (cnx.Conectar())
-            {
-                cnx.AddMySqlParameterCollection("@id", id);
-                DataTable table = (DataTable)cnx.ExecutarComandoMySql("spConsultarBilheteIdSorteio", enumExecutar.DataTable);
-
-                if (table != null)
-                {
-                    return PreencherBilheteColecao(table);
-                }
-                else
-                    return null;
-            }
-            else
-                return null;
-        }
-
-        public SorteioInfo ConsultarSorteioId(int id)
-        {
-            if (cnx.Conectar())
-            {
-                cnx.AddMySqlParameterCollection("@id", id);
-                DataTable table = (DataTable)cnx.ExecutarComandoMySql("spConsultarSorteioId", enumExecutar.DataTable);
-
-                if (table != null)
-                {
-                    return PreencherSorteioColecao(table)[0];
-                }
-                else
-                    return null;
-            }
-            else
-                return null;
-        }
-
         public object ExecutarSorteio(enumCRUD en, SorteioInfo sort = null)
         {
             if (cnx.Conectar())
@@ -187,7 +122,12 @@ namespace Business
                 {
                     case enumCRUD.select:
 
-                        DataTable table = (DataTable)cnx.ExecutarComandoMySql("spConsultarSorteio", enumExecutar.DataTable);
+                        DataTable table;
+                        if (sort == null)
+                            table = (DataTable)cnx.ExecutarComandoMySql("spConsultarSorteio", enumExecutar.DataTable);
+                        else
+                            table = (DataTable)cnx.ExecutarComandoMySql("spConsultarSorteioId", enumExecutar.DataTable);
+
                         if (table != null)
                             return PreencherSorteioColecao(table);
                         else
@@ -208,17 +148,58 @@ namespace Business
                 return 0;
         }
 
+        #region ADD
+
+        private void ItemAdd(SorteioItemInfo a, Cnx cnz)
+        {
+            if (a != null)
+            {
+                cnz.AddMySqlParameterCollection("@id", a.ID);
+                cnz.AddMySqlParameterCollection("@prod", a.Prod.produtoid);
+                cnz.AddMySqlParameterCollection("@sort", a.Sort.sorteioid);
+                cnz.AddMySqlParameterCollection("@quant", a.Quant);
+            }
+        }
+
+        private void BilheteAdd(BilheteInfo a, Cnx cnz)
+        {
+            if (a != null)
+            {
+                cnz.AddMySqlParameterCollection("@id", a.bilheteid);
+                cnz.AddMySqlParameterCollection("@conc", a.bilheteidconcorrente.concorrenteid);
+                cnz.AddMySqlParameterCollection("@vend", a.bilheteidVendedor.concorrenteid);
+                cnz.AddMySqlParameterCollection("@sort", a.bilheteidsorteio.sorteioid);
+                cnz.AddMySqlParameterCollection("@num", a.bilhetenum);
+            }
+        }
+
+        private void ProdutoAdd(ProdutoInfo a, Cnx cnz)
+        {
+            if (a != null)
+            {
+                cnz.AddMySqlParameterCollection("@id", a.produtoid);
+                cnz.AddMySqlParameterCollection("@descricao", a.produtodescricao);
+                cnz.AddMySqlParameterCollection("@foto", a.produtofoto);
+                cnz.AddMySqlParameterCollection("@valor", a.produtovalor);
+            }
+        }
+
         private void SorteioAdd(SorteioInfo a, Cnx cnz)
         {
             if (a != null)
             {
+                cnz.AddMySqlParameterCollection("@id", a.sorteioid);
                 cnz.AddMySqlParameterCollection("@descricao", a.sorteiodescricao);
                 cnz.AddMySqlParameterCollection("@quantb", a.sorteiobilhetequant);
                 cnz.AddMySqlParameterCollection("@valor", a.sorteiobilhetevalor);
                 cnz.AddMySqlParameterCollection("@sdata", a.sorteiodata);
-            } 
-           
+            }
+
         }
+
+        #endregion
+
+        #region PREENCHER
 
         private ProdutoColecao PreencherProdutoColecao(DataTable dataTable)
         {
@@ -242,13 +223,14 @@ namespace Business
             return info;
         }
 
-        private SorteioItemColecao PreencherSorteioItemColecao( DataTable dataTable)
+        private SorteioItemColecao PreencherSorteioItemColecao(DataTable dataTable)
         {
             var colecao = new SorteioItemColecao();
             foreach (DataRow row in dataTable.Rows)
             {
                 var sort = new SorteioItemInfo
                 {
+                    ID = Convert.ToInt32(row["itemid"]),
                     Prod = PreencherProdutoInfo(row),
                     Sort = PreencherSorteioInfo(row),
                     Quant = Convert.ToInt32(row["itemprodquant"]),
@@ -305,5 +287,7 @@ namespace Business
 
             return info;
         }
+
+        #endregion
     }
 }
