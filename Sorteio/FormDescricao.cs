@@ -35,6 +35,7 @@ namespace Sorteio
             InitializeComponent();
             FormFormat formFormat = new FormFormat(this);
             formFormat.formatar();
+            this.AcceptButton = buttonOK;
         }
 
         private void FormDescricao_Load(object sender, EventArgs e)
@@ -58,8 +59,24 @@ namespace Sorteio
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            Descricao = textBox1.Text;
-            this.DialogResult = DialogResult.Yes;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                if (Txt != enumTexto.texto)
+                {
+                    if(Convert.ToInt32(textBox1.Text) < 1)
+                    {
+                        FormMessage.ShowMessegeWarning("Insira valores maiores que zero!");
+                        textBox1.Clear();
+                        textBox1.Select();
+                        return;
+                    }
+                }
+
+                Descricao = textBox1.Text;
+                this.DialogResult = DialogResult.Yes;
+            }
+            else
+                FormMessage.ShowMessegeWarning("Preencha o campo!");
         }
 
         private void numeric_Click(object sender, EventArgs e)

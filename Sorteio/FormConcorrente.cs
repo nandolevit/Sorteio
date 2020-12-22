@@ -30,7 +30,7 @@ namespace Sorteio
 
         private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-            
+
         }
 
         private void buttonFechar_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Sorteio
         private void buttonSort_Click(object sender, EventArgs e)
         {
             negSort = new SorteioNegocio();
-            SorteioColecao colSort = negSort.ConsultarSorteio();
+            SorteioColecao colSort = (SorteioColecao)negSort.ExecutarSorteio(enumCRUD.select);
 
             var colecao = new Form_ConsultarColecao();
             foreach (var item in colSort)
@@ -76,7 +76,7 @@ namespace Sorteio
 
         private void ListaBilhete()
         {
-            
+
             NumSorteio(infoSort.sorteiobilhetequant);
             BilheteSelecionado();
             groupBoxNum.Enabled = true;
@@ -100,7 +100,7 @@ namespace Sorteio
 
                         BilheteInfo info = colecao.Where(b1 => b1.bilheteidconcorrente.concorrenteid == infoConc.concorrenteid)
                             .Where(b2 => b2.bilhetenum == Convert.ToInt32(b.Texto)).FirstOrDefault();
-                        
+
                         if (info != null)
                         {
                             b.Botao.BackColor = Color.Green;
@@ -120,7 +120,7 @@ namespace Sorteio
                     }
                 }
 
-                
+
             }
         }
 
@@ -207,7 +207,7 @@ namespace Sorteio
                             bilheteidVendedor = infoVend,
                             bilhetenum = Convert.ToInt32(bi.Botao.Text)
                         };
-                        id = negSort.InsertBilhete(b);
+                        id = (int)negSort.ExecutarBilhete(enumCRUD.insert, b);
                     }
                 }
 
@@ -242,7 +242,7 @@ namespace Sorteio
 
         private void FormConcorrente_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonLimpar_Click(object sender, EventArgs e)
@@ -313,8 +313,8 @@ namespace Sorteio
                     maskedTextBoxTel.Text = infoConc.concorrentetelefone;
                     buttonSort.Enabled = true;
 
-                    if(!string.IsNullOrEmpty(textBoxIdSort.Text))
-                        ListaBilhete(); 
+                    if (!string.IsNullOrEmpty(textBoxIdSort.Text))
+                        ListaBilhete();
                 }
             }
         }

@@ -75,7 +75,7 @@ namespace Sorteio
             };
 
             negSort = new SorteioNegocio();
-            negSort.InsertProduto(infoProd);
+            negSort.ExecutarProduto(enumCRUD.insert, infoProd);
 
             PreencherLista();
             pictureBox1.Image = Properties.Resources.eletro;
@@ -87,7 +87,7 @@ namespace Sorteio
         private void PreencherLista()
         {
             negSort = new SorteioNegocio();
-            ProdutoColecao colProd = negSort.ConsultarProduto();
+            ProdutoColecao colProd = (ProdutoColecao)negSort.ExecutarProduto(enumCRUD.select);
             flowLayoutPanel1.Controls.Clear();
 
             if (colProd != null)

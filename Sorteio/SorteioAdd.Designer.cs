@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonPict = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +45,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelProd = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonRemover = new System.Windows.Forms.Button();
             this.buttonSalvar = new System.Windows.Forms.Button();
             this.buttonFechar = new System.Windows.Forms.Button();
             this.labelTotalQuant = new System.Windows.Forms.Label();
@@ -50,9 +53,6 @@
             this.labelTotalValorBilhete = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonRemover = new System.Windows.Forms.Button();
-            this.buttonPict = new System.Windows.Forms.Button();
-            this.buttonSort = new System.Windows.Forms.Button();
             this.colCod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNome = new System.Windows.Forms.DataGridViewLinkColumn();
             this.groupBox1.SuspendLayout();
@@ -80,6 +80,36 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sorteio:";
+            // 
+            // buttonPict
+            // 
+            this.buttonPict.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonPict.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPict.Image = global::Sorteio.Properties.Resources.icons8_Electrical_16;
+            this.buttonPict.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPict.Location = new System.Drawing.Point(720, 58);
+            this.buttonPict.Name = "buttonPict";
+            this.buttonPict.Size = new System.Drawing.Size(98, 23);
+            this.buttonPict.TabIndex = 9;
+            this.buttonPict.Text = "Add Prêmio";
+            this.buttonPict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.buttonPict, "Adicionar prêmios...");
+            this.buttonPict.UseVisualStyleBackColor = true;
+            this.buttonPict.Click += new System.EventHandler(this.buttonPict_Click);
+            this.buttonPict.MouseEnter += new System.EventHandler(this.buttonPict_MouseEnter);
+            this.buttonPict.MouseLeave += new System.EventHandler(this.buttonPict_MouseLeave);
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
+            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSort.Location = new System.Drawing.Point(794, 31);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(24, 23);
+            this.buttonSort.TabIndex = 2;
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // label2
             // 
@@ -175,10 +205,25 @@
             this.flowLayoutPanelProd.Size = new System.Drawing.Size(817, 367);
             this.flowLayoutPanelProd.TabIndex = 0;
             // 
+            // buttonRemover
+            // 
+            this.buttonRemover.BackgroundImage = global::Sorteio.Properties.Resources.icons8_Close_Window_32;
+            this.buttonRemover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonRemover.Enabled = false;
+            this.buttonRemover.FlatAppearance.BorderSize = 0;
+            this.buttonRemover.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemover.Location = new System.Drawing.Point(13, 510);
+            this.buttonRemover.Name = "buttonRemover";
+            this.buttonRemover.Size = new System.Drawing.Size(30, 29);
+            this.buttonRemover.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.buttonRemover, "Clique no item que deseja remover antes de clicar...");
+            this.buttonRemover.UseVisualStyleBackColor = true;
+            this.buttonRemover.Click += new System.EventHandler(this.buttonRemover_Click);
+            // 
             // buttonSalvar
             // 
             this.buttonSalvar.Enabled = false;
-            this.buttonSalvar.Location = new System.Drawing.Point(1058, 507);
+            this.buttonSalvar.Location = new System.Drawing.Point(662, 527);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(75, 23);
             this.buttonSalvar.TabIndex = 3;
@@ -188,7 +233,7 @@
             // 
             // buttonFechar
             // 
-            this.buttonFechar.Location = new System.Drawing.Point(1145, 507);
+            this.buttonFechar.Location = new System.Drawing.Point(749, 527);
             this.buttonFechar.Name = "buttonFechar";
             this.buttonFechar.Size = new System.Drawing.Size(75, 23);
             this.buttonFechar.TabIndex = 4;
@@ -252,57 +297,12 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // buttonRemover
-            // 
-            this.buttonRemover.BackgroundImage = global::Sorteio.Properties.Resources.icons8_Close_Window_32;
-            this.buttonRemover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonRemover.Enabled = false;
-            this.buttonRemover.FlatAppearance.BorderSize = 0;
-            this.buttonRemover.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRemover.Location = new System.Drawing.Point(13, 510);
-            this.buttonRemover.Name = "buttonRemover";
-            this.buttonRemover.Size = new System.Drawing.Size(30, 29);
-            this.buttonRemover.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.buttonRemover, "Clique no item que deseja remover antes de clicar...");
-            this.buttonRemover.UseVisualStyleBackColor = true;
-            this.buttonRemover.Click += new System.EventHandler(this.buttonRemover_Click);
-            // 
-            // buttonPict
-            // 
-            this.buttonPict.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonPict.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPict.Image = global::Sorteio.Properties.Resources.icons8_Electrical_16;
-            this.buttonPict.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonPict.Location = new System.Drawing.Point(720, 58);
-            this.buttonPict.Name = "buttonPict";
-            this.buttonPict.Size = new System.Drawing.Size(98, 23);
-            this.buttonPict.TabIndex = 9;
-            this.buttonPict.Text = "Add Prêmio";
-            this.buttonPict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.buttonPict, "Adicionar prêmios...");
-            this.buttonPict.UseVisualStyleBackColor = true;
-            this.buttonPict.Click += new System.EventHandler(this.buttonPict_Click);
-            this.buttonPict.MouseEnter += new System.EventHandler(this.buttonPict_MouseEnter);
-            this.buttonPict.MouseLeave += new System.EventHandler(this.buttonPict_MouseLeave);
-            // 
-            // buttonSort
-            // 
-            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
-            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSort.Location = new System.Drawing.Point(794, 31);
-            this.buttonSort.Name = "buttonSort";
-            this.buttonSort.Size = new System.Drawing.Size(24, 23);
-            this.buttonSort.TabIndex = 2;
-            this.buttonSort.UseVisualStyleBackColor = true;
-            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
-            // 
             // colCod
             // 
             this.colCod.DataPropertyName = "concorrenteid";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "00000";
-            this.colCod.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.Format = "00000";
+            this.colCod.DefaultCellStyle = dataGridViewCellStyle13;
             this.colCod.HeaderText = "Cod.:";
             this.colCod.Name = "colCod";
             this.colCod.Visible = false;
@@ -311,8 +311,8 @@
             // colNome
             // 
             this.colNome.DataPropertyName = "concorrentenome";
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.colNome.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.colNome.DefaultCellStyle = dataGridViewCellStyle14;
             this.colNome.HeaderText = "Nome:";
             this.colNome.Name = "colNome";
             this.colNome.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -323,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1246, 565);
+            this.ClientSize = new System.Drawing.Size(843, 584);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.labelTotalValorBilhete);
             this.Controls.Add(this.labelTotalValorProd);

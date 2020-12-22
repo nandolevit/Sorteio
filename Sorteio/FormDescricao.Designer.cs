@@ -67,6 +67,7 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.labelDesc);
             this.Controls.Add(this.textBox1);
+            this.KeyPreview = true;
             this.Name = "FormDescricao";
             this.Load += new System.EventHandler(this.FormDescricao_Load);
             this.ResumeLayout(false);

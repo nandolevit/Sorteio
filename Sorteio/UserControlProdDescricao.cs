@@ -30,7 +30,8 @@ namespace Sorteio
 
         private void UserControlProdDescricao_MouseEnter(object sender, EventArgs e)
         {
-            this.BackColor = Color.Silver;
+            if (this.Enabled)
+                this.BackColor = Color.Silver;
         }
 
         private void UserControlProdDescricao_MouseLeave(object sender, EventArgs e)
@@ -41,12 +42,14 @@ namespace Sorteio
 
         private void UserControlProdDescricao_Click(object sender, EventArgs e)
         {
-            using(FormDescricao descricao = new FormDescricao(enumTexto.num, "Quantidade:"))
+            using (FormDescricao descricao = new FormDescricao(enumTexto.num, "Quantidade:"))
             {
                 if (descricao.ShowDialog(this) == DialogResult.Yes)
                 {
                     FlowLayoutPanel panel = (FlowLayoutPanel)this.Parent;
                     SorteioAdd frm1 = (SorteioAdd)Application.OpenForms["SorteioAdd"];
+                    this.BackColor = Color.GreenYellow;
+                    labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Bold);
 
                     if (frm1 != null)
                     {
@@ -62,12 +65,10 @@ namespace Sorteio
                                 break;
                             }
                         }
-                        Balloon();
                         this.Enabled = false;
+                        Balloon();
                     }
 
-                    this.BackColor = Color.GreenYellow;
-                    labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Bold);
                 }
             }
 
@@ -79,7 +80,7 @@ namespace Sorteio
             toolTip1.IsBalloon = true;
             toolTip1.ToolTipIcon = ToolTipIcon.Info;
             toolTip1.ToolTipTitle = "Informação";
-            toolTip1.Show("Produto adicionado a sua lista!", labelDescricao, 5000);
+            toolTip1.Show("Prêmio adicionado a sua lista!", labelDescricao, 5000);
         }
     }
 }

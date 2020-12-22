@@ -19,6 +19,10 @@ namespace Sorteio
         ProdutoInfo infoProd;
         SorteioInfo infoSort;
         SorteioNegocio negSort;
+        List<UserControlProd> listProdAdd = new List<UserControlProd>();
+        List<UserControlProd> listProdAlt = new List<UserControlProd>();
+        List<UserControlProd> listProdRem = new List<UserControlProd>();
+
         public SorteioAdd()
         {
             InitializeComponent();
@@ -33,9 +37,34 @@ namespace Sorteio
 
         public void PreencherProd(UserControlProd p)
         {
-            this.flowLayoutPanelProd.Controls.Add(p);
-            this.buttonSalvar.Enabled = true;
-            this.buttonRemover.Enabled = true;
+            bool b = true;
+            UserControlProd p1 = new UserControlProd();
+
+            foreach (var item in this.flowLayoutPanelProd.Controls)
+            {
+                p1 = (UserControlProd)item;
+
+                if (p1.Produto.produtoid == p.Produto.produtoid)
+                {
+                    b = false;
+                    if (FormMessage.ShowMessegeQuestion("Este Prêmio já foi adicionado a lista! Deseja acrescentar mais " + Environment.NewLine +
+                        string.Format("{0:00}", p.Quant) + (p.Quant > 1 ? " UNIDADES" : " UNIDADE") + "?") == DialogResult.Yes)
+                    {
+                        p1.AlterarQuant(p.Quant);
+                        listProdAlt.Add(p1);
+                    }
+
+                    break;
+                }
+            }
+
+            if (b)
+            {
+                this.flowLayoutPanelProd.Controls.Add(p);
+                this.listProdAdd.Add(p);
+                this.buttonSalvar.Enabled = true;
+                this.buttonRemover.Enabled = true;
+            }
         }
 
         private void buttonPict_Click(object sender, EventArgs e)
@@ -58,47 +87,65 @@ namespace Sorteio
 
             int id;
             negSort = new SorteioNegocio();
-            SorteioInfo sort = new SorteioInfo
-            {
-                sorteiodata = dateTimePicker1.Value,
-                sorteiodescricao = textBoxDescricaoSort.Text,
-                sorteiobilhetequant = Convert.ToInt32(numericUpDown1.Value),
-                sorteiobilhetevalor = Convert.ToDecimal(textBoxValor.Text)
-            };
 
-            id = negSort.InsertSorteio(sort);
-
-            if (id > 0)
+            if (infoSort == null)
             {
-                sort.sorteioid = id;
-                if (flowLayoutPanelProd.Controls.Count > 0)
+                infoSort = new SorteioInfo
                 {
-                    foreach (Control item in flowLayoutPanelProd.Controls)
+                    sorteiodata = dateTimePicker1.Value,
+                    sorteiodescricao = textBoxDescricaoSort.Text,
+                    sorteiobilhetequant = Convert.ToInt32(numericUpDown1.Value),
+                    sorteiobilhetevalor = Convert.ToDecimal(textBoxValor.Text)
+                };
+
+                id = (int)negSort.ExecutarSorteio(enumCRUD.insert, infoSort);
+
+                if (id > 0)
+                {
+                    infoSort.sorteioid = id;
+                    if (flowLayoutPanelProd.Controls.Count > 0)
                     {
-                        UserControlProd uProd = (UserControlProd)item;
-                        SorteioItemInfo it = new SorteioItemInfo
+                        foreach (Control item in flowLayoutPanelProd.Controls)
                         {
-                            Prod = uProd.Produto,
-                            Quant = uProd.Quant,
-                            Sort = sort
-                        };
-                        negSort.InsertSorteioItem(it);
+                            UserControlProd uProd = (UserControlProd)item;
+                            SorteioItemInfo it = new SorteioItemInfo
+                            {
+                                Prod = uProd.Produto,
+                                Quant = uProd.Quant,
+                                Sort = infoSort
+                            };
+                            negSort.InsertSorteioItem(it);
+                        }
+
+                        FormMessage.ShowMessageSave();
+
+                        if (this.Modal)
+                            this.DialogResult = DialogResult.Yes;
+                        else
+                            this.Close();
                     }
-
-                    FormMessage.ShowMessageSave();
-
-                    if (this.Modal)
-                        this.DialogResult = DialogResult.Yes;
                     else
-                        this.Close();
+                        MessageBox.Show("Nenhum produto foi lançado!");
                 }
                 else
-                    MessageBox.Show("Nenhum produto foi lançado!");
+                    FormMessage.ShowMessageFalha();
             }
             else
-                FormMessage.ShowMessageFalha();
+            {
+                id = infoSort.sorteioid;
 
+                infoSort = new SorteioInfo
+                {
+                    sorteiodata = dateTimePicker1.Value,
+                    sorteiodescricao = textBoxDescricaoSort.Text,
+                    sorteiobilhetequant = Convert.ToInt32(numericUpDown1.Value),
+                    sorteiobilhetevalor = Convert.ToDecimal(textBoxValor.Text),
+                    sorteioid = id
+                };
 
+                negSort.ExecutarSorteio(enumCRUD.update, infoSort);
+                FormMessage.ShowMessageSave();
+            }
         }
 
         private void buttonPict_MouseEnter(object sender, EventArgs e)
@@ -130,8 +177,13 @@ namespace Sorteio
             if (n == 0)
                 FormMessage.ShowMessegeWarning("Selecione um produto para que seja removido!");
             else
+            {
                 for (int i = 0; i < l.Count; i++)
+                {
                     flowLayoutPanelProd.Controls.Remove(l[i]);
+                    listProdRem.Add(l[i]);
+                }
+            }
 
         }
 
@@ -168,7 +220,7 @@ namespace Sorteio
         private void buttonSort_Click(object sender, EventArgs e)
         {
             negSort = new SorteioNegocio();
-            SorteioColecao colSort = negSort.ConsultarSorteio();
+            SorteioColecao colSort = (SorteioColecao)negSort.ExecutarSorteio(enumCRUD.select);
 
             if (colSort != null)
             {
@@ -195,22 +247,6 @@ namespace Sorteio
                         numericUpDown1.Value = infoSort.sorteiobilhetequant;
                         textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
 
-                        BilheteColecao colB = negSort.ConsultarBilheteIdSorteio(infoSort.sorteioid);
-                        dataGridView1.DataSource = null;
-
-                        if (colB != null)
-                        {
-                            ConcorrenteColecao colC = new ConcorrenteColecao();
-                            foreach (var item in colB)
-                            {
-                                var cc = colC.Where(c => c.concorrenteid == item.bilheteidconcorrente.concorrenteid).FirstOrDefault();
-
-                                if (cc == null)
-                                    colC.Add(item.bilheteidconcorrente);
-                            }
-                            dataGridView1.DataSource = colC;
-                        }
-
                         flowLayoutPanelProd.Controls.Clear();
                         SorteioItemColecao colItem = negSort.ConsultarItemIdSorteio(infoSort.sorteioid);
 
@@ -235,6 +271,31 @@ namespace Sorteio
                             labelTotalValorProd.Text = "Valor Total de Prêmios: " + string.Format("{0:C2}", totalValorProd);
                             labelTotalValorBilhete.Text = "Valor Total de Bilhetes: " + string.Format("{0:C2}", infoSort.sorteiobilhetequant * infoSort.sorteiobilhetevalor);
                         }
+
+                        BilheteColecao colB = negSort.ConsultarBilheteIdSorteio(infoSort.sorteioid);
+                        dataGridView1.DataSource = null;
+
+                        if (colB != null)
+                        {
+                            ConcorrenteColecao colC = new ConcorrenteColecao();
+                            foreach (var item in colB)
+                            {
+                                var cc = colC.Where(c => c.concorrenteid == item.bilheteidconcorrente.concorrenteid).FirstOrDefault();
+
+                                if (cc == null)
+                                    colC.Add(item.bilheteidconcorrente);
+                            }
+                            dataGridView1.DataSource = colC;
+                            this.Location = new Point(48, 34);
+                            this.Width = 1262;
+                        }
+                        else
+                        {
+                            this.Width = 859;
+                            this.Location = new Point(249, 34);
+                        }
+
+                        buttonSalvar.Enabled = true;
                     }
                 }
             }

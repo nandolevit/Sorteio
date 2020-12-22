@@ -33,5 +33,11 @@ namespace Sorteio
                 this.BackColor = Color.Silver;
 
         }
+
+        public void AlterarQuant(int n)
+        {
+            Quant += n;
+            labelQuant.Text = string.Format("{0:00}", Quant);
+        }
     }
 }
