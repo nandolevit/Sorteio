@@ -20,6 +20,8 @@ namespace Sorteio
         ProdutoInfo infoProd;
         SorteioInfo infoSort;
         SorteioNegocio negSort;
+        ConcorrenteColecao colConcorrente;
+        BilheteColecao colB;
         List<UserControlProd> listProdAdd = new List<UserControlProd>();
         List<UserControlProd> listProdAlt = new List<UserControlProd>();
         List<UserControlProd> listProdRem = new List<UserControlProd>();
@@ -196,7 +198,7 @@ namespace Sorteio
             {
                 UserControlProd prod = (UserControlProd)item;
 
-                if (prod.BackColor == Color.Silver)
+                if (prod.BackColor == Color.Gray)
                 {
                     l.Add(prod);
                     ++n;
@@ -299,36 +301,83 @@ namespace Sorteio
                             ContarItens();
                         }
 
-                        BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() };
-                        BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b);
-                        dataGridView1.DataSource = null;
-
-                        if (colB != null)
-                        {
-                            ConcorrenteColecao colC = new ConcorrenteColecao();
-                            foreach (var item in colB)
-                            {
-                                var cc = colC.Where(c => c.concorrenteid == item.bilheteidconcorrente.concorrenteid).FirstOrDefault();
-
-                                if (cc == null)
-                                    colC.Add(item.bilheteidconcorrente);
-                            }
-                            dataGridView1.DataSource = colC;
-                            this.Location = new Point(48, 34);
-                            this.Width = 1262;
-                        }
-                        else
-                        {
-                            this.Width = 859;
-                            this.Location = new Point(249, 34);
-                        }
-
+                        
+                        PreencherTree();
                         buttonSalvar.Enabled = true;
                         buttonRemover.Enabled = true;
                     }
                 }
             }
 
+        }
+
+        private void PreencherTree()
+        {
+            ConcorrenteNegocio neg = new ConcorrenteNegocio();
+            ConcorrenteColecao colecao = (ConcorrenteColecao)neg.ExecutarConcorrente(enumCRUD.select, null, true);
+            BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() };
+            colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b);
+
+            if (colB != null)
+            {
+                colConcorrente = new ConcorrenteColecao();
+                foreach (var item in colB)
+                {
+                    var cc = colConcorrente.Where(c => c.concorrenteid == item.bilheteidconcorrente.concorrenteid).FirstOrDefault();
+
+                    if (cc == null)
+                        colConcorrente.Add(item.bilheteidconcorrente);
+                }
+            }
+
+            treeView1.Nodes.Clear();
+            int num = 0;
+            if (colecao != null)
+            {
+                foreach (var item in colecao)
+                {
+                    num++;
+                    int num1 = 0;
+                    int totalBilhete = colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
+
+                    treeView1.Nodes.Add(item.concorrentenome);
+                    if (totalBilhete > 0)
+                    {
+                        //adiciona 2 nós com soma total de bilhete vendidos e o valor total
+                        treeView1.Nodes[num - 1].Nodes.Add(" - Total de Bilhetes Vendidos: " + string.Format("{0:000}", totalBilhete));
+                        treeView1.Nodes[num - 1].Nodes[0].Nodes.Add(" - Valor Total Vendidos: " + string.Format("{0:C2}", totalBilhete * infoSort.sorteiobilhetevalor));
+                    }
+
+                    BilheteColecao bc = new BilheteColecao();
+                    foreach (var item1 in colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid))
+                    {
+                        if (bc.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid).FirstOrDefault() == null)
+                        {
+                            num1++;
+                            bc.Add(item1);
+                            int totalBilhete2 = colB.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid && w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
+
+                            treeView1.Nodes[num - 1].Nodes[0].Nodes[0].Nodes.Add(item1.bilheteidconcorrente.concorrentenome);
+                            if (totalBilhete2 > 0)
+                            {
+                                treeView1.Nodes[num - 1].Nodes[0].Nodes[0].Nodes[num1 - 1].Nodes.Add(" - Total de Bilhetes Comprados: " + string.Format("{0:000}", totalBilhete2));
+                                treeView1.Nodes[num - 1].Nodes[0].Nodes[0].Nodes[num1 - 1].Nodes[0].Nodes.Add(" - Valor Total Comprados: " + string.Format("{0:C2}", totalBilhete2 * infoSort.sorteiobilhetevalor));
+                            }
+                        }
+                    }
+                }
+
+                int total = colB.Count();
+                if (total > 0)
+                {
+                    treeView1.Nodes.Add("TOTAL GERAL**").NodeFont = new Font(treeView1.Font, FontStyle.Bold);
+                    //treeView1.Nodes[num].NodeFont = new Font(treeView1.Font, FontStyle.Bold);
+                    treeView1.Nodes[num].ForeColor = Color.Maroon;
+                    //adiciona 2 nós com soma total de bilhete vendidos e o valor total
+                    treeView1.Nodes[num].Nodes.Add(" - Total de Bilhetes Vendidos: " + string.Format("{0:000}", total));
+                    treeView1.Nodes[num].Nodes[0].Nodes.Add(" - Valor Total Vendidos: " + string.Format("{0:C2}", total * infoSort.sorteiobilhetevalor));
+                }
+            }
         }
 
         private void ContarItens()

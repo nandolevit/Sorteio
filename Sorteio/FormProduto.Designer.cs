@@ -36,9 +36,9 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 57);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1314, 520);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1314, 565);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // buttonFechar
@@ -64,7 +64,7 @@
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
             this.buttonAdd.Image = global::Sorteio.Properties.Resources.add_32;
             this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdd.Location = new System.Drawing.Point(1211, 12);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 582);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(115, 38);
             this.buttonAdd.TabIndex = 10;
@@ -77,10 +77,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.IndianRed;
-            this.ClientSize = new System.Drawing.Size(1341, 633);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1347, 632);
             this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonFechar);
             this.Name = "FormProduto";
             this.Text = "Prêmios";

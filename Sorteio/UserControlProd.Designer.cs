@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlProd));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelDescricao = new System.Windows.Forms.Label();
             this.labelQuant = new System.Windows.Forms.Label();
@@ -38,7 +37,6 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(25, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -50,6 +48,7 @@
             // labelDescricao
             // 
             this.labelDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescricao.ForeColor = System.Drawing.Color.White;
             this.labelDescricao.Location = new System.Drawing.Point(3, 111);
             this.labelDescricao.Name = "labelDescricao";
             this.labelDescricao.Size = new System.Drawing.Size(145, 39);
@@ -61,6 +60,7 @@
             // 
             this.labelQuant.AutoSize = true;
             this.labelQuant.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelQuant.ForeColor = System.Drawing.Color.White;
             this.labelQuant.Location = new System.Drawing.Point(3, 8);
             this.labelQuant.Name = "labelQuant";
             this.labelQuant.Size = new System.Drawing.Size(41, 13);
@@ -72,10 +72,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Maroon;
             this.Controls.Add(this.labelQuant);
             this.Controls.Add(this.labelDescricao);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "UserControlProd";
             this.Size = new System.Drawing.Size(148, 150);
             this.Load += new System.EventHandler(this.UserControlProd_Load);

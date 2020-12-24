@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonPict = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
@@ -42,8 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBoxDescricaoSort = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanelProd = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonRemover = new System.Windows.Forms.Button();
             this.buttonSalvar = new System.Windows.Forms.Button();
@@ -51,15 +47,12 @@
             this.labelTotalQuant = new System.Windows.Forms.Label();
             this.labelTotalValorProd = new System.Windows.Forms.Label();
             this.labelTotalValorBilhete = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colCod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNome = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.flowLayoutPanelProd = new System.Windows.Forms.FlowLayoutPanel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -186,25 +179,6 @@
             this.textBoxDescricaoSort.Size = new System.Drawing.Size(778, 20);
             this.textBoxDescricaoSort.TabIndex = 1;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.flowLayoutPanelProd);
-            this.groupBox2.Location = new System.Drawing.Point(13, 118);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(823, 386);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lista de Prêmios:";
-            // 
-            // flowLayoutPanelProd
-            // 
-            this.flowLayoutPanelProd.AutoScroll = true;
-            this.flowLayoutPanelProd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelProd.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelProd.Name = "flowLayoutPanelProd";
-            this.flowLayoutPanelProd.Size = new System.Drawing.Size(817, 367);
-            this.flowLayoutPanelProd.TabIndex = 0;
-            // 
             // buttonRemover
             // 
             this.buttonRemover.BackgroundImage = global::Sorteio.Properties.Resources.icons8_Close_Window_32;
@@ -223,7 +197,7 @@
             // buttonSalvar
             // 
             this.buttonSalvar.Enabled = false;
-            this.buttonSalvar.Location = new System.Drawing.Point(663, 536);
+            this.buttonSalvar.Location = new System.Drawing.Point(758, 536);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(75, 23);
             this.buttonSalvar.TabIndex = 3;
@@ -233,7 +207,7 @@
             // 
             // buttonFechar
             // 
-            this.buttonFechar.Location = new System.Drawing.Point(750, 536);
+            this.buttonFechar.Location = new System.Drawing.Point(845, 536);
             this.buttonFechar.Name = "buttonFechar";
             this.buttonFechar.Size = new System.Drawing.Size(75, 23);
             this.buttonFechar.TabIndex = 4;
@@ -274,64 +248,47 @@
             this.labelTotalValorBilhete.TabIndex = 7;
             this.labelTotalValorBilhete.Text = "Valor Total de Bilhetes: ";
             // 
-            // groupBox3
+            // flowLayoutPanelProd
             // 
-            this.groupBox3.Controls.Add(this.dataGridView1);
-            this.groupBox3.Location = new System.Drawing.Point(842, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(392, 492);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Concorrentes:";
+            this.flowLayoutPanelProd.AutoScroll = true;
+            this.flowLayoutPanelProd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelProd.Location = new System.Drawing.Point(12, 99);
+            this.flowLayoutPanelProd.Name = "flowLayoutPanelProd";
+            this.flowLayoutPanelProd.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanelProd.Size = new System.Drawing.Size(926, 402);
+            this.flowLayoutPanelProd.TabIndex = 0;
             // 
-            // dataGridView1
+            // treeView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCod,
-            this.colNome});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(386, 473);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(3, 16);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(353, 470);
+            this.treeView1.TabIndex = 9;
             // 
-            // colCod
+            // groupBox2
             // 
-            this.colCod.DataPropertyName = "concorrenteid";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.Format = "00000";
-            this.colCod.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colCod.HeaderText = "Cod.:";
-            this.colCod.Name = "colCod";
-            this.colCod.Visible = false;
-            this.colCod.Width = 50;
-            // 
-            // colNome
-            // 
-            this.colNome.DataPropertyName = "concorrentenome";
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.colNome.DefaultCellStyle = dataGridViewCellStyle16;
-            this.colNome.HeaderText = "Nome:";
-            this.colNome.Name = "colNome";
-            this.colNome.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colNome.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colNome.Width = 350;
+            this.groupBox2.Controls.Add(this.treeView1);
+            this.groupBox2.Location = new System.Drawing.Point(944, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(359, 489);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Lista de Vendedores:";
             // 
             // SorteioAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 584);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(1315, 584);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.flowLayoutPanelProd);
             this.Controls.Add(this.labelTotalValorBilhete);
             this.Controls.Add(this.labelTotalValorProd);
             this.Controls.Add(this.labelTotalQuant);
             this.Controls.Add(this.buttonSalvar);
             this.Controls.Add(this.buttonFechar);
             this.Controls.Add(this.buttonRemover);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "SorteioAdd";
             this.Text = "Lançamento";
@@ -340,8 +297,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,11 +309,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox textBoxDescricaoSort;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonPict;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxValor;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProd;
         private System.Windows.Forms.Button buttonRemover;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label6;
@@ -369,9 +322,8 @@
         private System.Windows.Forms.Label labelTotalQuant;
         private System.Windows.Forms.Label labelTotalValorProd;
         private System.Windows.Forms.Label labelTotalValorBilhete;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCod;
-        private System.Windows.Forms.DataGridViewLinkColumn colNome;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProd;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

@@ -24,7 +24,7 @@ namespace Sorteio
             FormFormat formFormat = new FormFormat(this);
             formFormat.formatar();
             this.FormBorderStyle = FormBorderStyle.None;
-            this.buttonFechar.ForeColor = Color.White;
+            //this.buttonFechar.ForeColor = Color.White;
         }
 
         private void FormProduto_Load(object sender, EventArgs e)

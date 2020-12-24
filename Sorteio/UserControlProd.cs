@@ -37,10 +37,10 @@ namespace Sorteio
             if (verd)
                 LimparFlow((FlowLayoutPanel)this.Parent);
 
-            if (this.BackColor == Color.Silver)
-                this.BackColor = Color.White;
+            if (this.BackColor == Color.Gray)
+                this.BackColor = Color.Maroon;
             else
-                this.BackColor = Color.Silver;
+                this.BackColor = Color.Gray;
 
             if (verd)
             {
@@ -60,7 +60,7 @@ namespace Sorteio
             foreach (var item in flow.Controls)
             {
                 UserControlProd b = (UserControlProd)item;
-                b.BackColor = Color.White;
+                b.BackColor = Color.Maroon;
             }
         }
     }
