@@ -31,13 +31,13 @@ namespace Sorteio
         private void UserControlProdDescricao_MouseEnter(object sender, EventArgs e)
         {
             if (this.Enabled)
-                this.BackColor = Color.Silver;
+                this.BackColor = Color.Gray;
         }
 
         private void UserControlProdDescricao_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = Color.White;
-            labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Regular);
+            this.BackColor = Color.Maroon;
+            //labelDescricao.Font = new Font(labelDescricao.Font, FontStyle.Regular);
         }
 
         private void UserControlProdDescricao_Click(object sender, EventArgs e)

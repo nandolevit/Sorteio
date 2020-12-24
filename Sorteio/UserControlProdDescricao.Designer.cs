@@ -42,6 +42,7 @@
             // 
             this.labelValor.AutoSize = true;
             this.labelValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelValor.ForeColor = System.Drawing.Color.White;
             this.labelValor.Location = new System.Drawing.Point(114, 94);
             this.labelValor.Name = "labelValor";
             this.labelValor.Size = new System.Drawing.Size(44, 13);
@@ -52,11 +53,12 @@
             // 
             // labelDescricao
             // 
+            this.labelDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescricao.ForeColor = System.Drawing.Color.White;
             this.labelDescricao.Location = new System.Drawing.Point(114, 3);
             this.labelDescricao.Name = "labelDescricao";
             this.labelDescricao.Size = new System.Drawing.Size(132, 91);
             this.labelDescricao.TabIndex = 0;
-            this.labelDescricao.Text = "Descrição:";
             this.labelDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelDescricao.Click += new System.EventHandler(this.UserControlProdDescricao_Click);
             this.labelDescricao.MouseEnter += new System.EventHandler(this.UserControlProdDescricao_MouseEnter);
@@ -93,8 +95,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Maroon;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlProdDescricao";
             this.Size = new System.Drawing.Size(259, 115);
             this.Load += new System.EventHandler(this.UserControlProdDescricao_Load);
