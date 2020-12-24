@@ -54,7 +54,13 @@ namespace Sorteio
                 }
                 else if (button1.BackColor == Color.GreenYellow || button1.BackColor == Color.Gray)
                 {
-                    FormMessage.ShowMessegeWarning("Prêmio: " + infoS.Prod.produtodescricao + "Ganhador: " + infoS.Bilhete.bilheteidconcorrente.concorrentenome);
+                    //FormMessage.ShowMessegeWarning("Prêmio: " + infoS.Prod.produtodescricao + "Ganhador: " + infoS.Bilhete.bilheteidconcorrente.concorrentenome);
+
+                    using (FormPremio p = new FormPremio(infoS))
+                    {
+                        p.ShowDialog(this);
+                    }
+
                     button1.BackColor = Color.Gray;
                 }
             }

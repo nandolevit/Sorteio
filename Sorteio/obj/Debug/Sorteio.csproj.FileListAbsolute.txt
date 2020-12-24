@@ -39,3 +39,5 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlProdDescricao.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormDescricao.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormSortear.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormNumSorteio.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormPremio.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.Form2.resources

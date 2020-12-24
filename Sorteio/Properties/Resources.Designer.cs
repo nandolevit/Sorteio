@@ -103,6 +103,16 @@ namespace Sorteio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Best_Seller_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Best_Seller_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Broom_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_Broom_32", resourceCulture);
@@ -146,6 +156,16 @@ namespace Sorteio.Properties {
         internal static System.Drawing.Bitmap icons8_Save_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_Save_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Square_with_Numbers_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Square_with_Numbers_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

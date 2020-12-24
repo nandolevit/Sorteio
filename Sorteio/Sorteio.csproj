@@ -57,6 +57,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormConcorrente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,12 @@
     </Compile>
     <Compile Include="FormNumSorteio.Designer.cs">
       <DependentUpon>FormNumSorteio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPremio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPremio.Designer.cs">
+      <DependentUpon>FormPremio.cs</DependentUpon>
     </Compile>
     <Compile Include="FormProduto.cs">
       <SubType>Form</SubType>
@@ -128,6 +140,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormConcorrente.resx">
       <DependentUpon>FormConcorrente.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormNumSorteio.resx">
       <DependentUpon>FormNumSorteio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPremio.resx">
+      <DependentUpon>FormPremio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProduto.resx">
       <DependentUpon>FormProduto.cs</DependentUpon>
@@ -220,8 +238,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Electrical_48px.png" />
+    <None Include="Resources\icons8_Square_with_Numbers_32.png" />
     <None Include="Resources\icons8_Electrical_16.png" />
     <None Include="Resources\eletro.jpg" />
+    <None Include="Resources\icons8_Best_Seller_32.png" />
     <Content Include="Resources\icons8_Leaderboard.ico" />
     <Content Include="Resources\icons8_Leaderboard_32.png" />
   </ItemGroup>

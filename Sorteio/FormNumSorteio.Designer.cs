@@ -37,7 +37,7 @@
             // flowLayoutPanelBilhete
             // 
             this.flowLayoutPanelBilhete.AutoScroll = true;
-            this.flowLayoutPanelBilhete.Location = new System.Drawing.Point(133, 41);
+            this.flowLayoutPanelBilhete.Location = new System.Drawing.Point(79, 41);
             this.flowLayoutPanelBilhete.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelBilhete.Name = "flowLayoutPanelBilhete";
             this.flowLayoutPanelBilhete.Size = new System.Drawing.Size(1225, 666);
@@ -49,24 +49,27 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1344, 749);
+            this.panel1.Size = new System.Drawing.Size(1364, 749);
             this.panel1.TabIndex = 4;
             // 
             // buttonSortear
             // 
-            this.buttonSortear.Location = new System.Drawing.Point(1282, 711);
+            this.buttonSortear.BackColor = System.Drawing.Color.Maroon;
+            this.buttonSortear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSortear.ForeColor = System.Drawing.Color.White;
+            this.buttonSortear.Location = new System.Drawing.Point(1256, 714);
             this.buttonSortear.Name = "buttonSortear";
             this.buttonSortear.Size = new System.Drawing.Size(75, 23);
             this.buttonSortear.TabIndex = 0;
-            this.buttonSortear.Text = "button1";
-            this.buttonSortear.UseVisualStyleBackColor = true;
+            this.buttonSortear.Text = "Sortear";
+            this.buttonSortear.UseVisualStyleBackColor = false;
             this.buttonSortear.Click += new System.EventHandler(this.buttonSortear_Click);
             // 
             // FormNumSorteio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1344, 749);
+            this.ClientSize = new System.Drawing.Size(1364, 749);
             this.Controls.Add(this.flowLayoutPanelBilhete);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -76,6 +79,7 @@
             this.Name = "FormNumSorteio";
             this.Text = "FormNumSorteio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNumSorteio_FormClosing);
             this.Load += new System.EventHandler(this.FormNumSorteio_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

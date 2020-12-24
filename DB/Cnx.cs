@@ -28,9 +28,9 @@ namespace DB
                 mCnx.Open();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
-                return false;
+                throw new Exception("Error: " + ex.Message);
             }
         }
 

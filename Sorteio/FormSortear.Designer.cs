@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonSort = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.labelTotalQuant = new System.Windows.Forms.Label();
             this.labelBilheteContar = new System.Windows.Forms.Label();
             this.buttonSortear = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -70,18 +70,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sorteio:";
-            // 
-            // buttonSort
-            // 
-            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
-            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSort.Location = new System.Drawing.Point(621, 29);
-            this.buttonSort.Name = "buttonSort";
-            this.buttonSort.Size = new System.Drawing.Size(24, 23);
-            this.buttonSort.TabIndex = 2;
-            this.buttonSort.UseVisualStyleBackColor = true;
-            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // label2
             // 
@@ -234,13 +222,33 @@
             // 
             // buttonSortear
             // 
-            this.buttonSortear.Location = new System.Drawing.Point(1106, 553);
+            this.buttonSortear.BackColor = System.Drawing.Color.Green;
+            this.buttonSortear.Enabled = false;
+            this.buttonSortear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSortear.Font = new System.Drawing.Font("Impact", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSortear.ForeColor = System.Drawing.Color.White;
+            this.buttonSortear.Image = global::Sorteio.Properties.Resources.icons8_Best_Seller_32;
+            this.buttonSortear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSortear.Location = new System.Drawing.Point(1122, 553);
             this.buttonSortear.Name = "buttonSortear";
-            this.buttonSortear.Size = new System.Drawing.Size(138, 45);
+            this.buttonSortear.Size = new System.Drawing.Size(122, 45);
             this.buttonSortear.TabIndex = 12;
-            this.buttonSortear.Text = "button1";
-            this.buttonSortear.UseVisualStyleBackColor = true;
+            this.buttonSortear.Text = "Sortear";
+            this.buttonSortear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSortear.UseVisualStyleBackColor = false;
             this.buttonSortear.Click += new System.EventHandler(this.buttonSortear_Click);
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
+            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSort.Location = new System.Drawing.Point(621, 29);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(24, 23);
+            this.buttonSort.TabIndex = 2;
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // FormSortear
             // 
