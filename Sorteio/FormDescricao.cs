@@ -63,9 +63,9 @@ namespace Sorteio
             {
                 if (Txt != enumTexto.texto)
                 {
-                    if(Convert.ToInt32(textBox1.Text) < 1)
+                    if(Convert.ToInt32(textBox1.Text) == 0)
                     {
-                        FormMessage.ShowMessegeWarning("Insira valores maiores que zero!");
+                        FormMessage.ShowMessegeWarning("Insira valores diferente de zero!");
                         textBox1.Clear();
                         textBox1.Select();
                         return;

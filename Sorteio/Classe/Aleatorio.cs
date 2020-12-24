@@ -11,12 +11,21 @@ namespace Sorteio.Classe
         static Random rnd = new Random();
 
 
-        public static int[] Gerar(int n, int total)
+        public static List<int> Gerar(int nMax, int total)
         {
-            int[] num = new int[total];
+            List<int> num = new List<int>();
 
             for (int i = 0; i < total; i++)
-                num[i] = rnd.Next(1, n);
+            {
+                int num2;
+                do
+                {
+                    num2 = rnd.Next(1, nMax);
+                } while (num.Contains(num2));
+
+
+                num.Add(num2);
+            }
 
             return num;
         }

@@ -48,8 +48,8 @@ namespace Sorteio
                 if (p1.Produto.produtoid == p.Produto.produtoid)
                 {
                     b = false;
-                    if (FormMessage.ShowMessegeQuestion("Este Prêmio já foi adicionado a lista! Deseja acrescentar mais " + Environment.NewLine +
-                        string.Format("{0:00}", p.Quant) + (p.Quant > 1 ? " UNIDADES" : " UNIDADE") + "?") == DialogResult.Yes)
+                    if (FormMessage.ShowMessegeQuestion("Este Prêmio já foi adicionado a lista! Deseja " + (p.Quant > 0 ? "acrescentar mais " : "REMOVER ") + Environment.NewLine +
+                        string.Format("{0:00}", Math.Abs(p.Quant)) + (Math.Abs(p.Quant) > 1 ? " UNIDADES" : " UNIDADE") + "?") == DialogResult.Yes)
                     {
                         p1.AlterarQuant(p.Quant);
                         listProdAlt.Add(p1);
@@ -299,7 +299,7 @@ namespace Sorteio
                             ContarItens();
                         }
 
-                        BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidVendedor = new ConcorrenteInfo() };
+                        BilheteInfo b = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() };
                         BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b);
                         dataGridView1.DataSource = null;
 

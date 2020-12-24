@@ -9,19 +9,9 @@ using System.Windows.Forms;
 
 namespace Sorteio
 {
-    public enum EnumDias { Hoje, Amanha, Depois, Ontem, Anteontem}
+    public enum EnumDias { Hoje, Amanha, Depois, Ontem, Anteontem }
     public static class FormTextoFormat
     {
-        //criação de delegates de mensagem
-        //mensagem de confirmação tipo sim/não
-        private delegate DialogResult DelMessageQuestion(string mensagem);
-        private static DelMessageQuestion DelQ = new DelMessageQuestion(FormMessage.ShowMessegeQuestion);
-        //mensagem de aviso
-        private delegate void DelMessgeWarning(string mensagem);
-        private static DelMessgeWarning DelW = new DelMessgeWarning(FormMessage.ShowMessegeWarning);
-        //messagem de informação
-        private delegate void DelMessageInfo(string mensagem);
-        private static DelMessageInfo DelI = new DelMessageInfo(FormMessage.ShowMessegeInfo);
 
         public const string Alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -36,7 +26,7 @@ namespace Sorteio
                 //foreach (string p in Preposicao)
                 //    if (p.Contains(n.ToLower())) { prox = true; break; }
 
-                if(Preposicao.Contains(n.ToLower())) { prox = true; break; }
+                if (Preposicao.Contains(n.ToLower())) { prox = true; break; }
 
                 if (prox)
                 {
@@ -98,10 +88,18 @@ namespace Sorteio
                 string t = box.Text;
                 char c = t[t.Length - 1];
 
-                if (!char.IsNumber(c))
+                if (!char.IsNumber(c) || c == '-')
                 {
-                    if (!(c == (char)46 || c == (char)44))
-                        box.Text = t.Substring(0, t.Length - 1);
+                    if (c != '-')
+                    {
+                        if (!(c == (char)46 || c == (char)44))
+                            box.Text = t.Substring(0, t.Length - 1);
+                    }
+                    else
+                    {
+                        if (box.Text.Length != 1)
+                            box.Text = t.Substring(0, t.Length - 1);
+                    }
                 }
                 else if (casas > 1)
                 {
@@ -576,7 +574,7 @@ namespace Sorteio
                 return true;
             else
             {
-                DelW(texto + " EMAIL INVÁLIDO!");
+                FormMessage.ShowMessegeWarning(texto + " EMAIL INVÁLIDO!");
                 return false;
             }
         }

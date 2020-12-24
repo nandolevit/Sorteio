@@ -33,11 +33,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textBoxValor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBoxDescricaoSort = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelProd = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxNum = new System.Windows.Forms.GroupBox();
@@ -46,6 +46,7 @@
             this.labelTotalValorProd = new System.Windows.Forms.Label();
             this.labelTotalQuant = new System.Windows.Forms.Label();
             this.labelBilheteContar = new System.Windows.Forms.Label();
+            this.buttonSortear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -109,6 +110,14 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Valor Bilhete:";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Enabled = false;
+            this.numericUpDown1.Location = new System.Drawing.Point(83, 58);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown1.TabIndex = 4;
+            // 
             // textBoxValor
             // 
             this.textBoxValor.Enabled = false;
@@ -142,14 +151,6 @@
             this.textBoxDescricaoSort.Size = new System.Drawing.Size(605, 20);
             this.textBoxDescricaoSort.TabIndex = 1;
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Location = new System.Drawing.Point(83, 58);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
-            this.numericUpDown1.TabIndex = 4;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.flowLayoutPanelProd);
@@ -172,10 +173,9 @@
             // groupBoxNum
             // 
             this.groupBoxNum.Controls.Add(this.flowLayoutPanelBilhete);
-            this.groupBoxNum.Enabled = false;
-            this.groupBoxNum.Location = new System.Drawing.Point(669, 12);
+            this.groupBoxNum.Location = new System.Drawing.Point(675, 12);
             this.groupBoxNum.Name = "groupBoxNum";
-            this.groupBoxNum.Size = new System.Drawing.Size(578, 522);
+            this.groupBoxNum.Size = new System.Drawing.Size(572, 522);
             this.groupBoxNum.TabIndex = 4;
             this.groupBoxNum.TabStop = false;
             this.groupBoxNum.Text = "Número de bilhetes:";
@@ -186,7 +186,7 @@
             this.flowLayoutPanelBilhete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelBilhete.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelBilhete.Name = "flowLayoutPanelBilhete";
-            this.flowLayoutPanelBilhete.Size = new System.Drawing.Size(572, 503);
+            this.flowLayoutPanelBilhete.Size = new System.Drawing.Size(566, 503);
             this.flowLayoutPanelBilhete.TabIndex = 2;
             // 
             // labelTotalValorBilhete
@@ -232,11 +232,22 @@
             this.labelBilheteContar.TabIndex = 11;
             this.labelBilheteContar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // buttonSortear
+            // 
+            this.buttonSortear.Location = new System.Drawing.Point(1106, 553);
+            this.buttonSortear.Name = "buttonSortear";
+            this.buttonSortear.Size = new System.Drawing.Size(138, 45);
+            this.buttonSortear.TabIndex = 12;
+            this.buttonSortear.Text = "button1";
+            this.buttonSortear.UseVisualStyleBackColor = true;
+            this.buttonSortear.Click += new System.EventHandler(this.buttonSortear_Click);
+            // 
             // FormSortear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1259, 582);
+            this.ClientSize = new System.Drawing.Size(1259, 610);
+            this.Controls.Add(this.buttonSortear);
             this.Controls.Add(this.labelBilheteContar);
             this.Controls.Add(this.labelTotalValorBilhete);
             this.Controls.Add(this.labelTotalValorProd);
@@ -276,5 +287,6 @@
         private System.Windows.Forms.Label labelTotalValorProd;
         private System.Windows.Forms.Label labelTotalQuant;
         private System.Windows.Forms.Label labelBilheteContar;
+        private System.Windows.Forms.Button buttonSortear;
     }
 }

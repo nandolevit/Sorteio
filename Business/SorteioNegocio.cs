@@ -165,7 +165,7 @@ namespace Business
             {
                 cnz.AddMySqlParameterCollection("@id", a.bilheteid);
                 cnz.AddMySqlParameterCollection("@conc", a.bilheteidconcorrente.concorrenteid);
-                cnz.AddMySqlParameterCollection("@vend", a.bilheteidVendedor.concorrenteid);
+                cnz.AddMySqlParameterCollection("@vend", a.bilheteidvendedor.concorrenteid);
                 cnz.AddMySqlParameterCollection("@sort", a.bilheteidsorteio.sorteioid);
                 cnz.AddMySqlParameterCollection("@num", a.bilhetenum);
             }
@@ -253,7 +253,7 @@ namespace Business
                     bilheteidsorteio = PreencherSorteioInfo(row)
                 };
 
-                info.bilheteidVendedor = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidVendedor"]) };
+                info.bilheteidvendedor = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidVendedor"]) };
 
                 colecao.Add(info);
 

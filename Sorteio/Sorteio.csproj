@@ -57,12 +57,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBilheteLista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormBilheteLista.Designer.cs">
-      <DependentUpon>FormBilheteLista.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormConcorrente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +74,12 @@
     </Compile>
     <Compile Include="FormDescricao.Designer.cs">
       <DependentUpon>FormDescricao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNumSorteio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNumSorteio.Designer.cs">
+      <DependentUpon>FormNumSorteio.cs</DependentUpon>
     </Compile>
     <Compile Include="FormProduto.cs">
       <SubType>Form</SubType>
@@ -125,17 +125,8 @@
     <Compile Include="UserControlProdDescricao.Designer.cs">
       <DependentUpon>UserControlProdDescricao.cs</DependentUpon>
     </Compile>
-    <Compile Include="VendaBilhete.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VendaBilhete.Designer.cs">
-      <DependentUpon>VendaBilhete.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormBilheteLista.resx">
-      <DependentUpon>FormBilheteLista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormConcorrente.resx">
       <DependentUpon>FormConcorrente.cs</DependentUpon>
@@ -145,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDescricao.resx">
       <DependentUpon>FormDescricao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNumSorteio.resx">
+      <DependentUpon>FormNumSorteio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProduto.resx">
       <DependentUpon>FormProduto.cs</DependentUpon>
@@ -176,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlProdDescricao.resx">
       <DependentUpon>UserControlProdDescricao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VendaBilhete.resx">
-      <DependentUpon>VendaBilhete.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -36,6 +36,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxNome = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.maskedTextBoxCpf = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNome = new System.Windows.Forms.TextBox();
@@ -59,7 +60,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonFechar = new System.Windows.Forms.Button();
             this.buttonSalvar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBoxNum.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -158,6 +159,20 @@
             this.groupBoxNome.TabIndex = 0;
             this.groupBoxNome.TabStop = false;
             this.groupBoxNome.Text = "Comprador:";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(920, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 23);
+            this.button1.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.button1, "Consultar Vendedor...");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // maskedTextBoxCpf
             // 
@@ -379,25 +394,21 @@
             this.buttonSalvar.UseVisualStyleBackColor = true;
             this.buttonSalvar.Click += new System.EventHandler(this.buttonSalvar_Click);
             // 
-            // button1
+            // labelTotal
             // 
-            this.button1.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(920, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 23);
-            this.button1.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.button1, "Consultar Vendedor...");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.ForeColor = System.Drawing.Color.Maroon;
+            this.labelTotal.Location = new System.Drawing.Point(10, 552);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(0, 13);
+            this.labelTotal.TabIndex = 5;
             // 
             // FormConcorrente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 607);
+            this.ClientSize = new System.Drawing.Size(989, 600);
+            this.Controls.Add(this.labelTotal);
             this.Controls.Add(this.buttonSalvar);
             this.Controls.Add(this.buttonFechar);
             this.Controls.Add(this.groupBox1);
@@ -413,6 +424,7 @@
             this.groupBoxVendedor.ResumeLayout(false);
             this.groupBoxVendedor.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -449,5 +461,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button buttonLimpar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelTotal;
     }
 }

@@ -18,12 +18,10 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.Form1.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.Properties.Resources.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.SorteioAdd.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlProd.resources
-D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.VendaBilhete.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.csproj.GenerateResource.cache
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.exe
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.pdb
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormConcorrente.resources
-D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormBilheteLista.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlBilhete.resources
 D:\Sistema\Sorteio\Sorteio\bin\Debug\Business.dll
 D:\Sistema\Sorteio\Sorteio\bin\Debug\DB.dll
@@ -40,3 +38,4 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormProduto.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.UserControlProdDescricao.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormDescricao.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormSortear.resources
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormNumSorteio.resources

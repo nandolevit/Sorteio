@@ -50,6 +50,7 @@
     <Compile Include="ProdutoColecao.cs" />
     <Compile Include="ProdutoInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SorteadoInfo.cs" />
     <Compile Include="SorteioColecao.cs" />
     <Compile Include="SorteioInfo.cs" />
     <Compile Include="SorteioItemColecao.cs" />

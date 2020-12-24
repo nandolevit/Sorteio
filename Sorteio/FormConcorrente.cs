@@ -69,6 +69,17 @@ namespace Sorteio
                     textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
                     infoSort = (SorteioInfo)consult.Selecionado.Objeto;
                     ListaBilhete();
+
+                    int num = 0;
+                    foreach (var item in flowLayoutPanel1.Controls)
+                    {
+                        UserControlBilhete b = (UserControlBilhete)item;
+
+                        if (b.Botao.BackColor == Color.GreenYellow)
+                            ++num;
+                    }
+
+                    labelTotal.Text = "Total de bilhetes: " + string.Format("{0:000}", num);
                 }
             }
 
@@ -88,7 +99,7 @@ namespace Sorteio
         private void BilheteSelecionado()
         {
             negSort = new SorteioNegocio();
-            BilheteInfo b3 = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidVendedor = new ConcorrenteInfo() };
+            BilheteInfo b3 = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() };
             BilheteColecao colecao = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b3);
 
             if (colecao != null)
@@ -107,6 +118,7 @@ namespace Sorteio
                             b.Botao.BackColor = Color.GreenYellow;
                             b.Botao.Font = new Font(b.Font, FontStyle.Bold);
                             b.Botao.ForeColor = Color.White;
+
                         }
 
                         if (bi.bilhetenum == Convert.ToInt32(b.Texto))
@@ -118,10 +130,12 @@ namespace Sorteio
                             }
                         }
 
+                        //if (b.BackColor == Color.GreenYellow)
+                        //{
+                        //    ++num;
+                        //}
                     }
                 }
-
-
             }
         }
 
@@ -193,7 +207,7 @@ namespace Sorteio
             if (FormMessage.ShowMessegeQuestion("Salvar?") == DialogResult.Yes)
             {
                 int id = 0;
-                BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort, bilheteidVendedor = infoVend };
+                BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort, bilheteidvendedor = infoVend };
                 negSort.ExecutarBilhete(enumCRUD.delete, b1);
                 foreach (var item in flowLayoutPanel1.Controls)
                 {
@@ -205,7 +219,7 @@ namespace Sorteio
                         {
                             bilheteidconcorrente = infoConc,
                             bilheteidsorteio = infoSort,
-                            bilheteidVendedor = infoVend,
+                            bilheteidvendedor = infoVend,
                             bilhetenum = Convert.ToInt32(bi.Botao.Text)
                         };
                         id = (int)negSort.ExecutarBilhete(enumCRUD.insert, b);

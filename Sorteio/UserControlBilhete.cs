@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Object;
 
 namespace Sorteio
 {
@@ -19,7 +20,20 @@ namespace Sorteio
         private Color Cor { get; set; }
         private Font Fonte { get; set; }
 
+        SorteadoInfo infoS;
+
+        public UserControlBilhete(SorteadoInfo info)
+        {
+            Inicializar();
+            infoS = info;
+        }
+
         public UserControlBilhete()
+        {
+            Inicializar();
+        }
+
+        private void Inicializar()
         {
             InitializeComponent();
             Cor = button1.BackColor;
@@ -28,22 +42,38 @@ namespace Sorteio
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (infoS == null)
+                formatBotao();
+            else
+            {
+                if (button1.BackColor == Color.Blue)
+                {
+                    formatBotao();
+                    FormNumSorteio frm = (FormNumSorteio)this.Parent.Parent;
+                    frm.RevelarNum();
+                }
+                else if (button1.BackColor == Color.GreenYellow || button1.BackColor == Color.Gray)
+                {
+                    FormMessage.ShowMessegeWarning("Prêmio: " + infoS.Prod.produtodescricao + "Ganhador: " + infoS.Bilhete.bilheteidconcorrente.concorrentenome);
+                    button1.BackColor = Color.Gray;
+                }
+            }
+
+            Botao = button1;
+        }
+
+        private void formatBotao()
+        {
             if (button1.BackColor == Color.GreenYellow)
             {
                 button1.BackColor = Cor;
                 button1.Font = Fonte;
-                button1.ForeColor = Color.Black;
-                //Ativo = false;
             }
             else
             {
                 button1.BackColor = Color.GreenYellow;
                 button1.Font = new Font(button1.Font, FontStyle.Bold);
-                button1.ForeColor = Color.White;
-                //Ativo = true;
             }
-
-            Botao = button1;
         }
 
         private void UserControlBilhete_Load(object sender, EventArgs e)
@@ -52,6 +82,17 @@ namespace Sorteio
             button1.Text = Texto;
 
             Botao = button1;
+        }
+
+        public void MudarCorBotao(Color back, Color fore)
+        {
+            button1.BackColor = back;
+            button1.ForeColor = fore;
+        }
+
+        public void Sorteado(SorteadoInfo sorteado)
+        {
+            infoS = sorteado;
         }
     }
 }
