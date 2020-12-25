@@ -74,15 +74,18 @@ namespace Sorteio
 
         private void buttonPict_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             using (FormProduto formProduto = new FormProduto())
             {
                 formProduto.ShowDialog(this);
             }
+            this.Cursor = Cursors.Default;
         }
 
 
         private void Salvar()
         {
+            this.Cursor = Cursors.WaitCursor;
             if (string.IsNullOrEmpty(textBoxDescricaoSort.Text))
             {
                 MessageBox.Show("Defina uma descrição para o sorteio!");
@@ -154,6 +157,8 @@ namespace Sorteio
                 ExProd(listProdAdd, enumCRUD.insert);
                 ExProd(listProdAlt, enumCRUD.update);
 
+
+                this.Cursor = Cursors.Default;
                 FormMessage.ShowMessageSave();
             }
         }
@@ -236,7 +241,6 @@ namespace Sorteio
 
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
-            //Aleatorio.Gerar(infoSort.sorteiobilhetequant, 10);
 
             if (!string.IsNullOrEmpty(textBoxDescricaoSort.Text) && flowLayoutPanelProd.Controls.Count > 0)
             {

@@ -70,15 +70,16 @@ namespace Sorteio
 
         private void FormNumSorteio_Load(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             NumSorteio(infoSort.sorteiobilhetequant);
             negConc = new ConcorrenteNegocio();
             colVenderdor = (ConcorrenteColecao)negConc.ExecutarConcorrente(enumCRUD.select, null, true);
-
+            this.Cursor = Cursors.Default;
         }
 
         private void buttonSortear_Click(object sender, EventArgs e)
         {
-
+            this.Cursor = Cursors.WaitCursor;
             flowLayoutPanelBilhete.Controls.Clear();
             NumSorteio(infoSort.sorteiobilhetequant, true);
 
@@ -120,7 +121,7 @@ namespace Sorteio
             }
 
             SalvarTxt();
-
+            this.Cursor = Cursors.Default;
         }
 
         private void SalvarTxt()

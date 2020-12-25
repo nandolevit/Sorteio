@@ -43,7 +43,7 @@
             this.labelValor.AutoSize = true;
             this.labelValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelValor.ForeColor = System.Drawing.Color.White;
-            this.labelValor.Location = new System.Drawing.Point(114, 94);
+            this.labelValor.Location = new System.Drawing.Point(113, 91);
             this.labelValor.Name = "labelValor";
             this.labelValor.Size = new System.Drawing.Size(44, 13);
             this.labelValor.TabIndex = 4;
@@ -55,9 +55,9 @@
             // 
             this.labelDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDescricao.ForeColor = System.Drawing.Color.White;
-            this.labelDescricao.Location = new System.Drawing.Point(114, 3);
+            this.labelDescricao.Location = new System.Drawing.Point(113, 7);
             this.labelDescricao.Name = "labelDescricao";
-            this.labelDescricao.Size = new System.Drawing.Size(132, 91);
+            this.labelDescricao.Size = new System.Drawing.Size(132, 84);
             this.labelDescricao.TabIndex = 0;
             this.labelDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelDescricao.Click += new System.EventHandler(this.UserControlProdDescricao_Click);
@@ -73,7 +73,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(259, 115);
+            this.panel1.Size = new System.Drawing.Size(258, 119);
             this.panel1.TabIndex = 4;
             this.panel1.Click += new System.EventHandler(this.UserControlProdDescricao_Click);
             this.panel1.MouseEnter += new System.EventHandler(this.UserControlProdDescricao_MouseEnter);
@@ -82,7 +82,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 7);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -99,7 +99,7 @@
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlProdDescricao";
-            this.Size = new System.Drawing.Size(259, 115);
+            this.Size = new System.Drawing.Size(258, 119);
             this.Load += new System.EventHandler(this.UserControlProdDescricao_Load);
             this.Click += new System.EventHandler(this.UserControlProdDescricao_Click);
             this.MouseEnter += new System.EventHandler(this.UserControlProdDescricao_MouseEnter);

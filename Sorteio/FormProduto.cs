@@ -31,7 +31,7 @@ namespace Sorteio
         {
             PreencherLista();
         }
-        
+
         public void PreencherLista()
         {
             negSort = new SorteioNegocio();
@@ -52,6 +52,17 @@ namespace Sorteio
             }
         }
 
+        public void LimparSelecionado()
+        {
+            foreach (var item in flowLayoutPanel1.Controls)
+            {
+                UserControlProdDescricao d = (UserControlProdDescricao)item;
+
+                if (d.Enabled)
+                    d.BackColor = Color.Maroon;
+            }
+        }
+
         private void buttonFechar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -59,7 +70,7 @@ namespace Sorteio
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            using(FormProdutoAdd formProdutoAdd = new FormProdutoAdd())
+            using (FormProdutoAdd formProdutoAdd = new FormProdutoAdd())
             {
                 formProdutoAdd.ShowDialog(this);
             }

@@ -76,13 +76,14 @@ namespace Sorteio
 
         private void ListaBilhete()
         {
-
+            this.Cursor = Cursors.WaitCursor;
             NumSorteio(infoSort.sorteiobilhetequant);
             BilheteSelecionado();
             groupBoxNum.Enabled = true;
             buttonSelecionar.Enabled = true;
             buttonLimpar.Enabled = true;
             buttonSalvar.Enabled = true;
+            this.Cursor = Cursors.Default;
         }
 
         private void BilheteSelecionado()
@@ -192,6 +193,7 @@ namespace Sorteio
 
             if (FormMessage.ShowMessegeQuestion("Salvar?") == DialogResult.Yes)
             {
+                this.Cursor = Cursors.WaitCursor;
                 int id = 0;
                 BilheteInfo b1 = new BilheteInfo { bilheteidconcorrente = infoConc, bilheteidsorteio = infoSort, bilheteidvendedor = infoVend };
                 negSort.ExecutarBilhete(enumCRUD.delete, b1);
@@ -211,6 +213,8 @@ namespace Sorteio
                         id = (int)negSort.ExecutarBilhete(enumCRUD.insert, b);
                     }
                 }
+
+                this.Cursor = Cursors.Default;
 
                 if (id > 0)
                 {

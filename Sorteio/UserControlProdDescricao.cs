@@ -30,6 +30,9 @@ namespace Sorteio
 
         private void UserControlProdDescricao_MouseEnter(object sender, EventArgs e)
         {
+            FormProduto p = (FormProduto)this.Parent.Parent;
+            p.LimparSelecionado();
+
             if (this.Enabled)
                 this.BackColor = Color.Gray;
         }
