@@ -49,9 +49,9 @@
             // 
             this.labelDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDescricao.ForeColor = System.Drawing.Color.White;
-            this.labelDescricao.Location = new System.Drawing.Point(3, 111);
+            this.labelDescricao.Location = new System.Drawing.Point(11, 111);
             this.labelDescricao.Name = "labelDescricao";
-            this.labelDescricao.Size = new System.Drawing.Size(145, 39);
+            this.labelDescricao.Size = new System.Drawing.Size(129, 39);
             this.labelDescricao.TabIndex = 1;
             this.labelDescricao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelDescricao.Click += new System.EventHandler(this.UserControlProd_Click);

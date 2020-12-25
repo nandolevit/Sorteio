@@ -118,7 +118,8 @@
             this.buttonSelecionar.Name = "buttonSelecionar";
             this.buttonSelecionar.Size = new System.Drawing.Size(75, 23);
             this.buttonSelecionar.TabIndex = 1;
-            this.buttonSelecionar.Text = "Selecione";
+            this.buttonSelecionar.Text = "Aleatório";
+            this.toolTip1.SetToolTip(this.buttonSelecionar, "Selecione a quantidade de números aleatórios...");
             this.buttonSelecionar.UseVisualStyleBackColor = true;
             this.buttonSelecionar.Click += new System.EventHandler(this.buttonSelecionar_Click);
             // 

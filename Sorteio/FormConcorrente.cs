@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Object;
+using Sorteio.Classe;
 using Business;
 
 namespace Sorteio
@@ -144,25 +145,54 @@ namespace Sorteio
             if (numericUpDown1.Value == 0)
                 return;
 
-            int num = 1;
+            //lista de bilhetes livres para seleção
+            List<UserControlBilhete> numBilhetes = new List<UserControlBilhete>();
+
+            //preencher a lista de bilhestes livres
             foreach (Control item in flowLayoutPanel1.Controls)
             {
-                UserControlBilhete userControl = (UserControlBilhete)item;
+                UserControlBilhete b = (UserControlBilhete)item;
+                if (b.Botao.Enabled && b.Botao.BackColor != Color.GreenYellow)
+                    numBilhetes.Add(b);
+            }
 
-                if (userControl.Botao.Enabled && userControl.Botao.BackColor != Color.GreenYellow)
+            if (numBilhetes.Count < (int)numericUpDown1.Value)
+            {
+                if (numBilhetes.Count == 0)
                 {
-                    userControl.Botao.BackColor = Color.GreenYellow;
-                    userControl.Botao.Font = new Font(userControl.Botao.Font, FontStyle.Bold);
-                    userControl.Botao.ForeColor = Color.White;
-                    num++;
-
-                    if (num > numericUpDown1.Value)
+                    FormMessage.ShowMessegeWarning("Todos os bilhetes já foram vendidos!");
+                    return;
+                }
+                else
+                {
+                    if (FormMessage.ShowMessegeQuestion("Há somente " + numBilhetes.Count + " bilhetes para serem vendidos, deseja selecionar todos?") == DialogResult.Yes)
                     {
-                        numericUpDown1.Value = 0;
-                        break;
+                        foreach (var item in numBilhetes)
+                        {
+                            Button b = item.Botao;
+                            b.BackColor = Color.GreenYellow;
+                            b.Font = new Font(b.Font, FontStyle.Bold);
+                            b.ForeColor = Color.White;
+                        }
                     }
                 }
             }
+
+            //lista dos numeros aleatórios
+            List<int> numA = Aleatorio.Gerar(numBilhetes.Count, (int)numericUpDown1.Value);
+
+            //seleciona da lista com bilhetes sorteado
+            foreach (var item in numA)
+            {
+                Button b = numBilhetes[item].Botao;
+                b.BackColor = Color.GreenYellow;
+                b.Font = new Font(b.Font, FontStyle.Bold);
+                b.ForeColor = Color.White;
+            }
+            numericUpDown1.Value = 0;
+
+
+            ContarVerde();
         }
 
         private void buttonSalvar_Click(object sender, EventArgs e)

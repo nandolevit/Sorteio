@@ -279,6 +279,7 @@ namespace Sorteio
                 {
                     if (consult.ShowDialog(this) == DialogResult.Yes)
                     {
+                        this.Cursor = Cursors.WaitCursor;
                         infoSort = (SorteioInfo)consult.Selecionado.Objeto;
                         textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
                         dateTimePicker1.Value = infoSort.sorteiodata;
@@ -309,6 +310,7 @@ namespace Sorteio
                         PreencherTree();
                         buttonSalvar.Enabled = true;
                         buttonRemover.Enabled = true;
+                        this.Cursor = Cursors.Default;
                     }
                 }
             }
