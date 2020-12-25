@@ -31,6 +31,7 @@
             this.flowLayoutPanelBilhete = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSortear = new System.Windows.Forms.Button();
+            this.buttonFechar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,6 +46,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonFechar);
             this.panel1.Controls.Add(this.buttonSortear);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -57,13 +59,23 @@
             this.buttonSortear.BackColor = System.Drawing.Color.Maroon;
             this.buttonSortear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSortear.ForeColor = System.Drawing.Color.White;
-            this.buttonSortear.Location = new System.Drawing.Point(1256, 714);
+            this.buttonSortear.Location = new System.Drawing.Point(1135, 710);
             this.buttonSortear.Name = "buttonSortear";
             this.buttonSortear.Size = new System.Drawing.Size(75, 23);
             this.buttonSortear.TabIndex = 0;
             this.buttonSortear.Text = "Sortear";
             this.buttonSortear.UseVisualStyleBackColor = false;
             this.buttonSortear.Click += new System.EventHandler(this.buttonSortear_Click);
+            // 
+            // buttonFechar
+            // 
+            this.buttonFechar.Location = new System.Drawing.Point(1216, 710);
+            this.buttonFechar.Name = "buttonFechar";
+            this.buttonFechar.Size = new System.Drawing.Size(75, 23);
+            this.buttonFechar.TabIndex = 5;
+            this.buttonFechar.Text = "button3";
+            this.buttonFechar.UseVisualStyleBackColor = true;
+            this.buttonFechar.Click += new System.EventHandler(this.buttonFechar_Click);
             // 
             // FormNumSorteio
             // 
@@ -91,5 +103,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBilhete;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonSortear;
+        private System.Windows.Forms.Button buttonFechar;
     }
 }

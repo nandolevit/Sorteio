@@ -33,5 +33,10 @@ namespace Sorteio
             labelConc.Text = infoSorteado.Bilhete.bilheteidconcorrente.concorrentenome;
             labelVend.Text = infoSorteado.Bilhete.bilheteidvendedor.concorrentenome;
         }
+
+        private void buttonFechar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
     }
 }

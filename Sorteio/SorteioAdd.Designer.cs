@@ -197,7 +197,7 @@
             // buttonSalvar
             // 
             this.buttonSalvar.Enabled = false;
-            this.buttonSalvar.Location = new System.Drawing.Point(758, 536);
+            this.buttonSalvar.Location = new System.Drawing.Point(1128, 507);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(75, 23);
             this.buttonSalvar.TabIndex = 3;
@@ -207,7 +207,7 @@
             // 
             // buttonFechar
             // 
-            this.buttonFechar.Location = new System.Drawing.Point(845, 536);
+            this.buttonFechar.Location = new System.Drawing.Point(1215, 507);
             this.buttonFechar.Name = "buttonFechar";
             this.buttonFechar.Size = new System.Drawing.Size(75, 23);
             this.buttonFechar.TabIndex = 4;

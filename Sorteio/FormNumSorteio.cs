@@ -176,5 +176,10 @@ namespace Sorteio
             if (MessageBox.Show("Deseja fechar o formulário e cancelar o sorteio?", "ATENÇÃO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
                 e.Cancel = true;
         }
+
+        private void buttonFechar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
     }
 }

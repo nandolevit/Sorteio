@@ -43,7 +43,11 @@ namespace Sorteio
         private void button1_Click(object sender, EventArgs e)
         {
             if (infoS == null)
+            {
                 formatBotao();
+                FormConcorrente conc = (FormConcorrente)this.Parent.Parent.Parent.Parent;
+                conc.ContarVerde();
+            }
             else
             {
                 if (button1.BackColor == Color.Blue)

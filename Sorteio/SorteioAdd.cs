@@ -374,8 +374,12 @@ namespace Sorteio
                     //treeView1.Nodes[num].NodeFont = new Font(treeView1.Font, FontStyle.Bold);
                     treeView1.Nodes[num].ForeColor = Color.Maroon;
                     //adiciona 2 nós com soma total de bilhete vendidos e o valor total
-                    treeView1.Nodes[num].Nodes.Add(" - Total de Bilhetes Vendidos: " + string.Format("{0:000}", total));
-                    treeView1.Nodes[num].Nodes[0].Nodes.Add(" - Valor Total Vendidos: " + string.Format("{0:C2}", total * infoSort.sorteiobilhetevalor));
+                    treeView1.Nodes[num].Nodes.Add(" - Total de Bilhetes Vendidos: " + string.Format("{0:000}", total)).ForeColor = Color.Maroon;
+                    treeView1.Nodes[num].Nodes[0].Nodes.Add(" - Valor Total Vendidos: " + string.Format("{0:C2}", total * infoSort.sorteiobilhetevalor)).ForeColor = Color.Maroon;
+                    treeView1.Nodes[num].Expand();
+                    treeView1.Nodes[num].Nodes[0].Expand();
+                    treeView1.Nodes[num].Nodes[0].Nodes[0].Expand();
+
                 }
             }
         }

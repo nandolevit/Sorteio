@@ -69,17 +69,6 @@ namespace Sorteio
                     textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
                     infoSort = (SorteioInfo)consult.Selecionado.Objeto;
                     ListaBilhete();
-
-                    int num = 0;
-                    foreach (var item in flowLayoutPanel1.Controls)
-                    {
-                        UserControlBilhete b = (UserControlBilhete)item;
-
-                        if (b.Botao.BackColor == Color.GreenYellow)
-                            ++num;
-                    }
-
-                    labelTotal.Text = "Total de bilhetes: " + string.Format("{0:000}", num);
                 }
             }
 
@@ -129,14 +118,11 @@ namespace Sorteio
                                 break;
                             }
                         }
-
-                        //if (b.BackColor == Color.GreenYellow)
-                        //{
-                        //    ++num;
-                        //}
                     }
                 }
+                ContarVerde();
             }
+
         }
 
         private void NumSorteio(int n)
@@ -248,10 +234,6 @@ namespace Sorteio
             textBoxIdSort.Clear();
             flowLayoutPanel1.Controls.Clear();
             numericUpDown1.Value = 1;
-            //groupBoxNome.Enabled = true;
-            //groupBoxNum.Enabled = false;
-            //groupBoxSorteio.Enabled = false;
-            //groupBoxVendedor.Enabled = false;
             maskedTextBoxCpf.Select();
         }
 
@@ -314,6 +296,20 @@ namespace Sorteio
                 else
                     maskedTextBoxCpf.Text = string.Empty;
             }
+        }
+
+        public void ContarVerde()
+        {
+            int num = 0;
+            foreach (var item in flowLayoutPanel1.Controls)
+            {
+                UserControlBilhete b = (UserControlBilhete)item;
+
+                if (b.Botao.BackColor == Color.GreenYellow)
+                    ++num;
+            }
+
+            labelTotal.Text = "Total de bilhetes: " + string.Format("{0:000}", num);
         }
 
         private void button1_Click(object sender, EventArgs e)
