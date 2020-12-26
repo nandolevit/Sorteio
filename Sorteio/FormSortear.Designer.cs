@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonSort = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,7 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBoxDescricaoSort = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxProd = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelProd = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxNum = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelBilhete = new System.Windows.Forms.FlowLayoutPanel();
@@ -46,10 +47,9 @@
             this.labelTotalQuant = new System.Windows.Forms.Label();
             this.labelBilheteContar = new System.Windows.Forms.Label();
             this.buttonSortear = new System.Windows.Forms.Button();
-            this.buttonSort = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxProd.SuspendLayout();
             this.groupBoxNum.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +70,18 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sorteio:";
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
+            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSort.Location = new System.Drawing.Point(621, 29);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(24, 23);
+            this.buttonSort.TabIndex = 2;
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // label2
             // 
@@ -139,15 +151,15 @@
             this.textBoxDescricaoSort.Size = new System.Drawing.Size(605, 20);
             this.textBoxDescricaoSort.TabIndex = 1;
             // 
-            // groupBox2
+            // groupBoxProd
             // 
-            this.groupBox2.Controls.Add(this.flowLayoutPanelProd);
-            this.groupBox2.Location = new System.Drawing.Point(13, 105);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(653, 429);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lista de Prêmios:";
+            this.groupBoxProd.Controls.Add(this.flowLayoutPanelProd);
+            this.groupBoxProd.Location = new System.Drawing.Point(13, 105);
+            this.groupBoxProd.Name = "groupBoxProd";
+            this.groupBoxProd.Size = new System.Drawing.Size(653, 429);
+            this.groupBoxProd.TabIndex = 3;
+            this.groupBoxProd.TabStop = false;
+            this.groupBoxProd.Text = "Lista de Prêmios:";
             // 
             // flowLayoutPanelProd
             // 
@@ -238,18 +250,6 @@
             this.buttonSortear.UseVisualStyleBackColor = false;
             this.buttonSortear.Click += new System.EventHandler(this.buttonSortear_Click);
             // 
-            // buttonSort
-            // 
-            this.buttonSort.BackgroundImage = global::Sorteio.Properties.Resources.lupa_blue;
-            this.buttonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSort.Location = new System.Drawing.Point(621, 29);
-            this.buttonSort.Name = "buttonSort";
-            this.buttonSort.Size = new System.Drawing.Size(24, 23);
-            this.buttonSort.TabIndex = 2;
-            this.buttonSort.UseVisualStyleBackColor = true;
-            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
-            // 
             // FormSortear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,14 +261,15 @@
             this.Controls.Add(this.labelTotalValorProd);
             this.Controls.Add(this.labelTotalQuant);
             this.Controls.Add(this.groupBoxNum);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxProd);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormSortear";
             this.Text = "Sortear";
+            this.Load += new System.EventHandler(this.FormSortear_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.groupBoxProd.ResumeLayout(false);
             this.groupBoxNum.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -287,7 +288,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox textBoxDescricaoSort;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxProd;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProd;
         private System.Windows.Forms.GroupBox groupBoxNum;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBilhete;

@@ -18,6 +18,7 @@ namespace Sorteio
         SorteioInfo infoSort;
         BilheteColecao colBilhete;
         SorteioItemColecao colItem;
+        Control[] listBilhete;
 
         public FormSortear()
         {
@@ -52,32 +53,15 @@ namespace Sorteio
                     if (consult.ShowDialog(this) == DialogResult.Yes)
                     {
                         this.Cursor = Cursors.WaitCursor;
+                        flowLayoutPanelBilhete.Controls.Clear();
+                        flowLayoutPanelProd.Controls.Clear();
                         infoSort = (SorteioInfo)consult.Selecionado.Objeto;
                         textBoxDescricaoSort.Text = consult.Selecionado.Descricao;
                         dateTimePicker1.Value = infoSort.sorteiodata;
                         numericUpDown1.Value = infoSort.sorteiobilhetequant;
                         textBoxValor.Text = Convert.ToString(infoSort.sorteiobilhetevalor);
 
-                        flowLayoutPanelProd.Controls.Clear();
-                        SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo() };
-                        colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
-
-                        if (colItem != null)
-                        {
-                            foreach (var item in colItem)
-                            {
-                                UserControlProd prod = new UserControlProd(true)
-                                {
-                                    Produto = item.Prod,
-                                    Quant = item.Quant
-                                };
-
-                                flowLayoutPanelProd.Controls.Add(prod);
-                            }
-
-                            ContarItens();
-                        }
-
+                        ContarItens();
                         buttonSortear.Enabled = true;
                         this.Cursor = Cursors.Default;
 
@@ -88,6 +72,24 @@ namespace Sorteio
 
         private void ContarItens()
         {
+            flowLayoutPanelProd.Controls.Clear();
+            SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo() };
+            colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
+
+            if (colItem != null)
+            {
+                foreach (var item in colItem)
+                {
+                    UserControlProd prod = new UserControlProd(true)
+                    {
+                        Produto = item.Prod,
+                        Quant = item.Quant
+                    };
+
+                    flowLayoutPanelProd.Controls.Add(prod);
+                }
+            }
+
             int totalQuant = 0;
             decimal totalValorProd = 0;
             foreach (var item in flowLayoutPanelProd.Controls)
@@ -107,8 +109,7 @@ namespace Sorteio
 
         private void ListaBilhete()
         {
-
-            NumSorteio(infoSort.sorteiobilhetequant);
+            flowLayoutPanelBilhete.Controls.AddRange(listBilhete.Take(infoSort.sorteiobilhetequant).ToArray());
             BilheteSelecionado();
         }
 
@@ -120,21 +121,13 @@ namespace Sorteio
 
             if (colBilhete != null)
             {
-                int totalBilhe = 0;
                 foreach (var bi in colBilhete)
                 {
-                    foreach (var bu in flowLayoutPanelBilhete.Controls)
-                    {
-                        UserControlBilhete b = (UserControlBilhete)bu;
-                        if (bi.bilhetenum == Convert.ToInt32(b.Texto))
-                        {
-                            b.Botao.BackColor = Color.GreenYellow;
-                            ++totalBilhe;
-                        }
-                    }
+                    UserControlBilhete b = (UserControlBilhete)flowLayoutPanelBilhete.Controls[bi.bilhetenum - 1];
+                    b.Botao.BackColor = Color.GreenYellow;
                 }
 
-                labelBilheteContar.Text = "Total de bilhetes vendidos: " + string.Format("{0:000}", totalBilhe) + "/" + "Arrecadado: " + string.Format("{0:C2}", totalBilhe * infoSort.sorteiobilhetevalor);
+                labelBilheteContar.Text = "Total de bilhetes vendidos: " + string.Format("{0:000}", colBilhete.Count) + "/" + "Arrecadado: " + string.Format("{0:C2}", colBilhete.Count * infoSort.sorteiobilhetevalor);
             }
         }
 
@@ -148,6 +141,19 @@ namespace Sorteio
                 b.Nome = "_" + (i + 1).ToString();
                 b.Enabled = false;
                 flowLayoutPanelBilhete.Controls.Add(b);
+            }
+        }
+
+        private void NumSorteio()
+        {
+            listBilhete = new Control[1000];
+            for (int i = 0; i < 1000; i++)
+            {
+                UserControlBilhete b = new UserControlBilhete();
+                b.Texto = (i + 1).ToString();
+                b.Nome = "_" + (i + 1).ToString();
+                b.Enabled = false;
+                listBilhete[i] = b;
             }
         }
 
@@ -165,6 +171,11 @@ namespace Sorteio
             {
                 formNumSorteio.ShowDialog(this);
             }
+        }
+
+        private void FormSortear_Load(object sender, EventArgs e)
+        {
+            NumSorteio();
         }
     }
 }

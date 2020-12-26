@@ -340,12 +340,13 @@ namespace Sorteio
             int num = 0;
             if (colecao != null)
             {
-                foreach (var item in colecao)
+                foreach (var item in colecao.OrderBy(o => o.concorrentenome))
                 {
                     num++;
                     int num1 = 0;
                     int totalBilhete = colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
 
+                    //adiciona os nomes dos vendedores
                     treeView1.Nodes.Add(item.concorrentenome);
                     if (totalBilhete > 0)
                     {
@@ -355,7 +356,7 @@ namespace Sorteio
                     }
 
                     BilheteColecao bc = new BilheteColecao();
-                    foreach (var item1 in colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid))
+                    foreach (var item1 in colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid).OrderBy(o => o.bilheteidconcorrente.concorrentenome))
                     {
                         if (bc.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid).FirstOrDefault() == null)
                         {
@@ -363,6 +364,7 @@ namespace Sorteio
                             bc.Add(item1);
                             int totalBilhete2 = colB.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid && w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
 
+                            //adiciona os nomes dos compradores
                             treeView1.Nodes[num - 1].Nodes[0].Nodes[0].Nodes.Add(item1.bilheteidconcorrente.concorrentenome);
                             if (totalBilhete2 > 0)
                             {
@@ -376,8 +378,8 @@ namespace Sorteio
                 int total = colB.Count();
                 if (total > 0)
                 {
+                    //adiciona os valores gerais
                     treeView1.Nodes.Add("TOTAL GERAL**").NodeFont = new Font(treeView1.Font, FontStyle.Bold);
-                    //treeView1.Nodes[num].NodeFont = new Font(treeView1.Font, FontStyle.Bold);
                     treeView1.Nodes[num].ForeColor = Color.Maroon;
                     //adiciona 2 nós com soma total de bilhete vendidos e o valor total
                     treeView1.Nodes[num].Nodes.Add(" - Total de Bilhetes Vendidos: " + string.Format("{0:000}", total)).ForeColor = Color.Maroon;

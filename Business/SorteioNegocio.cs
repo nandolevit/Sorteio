@@ -70,7 +70,7 @@ namespace Business
                     case enumCRUD.insert:
                         return Convert.ToInt32(cnx.ExecutarComandoMySql("spInsertBilhete", enumExecutar.Scalar));
                     case enumCRUD.update:
-                        return 0;
+                        return Convert.ToInt32(cnx.ExecutarComandoMySql("spUpdateBilhete", enumExecutar.Scalar));
                     case enumCRUD.delete:
                         return Convert.ToInt32(cnx.ExecutarComandoMySql("spDeleteBilheteIdConcorrente", enumExecutar.Scalar));
                     default:

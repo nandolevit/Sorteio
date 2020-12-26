@@ -34,15 +34,17 @@
             this.concorrenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lancarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.sortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.bancoSortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sorteioToolStripMenuItem});
+            this.sorteioToolStripMenuItem,
+            this.bancoSortearToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -65,7 +67,7 @@
             this.concorrenteToolStripMenuItem,
             this.vendedorToolStripMenuItem});
             this.cadastrarToolStripMenuItem.Name = "cadastrarToolStripMenuItem";
-            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.cadastrarToolStripMenuItem.Text = "Cadastrar";
             // 
             // concorrenteToolStripMenuItem
@@ -85,9 +87,16 @@
             // lancarToolStripMenuItem
             // 
             this.lancarToolStripMenuItem.Name = "lancarToolStripMenuItem";
-            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.lancarToolStripMenuItem.Text = "Lançar Sorteio";
             this.lancarToolStripMenuItem.Click += new System.EventHandler(this.lancarToolStripMenuItem_Click);
+            // 
+            // sortearToolStripMenuItem
+            // 
+            this.sortearToolStripMenuItem.Name = "sortearToolStripMenuItem";
+            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.sortearToolStripMenuItem.Text = "Sortear";
+            this.sortearToolStripMenuItem.Click += new System.EventHandler(this.sortearToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -97,12 +106,12 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // sortearToolStripMenuItem
+            // bancoSortearToolStripMenuItem
             // 
-            this.sortearToolStripMenuItem.Name = "sortearToolStripMenuItem";
-            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sortearToolStripMenuItem.Text = "Sortear";
-            this.sortearToolStripMenuItem.Click += new System.EventHandler(this.sortearToolStripMenuItem_Click);
+            this.bancoSortearToolStripMenuItem.Name = "bancoSortearToolStripMenuItem";
+            this.bancoSortearToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.bancoSortearToolStripMenuItem.Text = "BancoSortear";
+            this.bancoSortearToolStripMenuItem.Click += new System.EventHandler(this.bancoSortearToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -137,6 +146,7 @@
         private System.Windows.Forms.ToolStripMenuItem concorrenteToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem sortearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bancoSortearToolStripMenuItem;
     }
 }
 

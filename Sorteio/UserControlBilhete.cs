@@ -45,8 +45,9 @@ namespace Sorteio
             if (infoS == null)
             {
                 formatBotao();
-                FormConcorrente conc = (FormConcorrente)this.Parent.Parent.Parent.Parent;
-                conc.ContarVerde();
+                FormConcorrente conc = this.Parent.Parent.Parent.Parent as FormConcorrente;
+                if (conc != null)
+                    conc.ContarVerde();
             }
             else
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sorteio.Classe;
 
 namespace Sorteio
 {
@@ -20,8 +21,6 @@ namespace Sorteio
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //sort = new SorteioAdd();
-            //sort.ShowDialog();
         }
 
         private void lancarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,6 +49,11 @@ namespace Sorteio
             FormSortear formSortear = new FormSortear();
             formSortear.MdiParent = this;
             formSortear.Show();
+        }
+
+        private void bancoSortearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Aleatorio.BilheteAleatorio();
         }
     }
 }

@@ -13,6 +13,20 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
+        public ConcorrenteColecao CadTest()
+        {
+            if (cnx.Conectar())
+            {
+                DataTable dataTable = (DataTable)cnx.ExecutarComandoMySql("cadconcorrente", enumExecutar.DataTable);
+                if (dataTable != null)
+                    return PreencherConcorrenteColecao(dataTable);
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+
         public object ExecutarConcorrente(enumCRUD en, ConcorrenteInfo info = null, bool vendedor = false)
         {
             if (cnx.Conectar())

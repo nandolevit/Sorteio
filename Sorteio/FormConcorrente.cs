@@ -21,6 +21,7 @@ namespace Sorteio
         SorteioInfo infoSort;
         ConcorrenteInfo infoConc;
         ConcorrenteInfo infoVend;
+        Control[] controlBilhete;
 
         public FormConcorrente()
         {
@@ -78,7 +79,9 @@ namespace Sorteio
         private void ListaBilhete()
         {
             this.Cursor = Cursors.WaitCursor;
-            NumSorteio(infoSort.sorteiobilhetequant);
+            //NumSorteio(infoSort.sorteiobilhetequant);
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.AddRange(controlBilhete.Take(infoSort.sorteiobilhetequant).ToArray());
             BilheteSelecionado();
             groupBoxNum.Enabled = true;
             buttonSelecionar.Enabled = true;
@@ -97,30 +100,31 @@ namespace Sorteio
             {
                 foreach (var bi in colecao)
                 {
-                    foreach (var bu in flowLayoutPanel1.Controls)
-                    {
-                        UserControlBilhete b = (UserControlBilhete)bu;
+                    UserControlBilhete b = (UserControlBilhete)flowLayoutPanel1.Controls[bi.bilhetenum - 1];
+                    if (bi.bilheteidconcorrente.concorrenteid == infoConc.concorrenteid)
+                        BotaoSelcionado(b.Botao);
+                    else
+                        b.Enabled = false;
 
-                        BilheteInfo info = colecao.Where(b1 => b1.bilheteidconcorrente.concorrenteid == infoConc.concorrenteid)
-                            .Where(b2 => b2.bilhetenum == Convert.ToInt32(b.Texto)).FirstOrDefault();
+                    //foreach (var bu in flowLayoutPanel1.Controls)
+                    //{
+                    //    UserControlBilhete b = (UserControlBilhete)bu;
 
-                        if (info != null)
-                        {
-                            b.Botao.BackColor = Color.GreenYellow;
-                            b.Botao.Font = new Font(b.Font, FontStyle.Bold);
-                            b.Botao.ForeColor = Color.White;
+                    //    BilheteInfo info = colecao.Where(b1 => b1.bilheteidconcorrente.concorrenteid == infoConc.concorrenteid)
+                    //        .Where(b2 => b2.bilhetenum == Convert.ToInt32(b.Texto)).FirstOrDefault();
 
-                        }
+                    //    if (info != null)
+                    //        BotaoSelcionado(b.Botao);
 
-                        if (bi.bilhetenum == Convert.ToInt32(b.Texto))
-                        {
-                            if (b.Botao.BackColor != Color.GreenYellow)
-                            {
-                                b.Enabled = false;
-                                break;
-                            }
-                        }
-                    }
+                    //    if (bi.bilhetenum == Convert.ToInt32(b.Texto))
+                    //    {
+                    //        if (b.Botao.BackColor != Color.GreenYellow)
+                    //        {
+                    //            b.Enabled = false;
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                 }
                 ContarVerde();
             }
@@ -159,10 +163,7 @@ namespace Sorteio
             if (numBilhetes.Count < (int)numericUpDown1.Value)
             {
                 if (numBilhetes.Count == 0)
-                {
                     FormMessage.ShowMessegeWarning("Todos os bilhetes já foram vendidos!");
-                    return;
-                }
                 else
                 {
                     if (FormMessage.ShowMessegeQuestion("Há somente " + numBilhetes.Count + " bilhetes para serem vendidos, deseja selecionar todos?") == DialogResult.Yes)
@@ -170,12 +171,12 @@ namespace Sorteio
                         foreach (var item in numBilhetes)
                         {
                             Button b = item.Botao;
-                            b.BackColor = Color.GreenYellow;
-                            b.Font = new Font(b.Font, FontStyle.Bold);
-                            b.ForeColor = Color.White;
+                            BotaoSelcionado(b);
                         }
                     }
                 }
+
+                return;
             }
 
             //lista dos numeros aleatórios
@@ -185,9 +186,7 @@ namespace Sorteio
             foreach (var item in numA)
             {
                 Button b = numBilhetes[item].Botao;
-                b.BackColor = Color.GreenYellow;
-                b.Font = new Font(b.Font, FontStyle.Bold);
-                b.ForeColor = Color.White;
+                BotaoSelcionado(b);
             }
             numericUpDown1.Value = 0;
 
@@ -195,8 +194,37 @@ namespace Sorteio
             ContarVerde();
         }
 
+        private void BotaoSelcionado(Button b)
+        {
+            b.BackColor = Color.GreenYellow;
+            b.Font = new Font(b.Font, FontStyle.Bold);
+            b.ForeColor = Color.White;
+        }
+
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
+            //negCon = new ConcorrenteNegocio();
+            //negSort = new SorteioNegocio();
+            //ConcorrenteColecao col = negCon.CadTest();
+            //ConcorrenteColecao col2 = (ConcorrenteColecao)negCon.ExecutarConcorrente(enumCRUD.select);
+            //ConcorrenteColecao col3 = (ConcorrenteColecao)negCon.ExecutarConcorrente(enumCRUD.select, null, true);
+
+            //foreach (var item in col)
+            //{
+            //    BilheteInfo b = new BilheteInfo
+            //    {
+            //        bilheteidconcorrente = col2.Where(w => w.concorrentenome == item.concorrentenome).FirstOrDefault(),
+            //        bilheteidvendedor = col3.Where(w => w.concorrentenome == item.concorrenteemail.ToUpper()).FirstOrDefault(),
+            //        bilheteidsorteio = new SorteioInfo { sorteioid = 1},
+            //        bilhetenum = Convert.ToInt32(item.concorrentecpf)
+            //    };
+
+            //    negSort.ExecutarBilhete(enumCRUD.insert, b);
+            //}
+
+            //FormMessage.ShowMessageSave();
+            //return;
+
             if (string.IsNullOrEmpty(textBoxNome.Text) || string.IsNullOrEmpty(textBoxIdSort.Text) || string.IsNullOrEmpty(textBoxVendCod.Text))
             {
                 if (string.IsNullOrEmpty(textBoxNome.Text))
@@ -269,11 +297,12 @@ namespace Sorteio
             flowLayoutPanel1.Controls.Clear();
             numericUpDown1.Value = 1;
             maskedTextBoxCpf.Select();
+            controlBilhete = Aleatorio.NumSorteio();
         }
 
         private void FormConcorrente_Load(object sender, EventArgs e)
         {
-
+            controlBilhete = Aleatorio.NumSorteio();
         }
 
         private void buttonLimpar_Click(object sender, EventArgs e)
@@ -360,7 +389,10 @@ namespace Sorteio
                     buttonSort.Enabled = true;
 
                     if (!string.IsNullOrEmpty(textBoxIdSort.Text))
+                    {
+                        controlBilhete = Aleatorio.NumSorteio();
                         ListaBilhete();
+                    }
                 }
             }
         }
