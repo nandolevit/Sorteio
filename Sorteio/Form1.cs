@@ -53,7 +53,10 @@ namespace Sorteio
 
         private void bancoSortearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Aleatorio.BilheteAleatorio();
+            if (FormMessage.ShowMessegeQuestion("Deseja embaralhar os bilhetes?") == DialogResult.Yes)
+                Aleatorio.BilheteAleatorio();
+
+            Aleatorio.ListaTxt();
         }
     }
 }

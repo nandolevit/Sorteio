@@ -111,6 +111,7 @@
             this.bancoSortearToolStripMenuItem.Name = "bancoSortearToolStripMenuItem";
             this.bancoSortearToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.bancoSortearToolStripMenuItem.Text = "BancoSortear";
+            this.bancoSortearToolStripMenuItem.Visible = false;
             this.bancoSortearToolStripMenuItem.Click += new System.EventHandler(this.bancoSortearToolStripMenuItem_Click);
             // 
             // Form1

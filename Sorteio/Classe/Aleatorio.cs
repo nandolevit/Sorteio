@@ -57,30 +57,50 @@ namespace Sorteio.Classe
             StringBuilder txt = new StringBuilder();
             List<int> l = Gerar(colB.Count + 1, colB.Count);
 
-            txt.Append("LISTA DOS CONCORRENTES DO " + colB.First().bilheteidsorteio.sorteiodescricao);
-            txt.AppendLine();
-
             for (int i = 0; i < l.Count; i++)
             {
                 BilheteInfo b = colB[i];
                 b.bilhetenum = l[i];
 
                 negSort.ExecutarBilhete(enumCRUD.update, b);
+            }
 
-                txt.Append("Bilhete: " + string.Format("{0:000}", b.bilhetenum) + "; " + "Concorrente: " + b.bilheteidconcorrente.concorrentenome + "; Vendedor: " + b.bilheteidvendedor.concorrentenome);
+            FormMessage.ShowMessageSave();
+        }
+
+        static public void ListaTxt()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\listaconcorrente.txt";
+            SorteioNegocio negSort = new SorteioNegocio();
+            ConcorrenteNegocio negoConc = new ConcorrenteNegocio();
+            ConcorrenteColecao colC = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select, null, true);
+            BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, new BilheteInfo { bilheteidsorteio = new SorteioInfo { sorteioid = 1 }, bilheteidconcorrente = new ConcorrenteInfo(), bilheteidvendedor = new ConcorrenteInfo() });
+            StringBuilder txt = new StringBuilder();
+
+            txt.Append("LISTA DOS CONCORRENTES DO " + colB.First().bilheteidsorteio.sorteiodescricao);
+            txt.AppendLine();
+
+            txt.AppendLine("TOTAL DE BILHETES VENDIDOS: " + string.Format("{0:000}", colB.Count) + "\t\tTOTAL EM VENDAS: " + string.Format("{0:C2}", colB.FirstOrDefault().bilheteidsorteio.sorteiobilhetevalor * colB.Count));
+
+            txt.AppendLine();
+            txt.AppendLine();
+
+            foreach (var b in colB.OrderBy(o => o.bilhetenum))
+            {
+                txt.Append("Bilhete: " + string.Format("{0:000}", b.bilhetenum) + "; " + "Concorrente: " + b.bilheteidconcorrente.concorrentenome + "; Vendedor: " + colC.Where(w => w.concorrenteid == b.bilheteidvendedor.concorrenteid).FirstOrDefault().concorrentenome);
                 txt.AppendLine();
             }
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            FileInfo f = new FileInfo(path + "listaconcorrente.txt");
+            FileInfo f = new FileInfo(path);
 
             if (f.Exists)
                 f.Delete();
 
             using (StreamWriter sw = f.AppendText())
             {
-                sw.WriteLine();
+                sw.Write(txt);
             }
+
             FormMessage.ShowMessageSave();
         }
 
