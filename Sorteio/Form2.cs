@@ -21,7 +21,6 @@ namespace Sorteio
         private void timer1_Tick(object sender, EventArgs e)
         {
             TimeSpan span = time - DateTime.Now;
-            label1.Text = span.TotalSeconds.ToString();
         }
 
         private void Form2_Load(object sender, EventArgs e)

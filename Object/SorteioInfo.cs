@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Object
 {
+    [Serializable]
     public class SorteioInfo
     {
         public int sorteioid { get; set; }

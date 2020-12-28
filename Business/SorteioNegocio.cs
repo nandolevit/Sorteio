@@ -250,10 +250,19 @@ namespace Business
                     bilheteid = Convert.ToInt32(row["bilheteid"]),
                     bilhetenum = Convert.ToInt32(row["bilhetenum"]),
                     bilheteidconcorrente = ConcorrenteNegocio.PreencherConcorrenteInfo(row),
-                    bilheteidsorteio = PreencherSorteioInfo(row)
+                    bilheteidsorteio = PreencherSorteioInfo(row),
+                    bilheteidvendedor = new ConcorrenteInfo
+                    {
+                        concorrentecpf = Convert.ToString(row["concorrentecpfv"]),
+                        concorrenteemail = Convert.ToString(row["concorrenteemailv"]),
+                        concorrenteid = Convert.ToInt32(row["concorrenteidv"]),
+                        concorrentenome = Convert.ToString(row["concorrentenomev"]),
+                        concorrentetelefone = Convert.ToString(row["concorrentetelefonev"]),
+                        concorrentevendedor = Convert.ToBoolean(row["concorrentevendedorv"]),
+                    },
                 };
 
-                info.bilheteidvendedor = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidVendedor"]) };
+                //info.bilheteidvendedor = new ConcorrenteInfo { concorrenteid = Convert.ToInt32(row["bilheteidVendedor"]) };
 
                 colecao.Add(info);
 

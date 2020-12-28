@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Object
 {
+
+    [Serializable]
     public class BilheteInfo
     {
         public int bilhetenum { get; set; }

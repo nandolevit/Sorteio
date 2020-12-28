@@ -72,8 +72,6 @@ namespace Sorteio
         {
             this.Cursor = Cursors.WaitCursor;
             NumSorteio(infoSort.sorteiobilhetequant);
-            negConc = new ConcorrenteNegocio();
-            colVenderdor = (ConcorrenteColecao)negConc.ExecutarConcorrente(enumCRUD.select, null, true);
             this.Cursor = Cursors.Default;
         }
 
@@ -99,25 +97,19 @@ namespace Sorteio
             colSorteado = new SorteadoColecao();
             for (int i = 0; i < num.Count; i++)
             {
-                foreach (var item in flowLayoutPanelBilhete.Controls)
+                UserControlBilhete b = (UserControlBilhete)flowLayoutPanelBilhete.Controls[num[i] - 1];
+
+                SorteadoInfo s = new SorteadoInfo
                 {
-                    UserControlBilhete b = (UserControlBilhete)item;
+                    Prod = lProd[num2[cont++] - 1], //seleciona o prêmio de forma aleatória e vincula a um sorteado
+                    Bilhete = colBilhete.Where(w => w.bilhetenum == colBilhete[num[i] - 1].bilhetenum).FirstOrDefault(),
+                };
 
-                    if (Convert.ToInt32(b.Botao.Text) == colBilhete[num[i] - 1].bilhetenum)
-                    {
-                        SorteadoInfo s = new SorteadoInfo
-                        {
-                            Prod = lProd[num2[cont++] - 1], //seleciona o prêmio de forma aleatória e vincula a um sorteado
-                            Bilhete = colBilhete.Where(w => w.bilhetenum == colBilhete[num[i] - 1].bilhetenum).FirstOrDefault(),
-                        };
+                colSorteado.Add(s);
+                b.Sorteado(s);
+                b.Botao.BackColor = Color.Blue;
+                b.Botao.ForeColor = Color.Blue;
 
-                        s.Bilhete.bilheteidvendedor = colVenderdor.Where(w => w.concorrenteid == s.Bilhete.bilheteidvendedor.concorrenteid).FirstOrDefault();
-                        colSorteado.Add(s);
-                        b.Sorteado(s);
-                        b.Botao.BackColor = Color.Blue;
-                        b.Botao.ForeColor = Color.Blue;
-                    }
-                }
             }
 
             SalvarTxt();
@@ -126,23 +118,25 @@ namespace Sorteio
 
         private void SalvarTxt()
         {
-            FileInfo f = new FileInfo(@"C:\Users\Public\ResultadoSorteio.txt");
-            //f.Create();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\BancoSorteio\\";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            FileInfo f = new FileInfo(path + "ResultadoSorteio.txt");
             StringBuilder txt = new StringBuilder();
-            txt.AppendLine("id;nome;bilhete;idprod;descricao");
+            txt.AppendLine("LISTA DE SORTEADOS");
             foreach (var item in colSorteado)
             {
-                txt.Append(item.Bilhete.bilheteidconcorrente.concorrenteid + ";");
-                txt.Append(item.Bilhete.bilheteidconcorrente.concorrentenome + ";");
-                txt.Append(item.Bilhete.bilhetenum + ";");
-                txt.Append(item.Prod.produtoid + ";");
-                txt.Append(item.Prod.produtodescricao + ";");
+                txt.Append("Sorteado: " + item.Bilhete.bilheteidconcorrente.concorrentenome + "; ");
+                txt.Append("Nº do bilhete: " + item.Bilhete.bilhetenum + "; ");
+                txt.Append("Vendedor: " + item.Bilhete.bilheteidvendedor.concorrentenome + "; ");
+                txt.Append("Prêmio: " + item.Prod.produtodescricao + "; ");
                 txt.AppendLine();
             }
             if (f.Exists)
                 f.Delete();
 
-            using( StreamWriter sw = f.AppendText())
+            using (StreamWriter sw = f.AppendText())
             {
                 sw.WriteLine(txt);
             }
@@ -180,7 +174,12 @@ namespace Sorteio
 
         private void buttonFechar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -167,10 +167,16 @@ namespace Sorteio
 
         private void buttonSortear_Click(object sender, EventArgs e)
         {
-            using (FormNumSorteio formNumSorteio = new FormNumSorteio(infoSort, colItem, colBilhete))
-            {
-                formNumSorteio.ShowDialog(this);
-            }
+            //using (FormNumSorteio formNumSorteio = new FormNumSorteio(infoSort, colItem, colBilhete))
+            //{
+            //    formNumSorteio.MdiParent = this.MdiParent;
+            //    formNumSorteio.Show();
+            //}
+            this.Visible = false;
+            FormNumSorteio formNumSorteio = new FormNumSorteio(infoSort, colItem, colBilhete);
+            formNumSorteio.MdiParent = this.MdiParent;
+            formNumSorteio.Show();
+            this.Close();
         }
 
         private void FormSortear_Load(object sender, EventArgs e)

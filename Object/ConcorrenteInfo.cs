@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Object
 {
+    [Serializable]
     public class ConcorrenteInfo
     {
         public int concorrenteid { get; set; }
@@ -13,6 +14,8 @@ namespace Object
         public string concorrentenome { get; set; }
         public string concorrenteemail { get; set; }
         public string concorrentetelefone { get; set; }
+        public bool concorrentevendedor { get; set; }
+
 
     }
 }

@@ -45,7 +45,9 @@ namespace Business
                             if (vendedor)
                                 dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarVendedor", enumExecutar.DataTable);
                             else
-                                dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrente", enumExecutar.DataTable);
+                                dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarTodosConcorrente", enumExecutar.DataTable);
+                            //else
+                            //    dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrente", enumExecutar.DataTable);
                         }
                         else
                             dataTable = (DataTable)cnx.ExecutarComandoMySql("spConsultarConcorrenteCpf", enumExecutar.DataTable);
@@ -112,6 +114,7 @@ namespace Business
                 concorrenteid = Convert.ToInt32(row["concorrenteid"]),
                 concorrentenome = Convert.ToString(row["concorrentenome"]),
                 concorrentetelefone = Convert.ToString(row["concorrentetelefone"]),
+                concorrentevendedor = Convert.ToBoolean(row["concorrentevendedor"]),
             };
 
             return info;

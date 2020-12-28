@@ -14,6 +14,7 @@ namespace Sorteio
     public partial class Form1 : Form
     {
         SorteioAdd sort;
+        static public bool frm2 = false;
         public Form1()
         {
             InitializeComponent();
@@ -54,9 +55,31 @@ namespace Sorteio
         private void bancoSortearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (FormMessage.ShowMessegeQuestion("Deseja embaralhar os bilhetes?") == DialogResult.Yes)
-                Aleatorio.BilheteAleatorio();
+            {
+                Aleatorio.desSerial();
+                //Aleatorio.BilheteAleatorio();
+            }
 
             Aleatorio.ListaTxt();
+        }
+
+        private void formToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.MdiParent = this;
+            form2.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (frm2)
+            {
+                frm2 = false;
+                Form2 form2 = new Form2();
+                //form2.MdiParent = this;
+                form2.Show(this);
+
+            }
         }
     }
 }

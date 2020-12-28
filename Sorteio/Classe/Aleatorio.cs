@@ -13,7 +13,7 @@ namespace Sorteio.Classe
     public static class Aleatorio
     {
         static Random rnd = new Random();
-
+        static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\BancoSorteio\\";
 
         public static List<int> Gerar(int nMax, int total)
         {
@@ -70,7 +70,8 @@ namespace Sorteio.Classe
 
         static public void ListaTxt()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\listaconcorrente.txt";
+            SerializarNegocios sn = new SerializarNegocios(path);
+            sn.CriarPasta();
             SorteioNegocio negSort = new SorteioNegocio();
             ConcorrenteNegocio negoConc = new ConcorrenteNegocio();
             ConcorrenteColecao colC = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select, null, true);
@@ -91,7 +92,7 @@ namespace Sorteio.Classe
                 txt.AppendLine();
             }
 
-            FileInfo f = new FileInfo(path);
+            FileInfo f = new FileInfo(path + "listaconcorrente.txt");
 
             if (f.Exists)
                 f.Delete();
@@ -104,5 +105,28 @@ namespace Sorteio.Classe
             FormMessage.ShowMessageSave();
         }
 
+        static public void Serial()
+        {
+            SerializarNegocios sn = new SerializarNegocios(path);
+            SorteioNegocio negSort = new SorteioNegocio();
+            ConcorrenteNegocio negoConc = new ConcorrenteNegocio();
+            ConcorrenteColecao colC = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select);
+            sn.SerializarObjeto(colC, "colC.lvt");
+            ConcorrenteColecao colV = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select, null, true);
+            sn.SerializarObjeto(colV, "colV.lvt");
+            BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, new BilheteInfo { bilheteidsorteio = new SorteioInfo { sorteioid = 1 }, bilheteidconcorrente = new ConcorrenteInfo(), bilheteidvendedor = new ConcorrenteInfo() });
+            sn.SerializarObjeto(colB, "colB.lvt");
+            ProdutoColecao colP = (ProdutoColecao)negSort.ExecutarProduto(enumCRUD.select);
+            sn.SerializarObjeto(colP, "colP.lvt");
+        }
+
+        static public void desSerial()
+        {
+            SerializarNegocios sn = new SerializarNegocios(path);
+            ConcorrenteColecao colC = (ConcorrenteColecao)sn.DesserializarObjeto("colC.lvt");
+            ConcorrenteColecao colV = (ConcorrenteColecao)sn.DesserializarObjeto("colV.lvt");
+            BilheteColecao colB = (BilheteColecao)sn.DesserializarObjeto("colB.lvt");
+            ProdutoColecao colP = (ProdutoColecao)sn.DesserializarObjeto("colP.lvt");
+        }
     }
 }

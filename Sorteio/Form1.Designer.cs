@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sorteioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,8 +36,9 @@
             this.vendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lancarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.bancoSortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             this.concorrenteToolStripMenuItem,
             this.vendedorToolStripMenuItem});
             this.cadastrarToolStripMenuItem.Name = "cadastrarToolStripMenuItem";
-            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cadastrarToolStripMenuItem.Text = "Cadastrar";
             // 
             // concorrenteToolStripMenuItem
@@ -87,16 +89,23 @@
             // lancarToolStripMenuItem
             // 
             this.lancarToolStripMenuItem.Name = "lancarToolStripMenuItem";
-            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lancarToolStripMenuItem.Text = "Lançar Sorteio";
             this.lancarToolStripMenuItem.Click += new System.EventHandler(this.lancarToolStripMenuItem_Click);
             // 
             // sortearToolStripMenuItem
             // 
             this.sortearToolStripMenuItem.Name = "sortearToolStripMenuItem";
-            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sortearToolStripMenuItem.Text = "Sortear";
             this.sortearToolStripMenuItem.Click += new System.EventHandler(this.sortearToolStripMenuItem_Click);
+            // 
+            // bancoSortearToolStripMenuItem
+            // 
+            this.bancoSortearToolStripMenuItem.Name = "bancoSortearToolStripMenuItem";
+            this.bancoSortearToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.bancoSortearToolStripMenuItem.Text = "BancoSortear";
+            this.bancoSortearToolStripMenuItem.Click += new System.EventHandler(this.bancoSortearToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -106,13 +115,10 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // bancoSortearToolStripMenuItem
+            // timer1
             // 
-            this.bancoSortearToolStripMenuItem.Name = "bancoSortearToolStripMenuItem";
-            this.bancoSortearToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.bancoSortearToolStripMenuItem.Text = "BancoSortear";
-            this.bancoSortearToolStripMenuItem.Visible = false;
-            this.bancoSortearToolStripMenuItem.Click += new System.EventHandler(this.bancoSortearToolStripMenuItem_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -148,6 +154,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem sortearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bancoSortearToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
