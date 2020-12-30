@@ -4,17 +4,27 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sorteio.Classe;
+using Object;
+using Business;
 
 namespace Sorteio
 {
     public partial class Form1 : Form
     {
+        static public bool Online;
         SorteioAdd sort;
-        static public bool frm2 = false;
+
+        static public ConcorrenteColecao colC;
+        static public ConcorrenteColecao colV;
+        static public BilheteColecao colB;
+        static public ProdutoColecao colP;
+        static public SorteioItemColecao colI;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +32,29 @@ namespace Sorteio
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Online = TestarConexao();
+
+            if (Online)
+            {
+                SorteioNegocio neg = new SorteioNegocio();
+
+                if (neg.ModoOffline())
+                {
+                    Online = false;
+
+                    if (!Aleatorio.TodosArquivosExiste())
+                        Aleatorio.Serial();
+                }
+                else if (neg.Active())
+                    bancoSortearToolStripMenuItem.Visible = true;
+            }
+
+            if (!Online)
+            {
+                sorteioToolStripMenuItem.Enabled = false;
+                Aleatorio.desSerial();
+                FormMessage.ShowMessegeWarning("O sistema funcionará no MODO OFFLINE!");
+            }
         }
 
         private void lancarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,19 +80,18 @@ namespace Sorteio
 
         private void sortearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormSortear formSortear = new FormSortear();
-            formSortear.MdiParent = this;
-            formSortear.Show();
+            
         }
 
         private void bancoSortearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (FormMessage.ShowMessegeQuestion("Deseja embaralhar os bilhetes?") == DialogResult.Yes)
             {
-                Aleatorio.desSerial();
-                //Aleatorio.BilheteAleatorio();
+                Aleatorio.BilheteAleatorio();
+                Aleatorio.Serial();
             }
 
+            Aleatorio.ListaVendedor(1);
             Aleatorio.ListaTxt();
         }
 
@@ -72,14 +104,38 @@ namespace Sorteio
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (frm2)
-            {
-                frm2 = false;
-                Form2 form2 = new Form2();
-                //form2.MdiParent = this;
-                form2.Show(this);
 
+        }
+
+        private bool TestarConexao()
+        {
+            try
+            {
+                if (Dns.GetHostAddresses("empresadb.mysql.uhserver.com") != null)
+                {
+                    //IPAddress[] ip = Dns.GetHostAddresses("empresadb.mysql.uhserver.com");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private void realizarSorteioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSortear formSortear = new FormSortear();
+            formSortear.MdiParent = this;
+            formSortear.Show();
+        }
+
+        private void listarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
     }
 }

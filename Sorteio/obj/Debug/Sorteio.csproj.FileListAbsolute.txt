@@ -42,3 +42,7 @@ D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormNumSorteio.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormPremio.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.Form2.resources
 D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.FormProdutoAdd.resources
+D:\Sistema\Sorteio\Sorteio\bin\Debug\Sorteio.exe.manifest
+D:\Sistema\Sorteio\Sorteio\bin\Debug\Sorteio.application
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.exe.manifest
+D:\Sistema\Sorteio\Sorteio\obj\Debug\Sorteio.application

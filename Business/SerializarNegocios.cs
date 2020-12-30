@@ -66,7 +66,7 @@ namespace Business
                 Directory.CreateDirectory(Path.GetDirectoryName(Caminho));
         }
 
-        public bool SerializarObjeto(object objeto, string fileName)
+        public bool SerializarObjeto(object objeto, string fileName, bool ocultar = false)
         {
             try
             {
@@ -76,6 +76,19 @@ namespace Business
                 {
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(Serial, objeto);
+                }
+
+                if (ocultar)
+                {
+                    FileInfo f = new FileInfo(Caminho + fileName);
+                    f.Attributes = FileAttributes.Hidden;
+                    //using (StreamReader sr = new StreamReader(f.Open(FileMode.Open)))
+                    //{
+                    //    Encryptar encryptar = new Encryptar(CryptProvider.RC2); // escolhe o tipo de criptografia, neste caso escolhemos o RC2
+                    //    string crypto = encryptar.Crypto(sr.ReadToEnd());
+
+                    //    GravarTxt(crypto, "crypto_" + fileName);
+                    //}
                 }
 
                 return true;
@@ -98,7 +111,20 @@ namespace Business
                     using (Stream Desserial = File.OpenRead(Path.Combine(Path.GetDirectoryName(Caminho), fileName)))
                     {
                         obj = (object)bf.Deserialize(Desserial);
-                        Desserial.Close();
+                        //Desserial.Close();
+
+                        //if (fileName.EndsWith(".lvt"))
+                        //{
+                        //    FileInfo f = new FileInfo(Caminho + "crypto_" + fileName);
+                        //    using (StreamReader sr = new StreamReader(f.Open(FileMode.Open)))
+                        //    {
+                        //        Encryptar encryptar = new Encryptar(CryptProvider.RC2); // escolhe o tipo de criptografia, neste caso escolhemos o RC2
+                        //        string crypto = encryptar.DeCrypto(sr.ReadToEnd());
+
+                        //        GravarTxt(crypto, "decrypto_" + fileName);
+                        //    }
+                        //}
+
                         return obj;
                     }
                 }
@@ -114,6 +140,23 @@ namespace Business
                 bf = null;
                 obj = null;
             }
+        }
+
+        public void GravarTxt(string str, string filelName)
+        {
+            FileInfo f = new FileInfo(Caminho + filelName);
+
+            if (f.Exists)
+                f.Delete();
+
+            using (StreamWriter sw = f.AppendText())
+            {
+                sw.Write(str);
+            }
+
+            //FormMessage.ShowMessageSave();
+
+            //FormMessage.ShowMessegeInfo("Relatório realizado com sucesso! Foi criada uma pasta na ÁREA DE TRABALHO/BANCOSORTEIO, lá estará os relatório!");
         }
     }
 }

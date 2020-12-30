@@ -125,7 +125,7 @@ namespace Sorteio
             FileInfo f = new FileInfo(path + "ResultadoSorteio.txt");
             StringBuilder txt = new StringBuilder();
             txt.AppendLine("LISTA DE SORTEADOS");
-            foreach (var item in colSorteado)
+            foreach (var item in colSorteado.OrderBy(o => o.Bilhete.bilheteidconcorrente.concorrentenome))
             {
                 txt.Append("Sorteado: " + item.Bilhete.bilheteidconcorrente.concorrentenome + "; ");
                 txt.Append("Nº do bilhete: " + item.Bilhete.bilhetenum + "; ");

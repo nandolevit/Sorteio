@@ -1,0 +1,7 @@
+D:\Sistema\Sorteio\DB\bin\Release\DB.dll
+D:\Sistema\Sorteio\DB\bin\Release\DB.pdb
+D:\Sistema\Sorteio\DB\bin\Release\MySql.Data.dll
+D:\Sistema\Sorteio\DB\bin\Release\MySql.Data.xml
+D:\Sistema\Sorteio\DB\obj\Release\DB.csproj.CopyComplete
+D:\Sistema\Sorteio\DB\obj\Release\DB.dll
+D:\Sistema\Sorteio\DB\obj\Release\DB.pdb

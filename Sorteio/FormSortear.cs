@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Object;
+using Sorteio.Classe;
 
 namespace Sorteio
 {
@@ -31,7 +32,23 @@ namespace Sorteio
         private void buttonSort_Click(object sender, EventArgs e)
         {
             negSort = new SorteioNegocio();
-            SorteioColecao colSort = (SorteioColecao)negSort.ExecutarSorteio(enumCRUD.select);
+            SorteioColecao colSort;
+
+            if (Form1.Online)
+                colSort = (SorteioColecao)negSort.ExecutarSorteio(enumCRUD.select);
+            else
+            {
+                if (Form1.colB != null)
+                {
+                    colSort = new SorteioColecao
+                    {
+
+                        Form1.colB[0].bilheteidsorteio
+                    };
+                }
+                else
+                    colSort = null;
+            }
 
             if (colSort != null)
             {
@@ -74,7 +91,11 @@ namespace Sorteio
         {
             flowLayoutPanelProd.Controls.Clear();
             SorteioItemInfo i = new SorteioItemInfo { Sort = infoSort, Prod = new ProdutoInfo() };
-            colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
+
+            if (Form1.Online)
+                colItem = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, i);
+            else
+                colItem = Form1.colI;
 
             if (colItem != null)
             {
@@ -117,7 +138,11 @@ namespace Sorteio
         {
             negSort = new SorteioNegocio();
             BilheteInfo b3 = new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() };
-            colBilhete = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b3);
+
+            if (Form1.Online)
+                colBilhete = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, b3);
+            else
+                colBilhete = Form1.colB;
 
             if (colBilhete != null)
             {

@@ -1,0 +1,4 @@
+D:\Sistema\Sorteio\Object\bin\Release\Object.dll
+D:\Sistema\Sorteio\Object\bin\Release\Object.pdb
+D:\Sistema\Sorteio\Object\obj\Release\Object.dll
+D:\Sistema\Sorteio\Object\obj\Release\Object.pdb

@@ -92,17 +92,25 @@ namespace Sorteio.Classe
                 txt.AppendLine();
             }
 
-            FileInfo f = new FileInfo(path + "listaconcorrente.txt");
+            GravarTxt(txt.ToString(), "listaconcorrente.txt");
+
+        }
+
+        static public void GravarTxt(string str, string filelName)
+        {
+            FileInfo f = new FileInfo(path + filelName);
 
             if (f.Exists)
                 f.Delete();
 
             using (StreamWriter sw = f.AppendText())
             {
-                sw.Write(txt);
+                sw.Write(str);
             }
 
-            FormMessage.ShowMessageSave();
+            //FormMessage.ShowMessageSave();
+
+            FormMessage.ShowMessegeInfo("Relatório realizado com sucesso! Foi criada uma pasta na ÁREA DE TRABALHO/BANCOSORTEIO, lá estará os relatório!");
         }
 
         static public void Serial()
@@ -111,22 +119,131 @@ namespace Sorteio.Classe
             SorteioNegocio negSort = new SorteioNegocio();
             ConcorrenteNegocio negoConc = new ConcorrenteNegocio();
             ConcorrenteColecao colC = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select);
-            sn.SerializarObjeto(colC, "colC.lvt");
+            sn.SerializarObjeto(colC, "colC.lvt", true);
             ConcorrenteColecao colV = (ConcorrenteColecao)negoConc.ExecutarConcorrente(enumCRUD.select, null, true);
-            sn.SerializarObjeto(colV, "colV.lvt");
+            sn.SerializarObjeto(colV, "colV.lvt", true);
             BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, new BilheteInfo { bilheteidsorteio = new SorteioInfo { sorteioid = 1 }, bilheteidconcorrente = new ConcorrenteInfo(), bilheteidvendedor = new ConcorrenteInfo() });
-            sn.SerializarObjeto(colB, "colB.lvt");
+            sn.SerializarObjeto(colB, "colB.lvt", true);
             ProdutoColecao colP = (ProdutoColecao)negSort.ExecutarProduto(enumCRUD.select);
-            sn.SerializarObjeto(colP, "colP.lvt");
+            sn.SerializarObjeto(colP, "colP.lvt", true);
+            SorteioItemColecao colI = (SorteioItemColecao)negSort.ExecutarSorteioItem(enumCRUD.select, new SorteioItemInfo { Sort = new SorteioInfo { sorteioid = 1}, Prod = new ProdutoInfo() });
+            sn.SerializarObjeto(colI, "colI.lvt", true);
         }
 
         static public void desSerial()
         {
             SerializarNegocios sn = new SerializarNegocios(path);
-            ConcorrenteColecao colC = (ConcorrenteColecao)sn.DesserializarObjeto("colC.lvt");
-            ConcorrenteColecao colV = (ConcorrenteColecao)sn.DesserializarObjeto("colV.lvt");
-            BilheteColecao colB = (BilheteColecao)sn.DesserializarObjeto("colB.lvt");
-            ProdutoColecao colP = (ProdutoColecao)sn.DesserializarObjeto("colP.lvt");
+            Form1.colC = (ConcorrenteColecao)sn.DesserializarObjeto("colC.lvt");
+            Form1.colV = (ConcorrenteColecao)sn.DesserializarObjeto("colV.lvt");
+            Form1.colB = (BilheteColecao)sn.DesserializarObjeto("colB.lvt");
+            Form1.colP = (ProdutoColecao)sn.DesserializarObjeto("colP.lvt");
+            Form1.colI = (SorteioItemColecao)sn.DesserializarObjeto("colI.lvt");
+        }
+
+        static public bool TodosArquivosExiste()
+        {
+            string[] arquivo = { "colC.lvt", "colV.lvt", "colB.lvt", "colP.lvt", "colI.lvt"};
+
+            if (Directory.Exists(path))
+            {
+                string[] dir = Directory.GetFiles(path);
+
+                foreach (var item in arquivo)
+                {
+                    if (dir.Where(w => w.EndsWith(item)).FirstOrDefault() == null)
+                        return false;
+                }
+
+                return true;
+            }
+            else
+                return false;
+
+        }
+
+        static public bool ArquivoExiste(string fileName)
+        {
+            try
+            {
+                string[] arquivos = Directory.GetFiles(path);
+
+                foreach (var item in arquivos)
+                {
+
+                }
+
+                if (File.Exists(Path.Combine(Path.GetDirectoryName(path), fileName)))
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: " + ex.Message);
+            }
+        }
+
+        public static void ListaVendedor(int idsort)
+        {
+            ConcorrenteNegocio neg = new ConcorrenteNegocio();
+            ConcorrenteColecao colecao = (ConcorrenteColecao)neg.ExecutarConcorrente(enumCRUD.select, null, true);
+            SorteioNegocio negSort = new SorteioNegocio();
+            SorteioColecao colSort = (SorteioColecao)negSort.ExecutarSorteio(enumCRUD.select);
+            SorteioInfo infoSort = colSort.Where(w => w.sorteioid == idsort).FirstOrDefault();
+            BilheteColecao colB = (BilheteColecao)negSort.ExecutarBilhete(enumCRUD.select, new BilheteInfo { bilheteidconcorrente = new ConcorrenteInfo(), bilheteidsorteio = infoSort, bilheteidvendedor = new ConcorrenteInfo() });
+
+            if (colecao != null)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                int total = colB.Count();
+                if (total > 0)
+                {
+                    //adiciona os valores gerais
+                    //adiciona 2 nós com soma total de bilhete vendidos e o valor total
+                    sb.AppendLine("**TOTAL GERAL**");
+                    sb.AppendLine("\t - Total de vendedores: " + string.Format("{0:000}", colB.GroupBy(gp => gp.bilheteidvendedor.concorrenteid).ToList().Count - 1));
+                    sb.AppendLine("\t - Total de concorrentes: " + string.Format("{0:000}", colB.GroupBy(gp => gp.bilheteidconcorrente.concorrenteid).ToList().Count - 1));
+                    sb.AppendLine("\t - Total de Bilhetes Vendidos: " + string.Format("{0:000}", total));
+                    sb.AppendLine("\t\t - Valor Total Vendidos: " + string.Format("{0:C2}", total * infoSort.sorteiobilhetevalor)); 
+                    sb.AppendLine();
+                }
+
+                foreach (var item in colecao.OrderBy(o => o.concorrentenome))
+                {
+                    int totalBilhete = colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
+
+                    //adiciona os nomes dos vendedores
+                    sb.AppendLine(item.concorrentenome);
+                    if (totalBilhete > 0)
+                    {
+                        //adiciona 2 nós com soma total de bilhete vendidos e o valor total
+                        sb.AppendLine("\t - Total de Bilhetes Vendidos: " + string.Format("{0:000}", totalBilhete));
+                        sb.AppendLine("\t\t - Valor Total Vendidos: " + string.Format("{0:C2}", totalBilhete * infoSort.sorteiobilhetevalor));
+                    }
+
+                    BilheteColecao bc = new BilheteColecao();
+                    foreach (var item1 in colB.Where(w => w.bilheteidvendedor.concorrenteid == item.concorrenteid).OrderBy(o => o.bilheteidconcorrente.concorrentenome))
+                    {
+                        if (bc.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid).FirstOrDefault() == null)
+                        {
+                            bc.Add(item1);
+                            int totalBilhete2 = colB.Where(w => w.bilheteidconcorrente.concorrenteid == item1.bilheteidconcorrente.concorrenteid && w.bilheteidvendedor.concorrenteid == item.concorrenteid).Count();
+
+                            //adiciona os nomes dos compradores
+                            sb.AppendLine("\t\t\t" + item1.bilheteidconcorrente.concorrentenome);
+                            if (totalBilhete2 > 0)
+                            {
+                                sb.AppendLine("\t\t\t\t - Total de Bilhetes Comprados: " + string.Format("{0:000}", totalBilhete2));
+                                sb.AppendLine("\t\t\t\t\t - Valor Total Comprados: " + string.Format("{0:C2}", totalBilhete2 * infoSort.sorteiobilhetevalor));
+                            }
+                        }
+                    }
+                }
+
+                GravarTxt(sb.ToString(), "vendedores.txt");
+            }
         }
     }
 }

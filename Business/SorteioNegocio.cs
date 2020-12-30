@@ -21,6 +21,26 @@ namespace Business
     {
         Cnx cnx = new Cnx();
 
+        public bool ModoOffline()
+        {
+            if (cnx.Conectar())
+            {
+                return Convert.ToBoolean(cnx.ExecutarComandoMySql("spActiveOffline", enumExecutar.Scalar));
+            }
+            else
+                return false;
+        }
+
+        public bool Active()
+        {
+            if (cnx.Conectar())
+            {
+                return Convert.ToBoolean(cnx.ExecutarComandoMySql("spActive", enumExecutar.Scalar));
+            }
+            else
+                return false;
+        }
+
         public object ExecutarSorteioItem(enumCRUD en, SorteioItemInfo item = null)
         {
             if (cnx.Conectar())

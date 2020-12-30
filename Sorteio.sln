@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{D429
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Object", "Object\Object.csproj", "{1FF9E0EE-8D24-4645-B373-99C486C6E9BF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupSorteio", "SetupSorteio\SetupSorteio.vdproj", "{FF83D98B-1220-4DCD-909F-9B717BF5B36B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1FF9E0EE-8D24-4645-B373-99C486C6E9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF9E0EE-8D24-4645-B373-99C486C6E9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF9E0EE-8D24-4645-B373-99C486C6E9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF83D98B-1220-4DCD-909F-9B717BF5B36B}.Debug|Any CPU.ActiveCfg = Debug
+		{FF83D98B-1220-4DCD-909F-9B717BF5B36B}.Debug|Any CPU.Build.0 = Debug
+		{FF83D98B-1220-4DCD-909F-9B717BF5B36B}.Release|Any CPU.ActiveCfg = Release
+		{FF83D98B-1220-4DCD-909F-9B717BF5B36B}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,7 +35,7 @@
             this.concorrenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lancarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.realizarSorteioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bancoSortearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -46,6 +46,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sorteioToolStripMenuItem,
+            this.realizarSorteioToolStripMenuItem,
             this.bancoSortearToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -57,8 +58,7 @@
             // 
             this.sorteioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrarToolStripMenuItem,
-            this.lancarToolStripMenuItem,
-            this.sortearToolStripMenuItem});
+            this.lancarToolStripMenuItem});
             this.sorteioToolStripMenuItem.Name = "sorteioToolStripMenuItem";
             this.sorteioToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.sorteioToolStripMenuItem.Text = "Sorteio";
@@ -69,7 +69,7 @@
             this.concorrenteToolStripMenuItem,
             this.vendedorToolStripMenuItem});
             this.cadastrarToolStripMenuItem.Name = "cadastrarToolStripMenuItem";
-            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cadastrarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.cadastrarToolStripMenuItem.Text = "Cadastrar";
             // 
             // concorrenteToolStripMenuItem
@@ -89,22 +89,23 @@
             // lancarToolStripMenuItem
             // 
             this.lancarToolStripMenuItem.Name = "lancarToolStripMenuItem";
-            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lancarToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.lancarToolStripMenuItem.Text = "Lançar Sorteio";
             this.lancarToolStripMenuItem.Click += new System.EventHandler(this.lancarToolStripMenuItem_Click);
             // 
-            // sortearToolStripMenuItem
+            // realizarSorteioToolStripMenuItem
             // 
-            this.sortearToolStripMenuItem.Name = "sortearToolStripMenuItem";
-            this.sortearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sortearToolStripMenuItem.Text = "Sortear";
-            this.sortearToolStripMenuItem.Click += new System.EventHandler(this.sortearToolStripMenuItem_Click);
+            this.realizarSorteioToolStripMenuItem.Name = "realizarSorteioToolStripMenuItem";
+            this.realizarSorteioToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.realizarSorteioToolStripMenuItem.Text = "Realizar Sorteio";
+            this.realizarSorteioToolStripMenuItem.Click += new System.EventHandler(this.realizarSorteioToolStripMenuItem_Click);
             // 
             // bancoSortearToolStripMenuItem
             // 
             this.bancoSortearToolStripMenuItem.Name = "bancoSortearToolStripMenuItem";
             this.bancoSortearToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.bancoSortearToolStripMenuItem.Text = "BancoSortear";
+            this.bancoSortearToolStripMenuItem.Visible = false;
             this.bancoSortearToolStripMenuItem.Click += new System.EventHandler(this.bancoSortearToolStripMenuItem_Click);
             // 
             // statusStrip1
@@ -152,9 +153,9 @@
         private System.Windows.Forms.ToolStripMenuItem vendedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem concorrenteToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripMenuItem sortearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bancoSortearToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem realizarSorteioToolStripMenuItem;
     }
 }
 
